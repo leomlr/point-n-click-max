@@ -1,72 +1,158 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image avec carré cliquable</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Image avec zones cliquables</title>
+
     <style>
         html,
         body {
             margin: 0;
             padding: 0;
+            background: black;
             height: 100%;
             width: 100%;
         }
 
-        .fullscreen-image {
+        /* Conteneur plein écran */
+        .image-container {
             position: relative;
-            width: 100%;
+            width: 100vw;
             height: 100vh;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: black;
+            overflow: hidden;
         }
 
+        /* Image de base (écran de choix) */
+        .root-img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+        }
+
+        /* Images "plein écran" après le choix : la plus grande possible SANS rogner */
+        .root-img.contain-full {
+            width: 100vw;
+            height: 100vh;
+            max-width: none;
+            max-height: none;
+            object-fit: contain; /* une seule bande selon le ratio */
+        }
+
+        /* Zones cliquables */
         .clickable-square {
             position: absolute;
-            top: 34%;
-            left: 40%;
-            width: 68px;
-            height: 49px;
-            display: block;
-            text-decoration: none;
+            cursor: pointer;
+            background-color: rgba(255, 255, 0, 0);
+            transition: background-color 0.25s ease;
+        }
+
+        /* Découpe la zone en ovale, clic uniquement dans l'ovale */
+        .clickable-oval {
+            clip-path: ellipse(50% 50% at 50% 50%);
         }
 
         .clickable-square:hover {
-            background-color: rgba(255, 0, 0, 0.8);
-            cursor: pointer;
+            background-color: rgba(255, 255, 0, 0.4);
         }
 
         .clickable-disabled {
             pointer-events: none;
             cursor: default;
-            color: gray;
-            text-decoration: none;
+            background-color: transparent !important;
         }
     </style>
-
 </head>
 
 <body>
 
-    <div id="background-img" class="fullscreen-image">
-        <a id="eye-zone" class="clickable-square"></a>
+    <div class="image-container">
+        <img id="root-img" class="root-img" src="/media/racine_de_l_arbre.png" alt="Arbre racine" />
+
+        <!-- ZONES CLIQUABLES SUR L'ÉCRAN DE CHOIX -->
+        <a id="marlene-zone" class="clickable-square clickable-oval"></a>
+        <a id="brandon-zone" class="clickable-square clickable-oval"></a>
     </div>
 
-        <script>
-        const bgimg = document.getElementById("background-img");
-        bgimg.style.backgroundImage = 'url("coco.jpeg")';
+    <script>
+        const IMG_ROOT = "/media/racine_de_l_arbre.png";
+        const IMG_MARLENE = "media/click_sur_marlene.jpg";
+        const IMG_BRANDON = "media/click_sur_brandon.jpg";
 
-        const eye = document.getElementById("eye-zone");
-        eye.addEventListener("click", function (e) {
-            bgimg.style.backgroundImage = 'url("maxime.jpeg")';
-            eye.classList.add("clickable-disabled");
+        const img = document.getElementById("root-img");
+        const marleneZone = document.getElementById("marlene-zone");
+        const brandonZone = document.getElementById("brandon-zone");
+        const container = document.querySelector(".image-container");
+
+        let currentImage = IMG_ROOT;
+
+        function isRootImage() {
+            return currentImage === IMG_ROOT;
+        }
+
+        function showZones(show) {
+            const display = show ? "block" : "none";
+            marleneZone.style.display = display;
+            brandonZone.style.display = display;
+        }
+
+        function setImage(src) {
+            currentImage = src;
+            img.src = src;
+
+            if (isRootImage()) {
+                // Écran de sélection : image centrée, zones visibles
+                img.classList.remove("contain-full");
+                showZones(true);
+            } else {
+                // Écran joueur : image la plus grande possible sans rogner, pas de zones
+                img.classList.add("contain-full");
+                showZones(false);
+            }
+        }
+
+        // Clics sur les zones
+        marleneZone.onclick = () => {
+            setImage(IMG_MARLENE);
+        };
+
+        brandonZone.onclick = () => {
+            setImage(IMG_BRANDON);
+        };
+
+        // Positionnement des zones sur l'image de choix
+        function updateZonePositions() {
+            const rect = img.getBoundingClientRect();
+            marleneZone.style.left = rect.left + rect.width * 0.068 + "px";
+            marleneZone.style.top = rect.top + rect.height * 0.785 + "px";
+            marleneZone.style.width = rect.width * 0.2 + "px";
+            marleneZone.style.height = rect.height * 0.13 + "px";
+
+            brandonZone.style.left = rect.left + rect.width * 0.45 + "px";
+            brandonZone.style.top = rect.top + rect.height * 0.84 + "px";
+            brandonZone.style.width = rect.width * 0.2 + "px";
+            brandonZone.style.height = rect.height * 0.13 + "px";
+        }
+
+        window.addEventListener("resize", updateZonePositions);
+
+        img.addEventListener("load", () => {
+            updateZonePositions();
         });
 
-
+        // Initialisation
+        // On repasse par setImage pour être sûr que currentImage et les classes sont cohérents
+        setImage(IMG_ROOT);
+        if (img.complete) {
+            updateZonePositions();
+        }
     </script>
 
 </body>
-
 </html>
