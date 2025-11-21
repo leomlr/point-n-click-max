@@ -73,7 +73,7 @@
 <body>
 
     <div class="image-container">
-        <img id="root-img" class="root-img" src="/media/racine_de_l_arbre.png" alt="Arbre racine" />
+        <img id="root-img" class="root-img" alt="Arbre racine" />
 
         <!-- ZONES CLIQUABLES SUR L'ÉCRAN DE CHOIX -->
         <a id="marlene-zone" class="clickable-square clickable-oval"></a>
@@ -91,6 +91,8 @@
         const container = document.querySelector(".image-container");
 
         let currentImage = IMG_ROOT;
+
+        setImage(currentImage);
 
         function isRootImage() {
             return currentImage === IMG_ROOT;
