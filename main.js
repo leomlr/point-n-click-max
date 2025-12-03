@@ -163,8 +163,15 @@ const MarlenBrando = {
         console.log(this)
     },
     showImage: function (src) {
-        this.imageEl.src = 'media/' + src;
-        this.imageEl.classList.add("contain-full");
+        return new Promise((resolve) => {
+            const onLoad = () => {
+                this.imageEl.removeEventListener('load', onLoad);
+                resolve();
+            };
+            this.imageEl.addEventListener('load', onLoad);
+            this.imageEl.src = 'media/' + src;
+            this.imageEl.classList.add("contain-full");
+        });
     },
     addClickableZone: function (clickZone) {
         const zone = document.createElement('a');
@@ -194,14 +201,14 @@ const MarlenBrando = {
         zone.style.display = "block";
         this.gameContainer.appendChild(zone);
 
-        zone.onclick = () => {
+        zone.onclick = async () => {
             if (clickZone.player) {
                 this.currentGamePath = clickZone.player;
             } else if (['SLPPE', 'game-over'].includes(clickZone.toStep)) {
                 this.currentGamePath = clickZone.toStep;
             }
             const step = this.paths[this.currentGamePath].find(obj => (obj.id === clickZone.toStep));
-            this.applyStep(step);
+            await this.applyStep(step);
         };
     },
     removeClickableZones: function () {
@@ -210,10 +217,10 @@ const MarlenBrando = {
         }
         this.currentZones = [];
     },
-    applyStep: function (step) {
+    applyStep: async function (step) {
         this.currentStepId = step.id;
         this.removeClickableZones();
-        this.showImage(step.img);
+        await this.showImage(step.img);
         for (const newClickZone of step.clickZones) {
             this.addClickableZone(newClickZone);
         }
