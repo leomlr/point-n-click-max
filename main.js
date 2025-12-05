@@ -8,6 +8,7 @@ const MarlenBrando = {
     history: null,
     adminMode: true,
     init: function () {
+        this.isArrivingToGame = true;
         this.currentZones = [];
         this.getGameFromLS();
         if (!this.currentGame.stepId) {
@@ -35,38 +36,13 @@ const MarlenBrando = {
             this.imageEl.classList.add("contain-full");
         });
     },
-    addClickableZone: function (clickZone) {
-        const zone = document.createElement('a');
-        if (clickZone.toStep) {
-            zone.id = clickZone.toStep + '-zone';
-        } else if (clickZone.type == 'every') {
-            zone.id = clickZone.type + '-zone';
+    addClickableZone: function (clickZone, stepIdAfterThrower = null) {
+        let stepId = clickZone.toStep;
+        if (stepIdAfterThrower) {
+            stepId = stepIdAfterThrower;
         }
-        this.currentZones.push(zone.id);
 
-        zone.className = 'clickable-zone' + (clickZone.type ? ' clickable-' + clickZone.type : '');
-        if (clickZone.pos) {
-            zone.style.left = clickZone.pos.left + "%";
-            zone.style.top = clickZone.pos.top + "%";
-            zone.style.width = clickZone.pos.width + "%";
-            if (clickZone.pos.height) {
-                zone.style.height = clickZone.pos.height + "%";
-            }
-            if (clickZone.pos['aspect-ratio']) {
-                zone.style['aspect-ratio'] = clickZone.pos['aspect-ratio'];
-            }
-            if (clickZone.pos.rotate) {
-                zone.style.transform = "rotate(" + clickZone.pos.rotate + "deg)"
-            }
-            if (this.adminMode) {
-                if (clickZone.isBack) {
-                    zone.classList.add('clickable-back');
-                } else {
-                    zone.classList.add('adminMode');
-                }
-            }
-        }
-        zone.style.display = "block";
+        const zone = this.createZone(stepId, clickZone);
         this.gameContainer.appendChild(zone);
 
         zone.onclick = async () => {
@@ -75,24 +51,56 @@ const MarlenBrando = {
                 document.querySelector('.chrono-wrapper').classList.remove('visible');
                 this.currentGame.history.pop();
             }
+            if (clickZone.throwStep) {
+                return await this.applyStep(clickZone.throwStep, clickZone.isBack, stepId);
+            }
             if (clickZone.path) {
                 this.currentGame.path = clickZone.path;
                 if (['brandon', 'marlene'].includes(clickZone.path)) {
                     this.currentGame.player = clickZone.path;
                 }
-            } else if (['game-over'].includes(clickZone.toStep)) {
-                this.currentGame.path = clickZone.toStep;
+            } else if (['game-over'].includes(stepId)) {
+                this.currentGame.path = stepId;
             }
-            await this.applyStep(clickZone.toStep, clickZone.isBack);
+            await this.applyStep(stepId, clickZone.isBack);
         };
     },
-    removeClickableZones: function () {
-        for (const id of this.currentZones) {
-            document.getElementById(id).remove();
+    createZone: function (id, clickZone) {
+        const z = document.createElement('a');
+        if (clickZone.throwStep) {
+            z.id = clickZone.throwStep + '-zone';
+        } else if (id) {
+            z.id = id + '-zone';
         }
-        this.currentZones = [];
+        z.className = 'clickable-zone' + (clickZone.type ? ' clickable-' + clickZone.type : '');
+        if (clickZone.pos) {
+            z.style.left = clickZone.pos.left + "%";
+            z.style.top = clickZone.pos.top + "%";
+            z.style.width = clickZone.pos.width + "%";
+            if (clickZone.pos.height) {
+                z.style.height = clickZone.pos.height + "%";
+            }
+            if (clickZone.pos['aspect-ratio']) {
+                z.style['aspect-ratio'] = clickZone.pos['aspect-ratio'];
+            }
+            if (clickZone.pos.rotate) {
+                z.style.transform = "rotate(" + clickZone.pos.rotate + "deg)"
+            }
+            if (this.adminMode) {
+                if (clickZone.isBack) {
+                    z.classList.add('clickable-back');
+                } else {
+                    z.classList.add('adminMode');
+                }
+            }
+        }
+        return z;
     },
-    applyStep: async function (id, isBack = false) {
+    removeClickableZones: function () {
+        document.querySelectorAll('.clickable-zone').forEach(el => el.remove());
+    },
+    applyStep: async function (id, isBack = false, stepIdAfterThrower = null) {
+        this.removeClickableZones();
         let step;
         if (id == 'bouzin') {
             step = this.GamePaths.bouzin;
@@ -109,16 +117,16 @@ const MarlenBrando = {
             return await this.applyStep('bouzin');
         }
         this.currentGame.stepId = step.id;
-        this.removeClickableZones();
         if (!step.img) {
             console.error("Unable to find image: " + step.id + " for player " + this.currentGame.player);
             return await this.applyStep('bouzin');
         } else {
             await this.showImage(step.img);
         }
+
         if (step.clickZones) {
             for (const newClickZone of step.clickZones) {
-                this.addClickableZone(newClickZone);
+                this.addClickableZone(newClickZone, stepIdAfterThrower);
             }
         }
         const currentGame = {
@@ -127,7 +135,14 @@ const MarlenBrando = {
         };
         this.saveGameInLS();
         if (!isBack) {
-            this.currentGame.history.push(currentGame);
+            if (!this.isArrivingToGame) {
+                this.currentGame.history.push(currentGame);
+            } else {
+                this.isArrivingToGame = false;
+                if (this.currentGame.history.length == 0) {
+                    this.currentGame.history.push(currentGame);
+                }
+            }
         }
         if (this.adminMode && this.currentGame.history.length > 1) {
             this.addClickableZone({
@@ -273,7 +288,7 @@ const MarlenBrando = {
                 id: "player-select",
                 img: "7.png",
                 clickZones: [{
-                    'path': "marlene",
+                    'path': 'marlene',
                     'toStep': "m-9",
                     'type': 'oval',
                     'pos': {
@@ -284,7 +299,7 @@ const MarlenBrando = {
 
                     }
                 }, {
-                    'path': "brandon",
+                    'path': 'brandon',
                     'toStep': "b-8",
                     'type': 'oval',
                     'pos': {
@@ -459,7 +474,7 @@ const MarlenBrando = {
             img: "Trop tard6.png",
             clickZones: [{
                 'toStep': "start-1",
-                'path': "starter",
+                'path': 'starter',
                 'type': 'arrow',
                 'pos': {
                     'left': 73,

@@ -11,7 +11,8 @@ const BRANDON_STEPS = [
         id: "b-10",
         img: "10.png",
         clickZones: [{
-            'toStep': "b-11",
+            'toStep': "b-12",
+            'throwStep': "page-suspens",
             'type': 'arrow',
             'pos': {
                 'left': 77,
@@ -20,12 +21,17 @@ const BRANDON_STEPS = [
             }
         }]
     }, {
-        id: "b-11",
+        id: "page-suspens",
         img: "11.png",
         clickZones: [{
-            'toStep': "b-12",
+            'toStep': null,
             'type': 'arrow',
-            'pos': BOTTOM_RIGHT_ARROW
+            'pos': {
+                'left': 71,
+                'top': 88.5,
+                'width': 23,
+                'height': 8
+            }
         }]
     }, {
         id: "b-12",
@@ -87,7 +93,8 @@ const BRANDON_STEPS = [
                 'rotate': 180
             }
         }, {
-            'toStep': "continuer-plus-haut",
+            'toStep': "b-32",
+            'throwStep': "continuer-plus-haut",
             'type': 'arrow',
             'pos': {
                 'left': 59.5,
@@ -136,7 +143,8 @@ const BRANDON_STEPS = [
                 'rotate': -90
             }
         }, {
-            'toStep': "continuer-plus-haut",
+            'toStep': "b-32",
+            'throwStep': "continuer-plus-haut",
             'type': 'arrow',
             'pos': {
                 'left': 45,
@@ -268,15 +276,299 @@ const BRANDON_STEPS = [
         }]
     }, {
         id: "continuer-plus-haut",
-        img: "bouzin.png",
+        img: "31.png",
         clickZones: [{
-            'toStep': "b-32",
+            'toStep': null,
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 23,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "partir-37",
+        img: "37.png",
+        clickZones: [{
+            'toStep': "bouzin",
             'type': 'arrow',
             'pos': {
                 'left': 73,
                 'top': 89,
                 'width': 24,
                 'height': 10
+            }
+        }]
+    }, {
+        id: "b-32",
+        img: "32.png",
+        clickZones: [{
+            'toStep': "b-33",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-33",
+        img: "33.png",
+        clickZones: [{
+            'toStep': "b-34",
+            'type': 'arrow',
+            'pos': {
+                'left': 64,
+                'top': 18,
+                'width': 39,
+                'height': 14,
+                'rotate': -58
+            }
+        }]
+    }, {
+        id: "b-34",
+        img: "34.png",
+        clickZones: [{
+            'toStep': "b-35",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 74,
+                'width': 24,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-35",
+        img: "35.png",
+        clickZones: [{
+            'toStep': "lecher-empreinte",
+            'type': 'oval',
+            'pos': {
+                'left': 35.5,
+                'top': 2,
+                'width': 58,
+                'aspect-ratio': 1.5 / 1
+            }
+        }, {
+            'toStep': "SLPPE",
+            'path': 'SLPPE',
+            'type': 'oval',
+            'pos': {
+                'left': 20,
+                'top': 56,
+                'width': 60,
+                'aspect-ratio': 1.35 / 1
+            }
+        }]
+    }, {
+        id: "lecher-empreinte",
+        img: "36.png",
+        clickZones: [{
+            'toStep': "b-38",
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 87.5,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "b-38",
+        img: "38.png",
+        clickZones: [{
+            'toStep': "b-39",
+            'type': 'oval',
+            'pos': {
+                'left': 9.5,
+                'top': 75,
+                'width': 38,
+                'aspect-ratio': 1.5 / 1
+            }
+        }, {
+            'toStep': "b-40",
+            'throwStep': "page-suspens",
+            'type': 'oval',
+            'pos': {
+                'left': 61,
+                'top': 75.5,
+                'width': 34,
+                'aspect-ratio': 1.3 / 1
+            }
+        }]
+    }, {
+        id: "b-39",
+        img: "39.png",
+        clickZones: [{
+            'toStep': "SLPPE",
+            'path': 'SLPPE',
+            'type': 'oval',
+            'pos': {
+                'left': 62,
+                'top': 76,
+                'width': 34,
+                'aspect-ratio': 1.3 / 1
+            }
+        }, {
+            'toStep': "b-42",
+            'type': 'oval',
+            'pos': {
+                'left': 9,
+                'top': 75,
+                'width': 38,
+                'aspect-ratio': 1.3 / 1
+            }
+        }]
+    }, {
+        id: "b-40",
+        img: "40.png",
+        clickZones: [{
+            'toStep': "b-41",
+            'type': 'oval',
+            'pos': {
+                'left': 9,
+                'top': 75.5,
+                'width': 39,
+                'aspect-ratio': 1.3 / 1
+            }
+        }, {
+            'toStep': "se-battre",
+            'type': 'oval',
+            'pos': {
+                'left': 62,
+                'top': 76,
+                'width': 33.5,
+                'aspect-ratio': 1.3 / 1
+            }
+        }]
+    }, {
+        id: "b-42",
+        img: "42.png",
+        clickZones: [{
+            'toStep': "b-43",
+            'throwStep': "continuer-plus-haut",
+            'type': 'arrow',
+            'pos': {
+                'left': 2,
+                'top': 4.5,
+                'width': 55,
+                'height': 17,
+                'rotate': 180
+            }
+        }]
+    }, {
+        id: "b-43",
+        img: "43.png",
+        clickZones: [{
+            'toStep': "b-44",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 88,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "b-44",
+        img: "44.png",
+        clickZones: [{
+            'toStep': "SLPPE",
+            'path': 'SLPPE',
+            'type': 'oval',
+            'pos': {
+                'left': 37,
+                'top': 2,
+                'width': 44,
+                'aspect-ratio': 1.3 / 1
+            }
+        }, {
+            'toStep': "rentrer-grotte",
+            'type': 'oval',
+            'pos': {
+                'left': 10,
+                'top': 35,
+                'width': 33.5,
+                'aspect-ratio': 1.2 / 1
+            }
+        }, {
+            'toStep': "oubliettes",
+            'path': 'SLPPE',
+            'type': 'oval',
+            'pos': {
+                'left': 24,
+                'top': 62,
+                'width': 60.5,
+                'aspect-ratio': 1.6 / 1
+            }
+        }]
+    }, {
+        id: "rentrer-grotte",
+        img: "45.png",
+        clickZones: [{
+            'toStep': "b-46",
+            'throwStep': 'page-suspens',
+            'type': 'arrow',
+            'pos': {
+                'left': 57.5,
+                'top': 85,
+                'width': 39.5,
+                'height': 12
+            }
+        }]
+    }, {
+        id: "b-46",
+        img: "46.png",
+        clickZones: [{
+            'toStep': "b-47",
+            'type': 'arrow',
+            'pos': {
+                'left': 69,
+                'top': 87.5,
+                'width': 23,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-47",
+        img: "47.png",
+        clickZones: [{
+            'toStep': "b-48",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 23,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-48",
+        img: "48.png",
+        clickZones: [{
+            'toStep': "game-over",
+            'type': 'arrow',
+            'pos': {
+                'left': 74,
+                'top': 90,
+                'width': 24,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-41",
+        img: "41.png",
+        clickZones: [{
+            'toStep': "b-42",
+            'type': 'arrow',
+            'pos': {
+                'left': 73.5,
+                'top': 89,
+                'width': 23,
+                'height': 8.5
             }
         }]
     }

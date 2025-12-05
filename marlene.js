@@ -44,7 +44,7 @@ const MARLENE_STEPS = [    {
         img: "16.png",
         clickZones: [{
             'toStep': "SLPPE",
-            'path': "SLPPE",
+            'path': 'SLPPE',
             'type': 'oval',
             'pos': {
                 'left': 32.5,

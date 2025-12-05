@@ -34,6 +34,7 @@ body {
 /* Clickable zone */
 
 .clickable-zone {
+    display: block;
     position: absolute;
     cursor: pointer;
     transition: background-color 0.25s ease;
