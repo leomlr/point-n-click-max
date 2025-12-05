@@ -44,6 +44,7 @@ const BRANDON_STEPS = [
         img: "13.png",
         clickZones: [{
             'toStep': "SLPPE",
+            'path': 'SLPPE',
             'type': 'oval',
             'pos': {
                 'left': 32.5,
@@ -86,7 +87,7 @@ const BRANDON_STEPS = [
                 'rotate': 180
             }
         }, {
-            'toStep': "tout-droit",
+            'toStep': "continuer-plus-haut",
             'type': 'arrow',
             'pos': {
                 'left': 59.5,
@@ -135,7 +136,7 @@ const BRANDON_STEPS = [
                 'rotate': -90
             }
         }, {
-            'toStep': "droit-plus-haut",
+            'toStep': "continuer-plus-haut",
             'type': 'arrow',
             'pos': {
                 'left': 45,
@@ -183,7 +184,7 @@ const BRANDON_STEPS = [
                 'aspect-ratio': 1.35 / 1
             }
         }, {
-            'toStep': "partir-nager-vite",
+            'toStep': "partir-37",
             'type': 'oval',
             'pos': {
                 'left': 58.5,
@@ -194,6 +195,28 @@ const BRANDON_STEPS = [
         }]
     }, {
         id: "parler-poisson-combattant",
+        img: "25.png",
+        clickZones: [{
+            'toStep': "partir-37",
+            'type': 'square',
+            'pos': {
+                'left': 8,
+                'top': 77,
+                'width': 39,
+                'height': 16
+            }
+        }, {
+            'toStep': "ecole-poisson",
+            'type': 'square',
+            'pos': {
+                'left': 55,
+                'top': 77.5,
+                'width': 39,
+                'height': 16
+            }
+        }]
+    }, {
+        id: "ecole-poisson",
         img: "26.png",
         clickZones: [{
             'toStep': "b-27",
@@ -210,6 +233,7 @@ const BRANDON_STEPS = [
         img: "27.png",
         clickZones: [{
             'toStep': "SLPPE",
+            'path': 'SLPPE',
             'type': 'arrow',
             'pos': {
                 'left': 4,
@@ -232,7 +256,21 @@ const BRANDON_STEPS = [
         id: "parler-poisson-combattant-2",
         img: "28.png",
         clickZones: [{
-            'toStep': "b-27",
+            'toStep': "TROP-TARD",
+            'path': 'troptard',
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 24,
+                'height': 10
+            }
+        }]
+    }, {
+        id: "continuer-plus-haut",
+        img: "bouzin.png",
+        clickZones: [{
+            'toStep': "b-32",
             'type': 'arrow',
             'pos': {
                 'left': 73,

@@ -31,6 +31,8 @@ body {
     display: block;
 }
 
+/* Clickable zone */
+
 .clickable-zone {
     position: absolute;
     cursor: pointer;
@@ -38,29 +40,58 @@ body {
     background-color: rgba(255, 255, 0, 0);
 }
 
+.clickable-zone.adminMode {
+    background-color: rgba(48, 19, 212, 0.6);
+}
+
 .clickable-oval {
     clip-path: ellipse(50% 50% at 50% 50%);
 }
 
 .clickable-arrow {
-    clip-path: polygon(
-        5% 25%,
-        60% 35%,
-        57% 0%,
-        95% 48%,
-        56% 100%,
-        60% 65%,
-        5% 75%
-    );
-    aspect-ratio: 2 / 1; /* ou 3 / 1 si tu veux plus allongé */
+    clip-path: polygon(5% 25%,
+            60% 35%,
+            57% 0%,
+            95% 48%,
+            56% 100%,
+            60% 65%,
+            5% 75%);
+    aspect-ratio: 2 / 1;
 }
 
-.clickable-oval/*:hover*/,
-.clickable-arrow/*:hover*/ {
+.clickable-square:hover,
+.clickable-oval:hover,
+.clickable-arrow:hover {
     background-color: rgba(255, 255, 0, 0.4);
+}
+
+.clickable-back {
+    background-color: rgba(104, 16, 205, 0.6);
 }
 
 .clickable-every {
     inset: 0;
     transform: none;
+}
+
+/* count down */
+
+.chrono-wrapper {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+}
+
+.chrono-wrapper.visible {
+    display: flex;
+    /* visible + centrée */
+}
+
+#countdown {
+    color: #ffffff;
+    font-size: 3rem;
+    font-family: sans-serif;
+    font-weight: bold;
 }
