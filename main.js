@@ -1,16 +1,12 @@
 
 const MarlenBrando = {
-    currentStepId: null,
-    currentZones: null,
     currentGame: null,
     imageEl: document.getElementById("current-img"),
     gameContainer: document.querySelector(".img-wrapper"),
-    history: null,
     adminMode: true,
     MDP: 'U0xJUFZPVVBMQUk=',
     init: function () {
         this.isArrivingToGame = true;
-        this.currentZones = [];
         this.getGameFromLS();
         if (!this.currentGame.stepId) {
             this.currentGame.history = [];
@@ -24,7 +20,17 @@ const MarlenBrando = {
                 this.currentGame.history = [];
             }
         }
-        this.applyStep(this.currentGame.stepId);
+        let stepIdAfterThrower;
+        if (this.currentGame.isThrowStep && this.currentGame.history.length > 1) {
+            const index = this.currentGame.history.length - 2;
+            const previousStep = this.currentGame.history[index];
+            if (previousStep) {
+                const pathSteps = this.GamePaths[this.currentGame.path];
+                const previousStepZones = pathSteps.find(obj => (obj.id === previousStep.stepId)).clickZones;
+                stepIdAfterThrower = previousStepZones.find(obj => (obj.throwStep === this.currentGame.stepId)).toStep;
+            }
+        }
+        this.applyStep(this.currentGame.stepId, false, stepIdAfterThrower);
     },
     showImage: function (src) {
         return new Promise((resolve) => {
@@ -38,12 +44,7 @@ const MarlenBrando = {
         });
     },
     addClickableZone: function (clickZone, stepIdAfterThrower = null) {
-        let stepId = clickZone.toStep;
-        if (stepIdAfterThrower) {
-            stepId = stepIdAfterThrower;
-        }
-
-        const zone = this.createZone(stepId, clickZone);
+        const zone = this.createZone(clickZone.toStep, clickZone);
         this.gameContainer.appendChild(zone);
 
         zone.onclick = async () => {
@@ -52,27 +53,47 @@ const MarlenBrando = {
                 document.querySelector('.chrono-wrapper').classList.remove('visible');
                 this.currentGame.history.pop();
             }
+            let toStepId = clickZone.toStep;
+            if (stepIdAfterThrower) {
+                toStepId = stepIdAfterThrower;
+            }
+            if (clickZone.testPwd) {
+                const input = document.getElementById("mdp-input");
+                if (input.value) {
+                    const inputValue = this.encodeText(input.value);
+                    console.log(clickZone.testPwd)
+                    if (inputValue == this.MDP) {
+                        return await this.applyStep(clickZone.testPwd.correct.toStep, clickZone.isBack, toStepId);
+                    } else {
+                        return await this.applyStep(clickZone.testPwd.incorrect.toStep, clickZone.isBack, toStepId);
+                    }
+                } else {
+                    return false;
+                }
+            }
             if (clickZone.throwStep) {
-                return await this.applyStep(clickZone.throwStep, clickZone.isBack, stepId);
+                this.currentGame.isThrowStep = true;
+                return await this.applyStep(clickZone.throwStep, clickZone.isBack, toStepId);
+            } else {
+                delete this.currentGame.isThrowStep;
             }
             if (clickZone.path) {
                 this.currentGame.path = clickZone.path;
                 if (['brandon', 'marlene'].includes(clickZone.path)) {
                     this.currentGame.player = clickZone.path;
                 }
-            } else if (['game-over'].includes(stepId)) {
-                this.currentGame.path = stepId;
+            } else if (['game-over'].includes(toStepId)) {
+                this.currentGame.path = toStepId;
             }
-            await this.applyStep(stepId, clickZone.isBack);
+            await this.applyStep(toStepId, clickZone.isBack);
         };
     },
     createZone: function (id, clickZone) {
-        const z = document.createElement('a');
-        if (clickZone.throwStep) {
-            z.id = clickZone.throwStep + '-zone';
-        } else if (id) {
-            z.id = id + '-zone';
+        if (!id) {
+            id = Math.random().toString(36).substring(2, 10);
         }
+        const z = document.createElement('a');
+        z.id = id + '-zone';
         z.className = 'clickable-zone' + (clickZone.type ? ' clickable-' + clickZone.type : '');
         if (clickZone.pos) {
             z.style.left = clickZone.pos.left + "%";
@@ -97,8 +118,11 @@ const MarlenBrando = {
         }
         return z;
     },
-    removeClickableZones: function () {
+    removeElementsFromPreviousStep: function () {
         document.querySelectorAll('.clickable-zone').forEach(el => el.remove());
+        document.querySelector('.chrono-wrapper').classList.remove('visible');
+        document.querySelector('.input-group').classList.remove('visible');
+        document.getElementById("mdp-input").value = "";
     },
     encodeText(str) {
         const utf8 = new TextEncoder().encode(str);
@@ -107,7 +131,9 @@ const MarlenBrando = {
         return btoa(binary);
     },
     applyStep: async function (id, isBack = false, stepIdAfterThrower = null) {
-        this.removeClickableZones();
+        console.log(id, isBack, stepIdAfterThrower)
+        this.removeElementsFromPreviousStep();
+        // get step by id
         let step;
         if (id == 'bouzin') {
             step = this.GamePaths.bouzin;
@@ -124,33 +150,40 @@ const MarlenBrando = {
             return await this.applyStep('bouzin');
         }
         this.currentGame.stepId = step.id;
+        // show image
         if (!step.img) {
             console.error("Unable to find image: " + step.id + " for player " + this.currentGame.player);
             return await this.applyStep('bouzin');
         } else {
             await this.showImage(step.img);
         }
-
+        // add click zones
         if (step.clickZones) {
             for (const newClickZone of step.clickZones) {
                 this.addClickableZone(newClickZone, stepIdAfterThrower);
             }
         }
-        const currentGame = {
-            path: this.currentGame.path,
-            stepId: this.currentGame.stepId
-        };
-        this.saveGameInLS();
+        // add input
+        if (step.onInput) {
+            document.querySelector('.input-group').classList.add('visible');
+        }
+        // Manage game history
         if (!isBack) {
+            const currentStep = {
+                path: this.currentGame.path,
+                stepId: this.currentGame.stepId
+            };
             if (!this.isArrivingToGame) {
-                this.currentGame.history.push(currentGame);
+                this.currentGame.history.push(currentStep);
             } else {
                 this.isArrivingToGame = false;
                 if (this.currentGame.history.length == 0) {
-                    this.currentGame.history.push(currentGame);
+                    this.currentGame.history.push(currentStep);
                 }
             }
         }
+        // Save game in localStorage
+        this.saveGameInLS();
         if (this.adminMode && this.currentGame.history.length > 1) {
             this.addClickableZone({
                 "toStep": this.currentGame.history[this.currentGame.history.length - 2].stepId,
@@ -170,7 +203,6 @@ const MarlenBrando = {
             document.querySelector('.chrono-wrapper').classList.add('visible');
             this.startCountDown();
         }
-
     },
     saveGameInLS: function () {
         if (typeof localStorage !== 'undefined') {

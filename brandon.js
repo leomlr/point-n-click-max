@@ -685,14 +685,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-56",
         img: "56.png",
-        inputs: {
-            'correct': {
-                'toStep': "b-60"
-            },
-            'incorrect': {
-                'toStep': "b-57"
-            }
-        },
+        onInput: true,
         clickZones: [{
             'toStep': "aucune-idee",
             'type': 'oval',
@@ -703,8 +696,14 @@ const BRANDON_STEPS = [
                 'aspect-ratio': 1.3 / 1
             }
         }, {
-            'testPwd': true,
-            'toStep': null,
+            'testPwd': {
+                'correct': {
+                    'toStep': "b-60"
+                },
+                'incorrect': {
+                    'toStep': "b-57"
+                }
+            },
             'type': 'arrow',
             'pos': {
                 'left': 58,
@@ -716,14 +715,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-57",
         img: "57.png",
-        inputs: {
-            'correct': {
-                'toStep': "b-60",
-            },
-            'incorrect': {
-                'toStep': "b-58"
-            }
-        },
+        onInput: true,
         clickZones: [{
             'toStep': "aucune-idee",
             'type': 'oval',
@@ -734,7 +726,14 @@ const BRANDON_STEPS = [
                 'aspect-ratio': 1.3 / 1
             }
         }, {
-            'testPwd': true,
+            'testPwd': {
+                'correct': {
+                    'toStep': "b-60",
+                },
+                'incorrect': {
+                    'toStep': "b-58"
+                }
+            },
             'toStep': null,
             'type': 'arrow',
             'pos': {
@@ -751,9 +750,9 @@ const BRANDON_STEPS = [
             'toStep': "aucune-idee",
             'type': 'arrow',
             'pos': {
-                'left': 74,
-                'top': 89,
-                'width': 22.5,
+                'left': 71,
+                'top': 88.5,
+                'width': 23.5,
                 'height': 8
             }
         }]
@@ -768,6 +767,32 @@ const BRANDON_STEPS = [
                 'top': 88.5,
                 'width': 23.5,
                 'height': 8
+            }
+        }]
+    }, {
+        id: "b-60",
+        img: "60.png",
+        clickZones: [{
+            'toStep': "b-61",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-61",
+        img: "61.png",
+        clickZones: [{
+            'toStep': "bouzin",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 88.5,
+                'width': 24,
+                'height': 8.5
             }
         }]
     }

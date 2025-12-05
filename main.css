@@ -70,11 +70,6 @@ body {
     background-color: rgba(104, 16, 205, 0.6);
 }
 
-.clickable-every {
-    inset: 0;
-    transform: none;
-}
-
 /* count down */
 
 .chrono-wrapper {
@@ -85,8 +80,14 @@ body {
     display: none;
 }
 
+.input-group.visible,
 .chrono-wrapper.visible {
     display: flex;
+    /* visible + centrée */
+}
+
+.input-group.visible {
+    display: block;
     /* visible + centrée */
 }
 
@@ -95,4 +96,41 @@ body {
     font-size: 3rem;
     font-family: sans-serif;
     font-weight: bold;
+}
+
+/* passowrd input */
+
+.input-group {
+    display: none;
+    position: absolute;
+    top: 73%;
+    left: 47%;
+    height: 4%;
+    width: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background: white;
+}
+
+/* input stylé */
+#mdp-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    font-family: "Comic Sans MS", "Fredoka", system-ui, sans-serif;
+    color: #000000;
+    text-align: center;
+}
+
+#mdp-input::placeholder {
+    color: #5c5c5c;
+}
+
+.input-group input:focus {
+    border-color: #4f9cff;
+    box-shadow: 0 0 0 4px rgba(79, 156, 255, 0.3);
+    background: #121212;
+    border-radius: 10px;
 }
