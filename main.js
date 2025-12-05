@@ -7,6 +7,7 @@ const MarlenBrando = {
     gameContainer: document.querySelector(".img-wrapper"),
     history: null,
     adminMode: true,
+    MDP: 'U0xJUFZPVVBMQUk=',
     init: function () {
         this.isArrivingToGame = true;
         this.currentZones = [];
@@ -98,6 +99,12 @@ const MarlenBrando = {
     },
     removeClickableZones: function () {
         document.querySelectorAll('.clickable-zone').forEach(el => el.remove());
+    },
+    encodeText(str) {
+        const utf8 = new TextEncoder().encode(str);
+        let binary = "";
+        utf8.forEach(b => binary += String.fromCharCode(b));
+        return btoa(binary);
     },
     applyStep: async function (id, isBack = false, stepIdAfterThrower = null) {
         this.removeClickableZones();
@@ -266,7 +273,8 @@ const MarlenBrando = {
                 id: "start-6",
                 img: "6.png",
                 clickZones: [{
-                    'toStep': "partir",
+                    'toStep': "go-partir",
+                    'path': 'game-over',
                     'type': 'oval',
                     'pos': {
                         'left': 32.5,
@@ -309,10 +317,6 @@ const MarlenBrando = {
                         'aspect-ratio': 2 / 1
                     }
                 }]
-            }, {
-                id: "partir",
-                img: "bouzin.png",
-                clickZones: []
             }
         ],
         SLPPE: [
@@ -347,6 +351,7 @@ const MarlenBrando = {
                 img: "SLPPE3.png",
                 clickZones: [{
                     'toStep': "oubliettes",
+                    'path': 'game-over',
                     'type': 'oval',
                     'pos': {
                         'left': 4.5,
@@ -365,21 +370,7 @@ const MarlenBrando = {
                         'aspect-ratio': 1.3 / 1
                     }
                 }]
-            }, {
-                id: "oubliettes",
-                img: "Oubliettes.png",
-                clickZones: [{
-                    'toStep': "game-over",
-                    'type': 'arrow',
-                    'pos': {
-                        left: 74,
-                        top: 89,
-                        width: 23,
-                        height: 9
-                    }
-                }]
             }
-
         ],
         troptard: [{
             id: "TROP-TARD",
@@ -484,12 +475,51 @@ const MarlenBrando = {
                 }
             }]
         }],
-        'game-over': [{
-            id: "game-over",
-            img: "Game over.png",
-            clickZones: []
-        }
-
+        'game-over': [
+            {
+                id: "game-over",
+                img: "Game over.png",
+                clickZones: []
+            }, {
+                id: "oubliettes",
+                img: "Oubliettes.png",
+                clickZones: [{
+                    'toStep': "game-over",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 74,
+                        'top': 89,
+                        'width': 23,
+                        'height': 9
+                    }
+                }]
+            }, {
+                id: "go-partir",
+                img: "29.png",
+                clickZones: [{
+                    'toStep': "go-30",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 72,
+                        'top': 88.5,
+                        'width': 23,
+                        'height': 8
+                    }
+                }]
+            }, {
+                id: "go-30",
+                img: "30.png",
+                clickZones: [{
+                    'toStep': "game-over",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 73,
+                        'top': 89,
+                        'width': 23,
+                        'height': 8
+                    }
+                }]
+            }
         ],
         brandon: BRANDON_STEPS,
         marlene: MARLENE_STEPS,

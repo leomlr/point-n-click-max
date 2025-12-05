@@ -291,13 +291,14 @@ const BRANDON_STEPS = [
         id: "partir-37",
         img: "37.png",
         clickZones: [{
-            'toStep': "bouzin",
+            'toStep': "b-49",
+            'throwStep': "page-suspens",
             'type': 'arrow',
             'pos': {
-                'left': 73,
+                'left': 69,
                 'top': 89,
-                'width': 24,
-                'height': 10
+                'width': 22,
+                'height': 9
             }
         }]
     }, {
@@ -496,7 +497,7 @@ const BRANDON_STEPS = [
             }
         }, {
             'toStep': "oubliettes",
-            'path': 'SLPPE',
+            'path': 'game-over',
             'type': 'oval',
             'pos': {
                 'left': 24,
@@ -510,7 +511,7 @@ const BRANDON_STEPS = [
         img: "45.png",
         clickZones: [{
             'toStep': "b-46",
-            'throwStep': 'page-suspens',
+            'throwStep': "page-suspens",
             'type': 'arrow',
             'pos': {
                 'left': 57.5,
@@ -569,6 +570,204 @@ const BRANDON_STEPS = [
                 'top': 89,
                 'width': 23,
                 'height': 8.5
+            }
+        }]
+    }, {
+        id: "b-49",
+        img: "49.png",
+        clickZones: [{
+            'toStep': "b-50",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 23,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-50",
+        img: "50.png",
+        clickZones: [{
+            'toStep': "b-51",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 23,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-51",
+        img: "51.png",
+        clickZones: [{
+            'toStep': "cantine",
+            'type': 'oval',
+            'pos': {
+                'left': 10,
+                'top': 78.5,
+                'width': 34,
+                'aspect-ratio': 1.6 / 1
+            }
+        }, {
+            'toStep': "b-48",
+            'type': 'oval',
+            'pos': {
+                'left': 59,
+                'top': 74.5,
+                'width': 34,
+                'aspect-ratio': 1.3 / 1
+            }
+        }]
+    }, {
+        id: "cantine",
+        img: "52.png",
+        clickZones: [{
+            'toStep': "frite",
+            'type': 'oval',
+            'pos': {
+                'left': 7.5,
+                'top': 83,
+                'width': 27,
+                'aspect-ratio': 1.5 / 1
+            }
+        }, {
+            'toStep': "gauffre",
+            'type': 'oval',
+            'pos': {
+                'left': 58,
+                'top': 77.5,
+                'width': 29,
+                'aspect-ratio': 1.2 / 1
+            }
+        }]
+    }, {
+        id: "frite",
+        img: "53.png",
+        clickZones: [{
+            'toStep': "b-54",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 89,
+                'width': 24,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-54",
+        img: "54.png",
+        clickZones: [{
+            'toStep': "oubliettes",
+            'path': 'game-over',
+            'type': 'arrow',
+            'pos': {
+                'left': 74,
+                'top': 89,
+                'width': 22.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "gauffre",
+        img: "55.png",
+        clickZones: [{
+            'toStep': "b-56",
+            'type': 'arrow',
+            'pos': {
+                'left': 71.5,
+                'top': 89,
+                'width': 22.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-56",
+        img: "56.png",
+        inputs: {
+            'correct': {
+                'toStep': "b-60"
+            },
+            'incorrect': {
+                'toStep': "b-57"
+            }
+        },
+        clickZones: [{
+            'toStep': "aucune-idee",
+            'type': 'oval',
+            'pos': {
+                'left': 59,
+                'top': 1,
+                'width': 34,
+                'aspect-ratio': 1.3 / 1
+            }
+        }, {
+            'testPwd': true,
+            'toStep': null,
+            'type': 'arrow',
+            'pos': {
+                'left': 58,
+                'top': 85,
+                'width': 38.5,
+                'height': 12
+            }
+        }]
+    }, {
+        id: "b-57",
+        img: "57.png",
+        inputs: {
+            'correct': {
+                'toStep': "b-60",
+            },
+            'incorrect': {
+                'toStep': "b-58"
+            }
+        },
+        clickZones: [{
+            'toStep': "aucune-idee",
+            'type': 'oval',
+            'pos': {
+                'left': 59,
+                'top': 1,
+                'width': 34,
+                'aspect-ratio': 1.3 / 1
+            }
+        }, {
+            'testPwd': true,
+            'toStep': null,
+            'type': 'arrow',
+            'pos': {
+                'left': 58,
+                'top': 85,
+                'width': 38.5,
+                'height': 12
+            }
+        }]
+    }, {
+        id: "b-58",
+        img: "58.png",
+        clickZones: [{
+            'toStep': "aucune-idee",
+            'type': 'arrow',
+            'pos': {
+                'left': 74,
+                'top': 89,
+                'width': 22.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "aucune-idee",
+        img: "59.png",
+        clickZones: [{
+            'toStep': "bouzin",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8
             }
         }]
     }
