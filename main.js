@@ -60,12 +60,14 @@ const MarlenBrando = {
         zone.onclick = async () => {
             if (clickZone.isBack) {
                 clearInterval(this.intervalId);
-                document.querySelector('.chrono-wrapper').classList.remove('visible');
                 this.currentGame.history.pop();
             }
             let toStepId = clickZone.toStep;
             if (stepIdAfterThrower) {
                 toStepId = stepIdAfterThrower;
+            }
+            if (toStepId == "partir-bouzin") {
+                clearInterval(this.intervalId);
             }
             if (clickZone.testPwd) {
                 const input = document.getElementById("mdp-input");
@@ -96,7 +98,11 @@ const MarlenBrando = {
                 this.currentGame.path = toStepId;
             }
             if (toStepId == 'time-machine-construct') {
-                delete this.currentGame.endTime;
+                if (clickZone.addTime) {
+
+                } else {
+                    delete this.currentGame.endTime;
+                }
             }
             await this.applyStep(toStepId, clickZone.isBack);
         };
