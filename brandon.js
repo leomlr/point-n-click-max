@@ -5,7 +5,12 @@ const BRANDON_STEPS = [
         clickZones: [{
             'toStep': "b-10",
             'type': 'arrow',
-            'pos': BOTTOM_RIGHT_ARROW
+            'pos': {
+                'left': 68,
+                'top': 87.5,
+                'width': 29,
+                'height': 10
+            }
         }]
     }, {
         id: "b-10",
@@ -28,9 +33,9 @@ const BRANDON_STEPS = [
             'type': 'arrow',
             'pos': {
                 'left': 71,
-                'top': 88.5,
-                'width': 23,
-                'height': 8
+                'top': 88,
+                'width': 23.5,
+                'height': 8.5
             }
         }]
     }, {
@@ -41,8 +46,9 @@ const BRANDON_STEPS = [
             'type': 'arrow',
             'pos': {
                 'left': 70,
-                'top': 90,
-                'width': 26
+                'top': 89,
+                'width': 24,
+                'height': 8.5
             }
         }]
     }, {
@@ -53,8 +59,8 @@ const BRANDON_STEPS = [
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {
-                'left': 32.5,
-                'top': 9,
+                'left': 32,
+                'top': 8.5,
                 'width': 44,
                 'aspect-ratio': 1.35 / 1
             }
@@ -75,9 +81,10 @@ const BRANDON_STEPS = [
             'toStep': "b-18",
             'type': 'arrow',
             'pos': {
-                'left': 72,
+                'left': 73.5,
                 'top': 89.5,
-                'width': 26
+                'width': 23.5,
+                'height': 8
             }
         }]
     }, {
@@ -87,9 +94,10 @@ const BRANDON_STEPS = [
             'toStep': "couper-gauche",
             'type': 'arrow',
             'pos': {
-                'left': 6,
-                'top': 19,
-                'width': 36,
+                'left': 8,
+                'top': 18.5,
+                'width': 33.5,
+                'height': 11,
                 'rotate': 180
             }
         }, {
@@ -97,9 +105,10 @@ const BRANDON_STEPS = [
             'throwStep': "continuer-plus-haut",
             'type': 'arrow',
             'pos': {
-                'left': 59.5,
-                'top': 20.5,
-                'width': 40,
+                'left': 60.5,
+                'top': 19.5,
+                'width': 38.5,
+                'height': 14,
                 'rotate': -90
             }
         }]
@@ -760,7 +769,7 @@ const BRANDON_STEPS = [
         id: "aucune-idee",
         img: "59.png",
         clickZones: [{
-            'toStep': "bouzin",
+            'toStep': "b-62",
             'type': 'arrow',
             'pos': {
                 'left': 73,
@@ -786,13 +795,481 @@ const BRANDON_STEPS = [
         id: "b-61",
         img: "61.png",
         clickZones: [{
-            'toStep': "bouzin",
+            'toStep': "b-63",
             'type': 'arrow',
             'pos': {
                 'left': 71,
                 'top': 88.5,
                 'width': 24,
                 'height': 8.5
+            }
+        }]
+    }, {
+        id: "b-62",
+        img: "62.png",
+        clickZones: [{
+            'toStep': "TROP-TARD",
+            'path': 'troptard',
+            'type': 'arrow',
+            'pos': {
+                'left': 72.5,
+                'top': 88.5,
+                'width': 24,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "b-63",
+        img: "63.png",
+        clickZones: [{
+            'toStep': "SLPPE",
+            'path': 'SLPPE',
+            'type': 'oval',
+            'pos': {
+                'left': 7,
+                'top': 72.5,
+                'width': 40,
+                'height': 17.5
+            }
+        }, {
+            'toStep': "b-64",
+            'type': 'arrow',
+            'pos': {
+                'left': 70,
+                'top': 88,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "b-64",
+        img: "64.png",
+        clickZones: [{
+            'toStep': "b-65",
+            'type': 'arrow',
+            'pos': {
+                'left': 74,
+                'top': 89.5,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-65",
+        img: "65.png",
+        clickZones: [{
+            'toStep': "donner-enfant-allergique",
+            'type': 'oval',
+            'pos': {
+                'left': 4,
+                'top': 76,
+                'width': 43,
+                'height': 16
+            }
+        }, {
+            'toStep': "miam-gauffre",
+            'type': 'oval',
+            'pos': {
+                'left': 59,
+                'top': 76,
+                'width': 34,
+                'aspect-ratio': 1.3 / 1
+            }
+        }]
+    }, {
+        id: "donner-enfant-allergique",
+        img: "66.png",
+        clickZones: [{
+            'toStep': "miam-gauffre",
+            'type': 'oval',
+            'pos': {
+                'left': 33,
+                'top': 57,
+                'width': 48,
+                'height': 22
+            }
+        }]
+    }, {
+        id: "miam-gauffre",
+        img: "67.png",
+        clickZones: [{
+            'toStep': "b-68",
+            'type': 'arrow',
+            'pos': {
+                'left': 70,
+                'top': 88,
+                'width': 24,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "b-68",
+        img: "68.png",
+        clickZones: [{
+            'toStep': "b-69",
+            'type': 'arrow',
+            'pos': {
+                'left': 74,
+                'top': 89.5,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "b-69",
+        img: "69.png",
+        clickZones: [{
+            'toStep': "b-70",
+            'type': 'arrow',
+            'pos': {
+                'left': 74,
+                'top': 89,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "b-70",
+        img: "70.png",
+        clickZones: [{
+            'toStep': "b-71",
+            'type': 'arrow',
+            'pos': {
+                'left': 74,
+                'top': 89,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-71",
+        img: "71.png",
+        clickZones: [{
+            'toStep': "b-72",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 88.5,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "b-72",
+        img: "72.png",
+        clickZones: [{
+            'toStep': "bouzin",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "se-battre",
+        img: "73.png",
+        clickZones: [{
+            'toStep': "b-74",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 85.5,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "b-74",
+        img: "74.png",
+        clickZones: [{
+            'toStep': "SLPPE",
+            'path': 'SLPPE',
+            'type': 'oval',
+            'pos': {
+                'left': 14,
+                'top': 87.5,
+                'width': 16,
+                'height': 8
+            }
+        }, {
+            'toStep': "b-75",
+            'type': 'arrow',
+            'pos': {
+                'left': 58,
+                'top': 78,
+                'width': 40,
+                'height': 13,
+                'rotate': -40
+            }
+        }]
+    }, {
+        id: "b-75",
+        img: "75.png",
+        clickZones: [{
+            'toStep': "b-76",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-76",
+        img: "76.png",
+        clickZones: [{
+            'toStep': "b-77",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 88.5,
+                'width': 22.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-77",
+        img: "77.png",
+        clickZones: [{
+            'toStep': "SLPPE",
+            'path': 'SLPPE',
+            'type': 'oval',
+            'pos': {
+                'left': 37,
+                'top': 2,
+                'width': 44,
+                'aspect-ratio': 1.3 / 1
+            }
+        }, {
+            'toStep': "continuer-grimper",
+            'type': 'oval',
+            'pos': {
+                'left': 12,
+                'top': 33,
+                'width': 33.5,
+                'aspect-ratio': 1.2 / 1
+            }
+        }, {
+            'toStep': "game-over",
+            'throwStep': 'page-suspens',
+            'path': 'game-over',
+            'type': 'oval',
+            'pos': {
+                'left': 24,
+                'top': 62,
+                'width': 60.5,
+                'aspect-ratio': 1.6 / 1
+            }
+        }]
+    }, {
+        id: "continuer-grimper",
+        img: "78.png",
+        clickZones: [{
+            'toStep': "b-79",
+            'type': 'arrow',
+            'pos': {
+                'left': 72.5,
+                'top': 87.5,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-79",
+        img: "79.png",
+        clickZones: [{
+            'toStep': "attaquer-monstre",
+            'type': 'oval',
+            'pos': {
+                'left': 8.5,
+                'top': 77,
+                'width': 34,
+                'aspect-ratio': 1.5 / 1
+            }
+        }, {
+            'toStep': "chanter-berceuse",
+            'type': 'oval',
+            'pos': {
+                'left': 57,
+                'top': 75.5,
+                'width': 34,
+                'aspect-ratio': 1.3 / 1
+            }
+        }]
+    }, {
+        id: "attaquer-monstre",
+        img: "81.png",
+        clickZones: [{
+            'toStep': "b-82",
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 88,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-82",
+        img: "82.png",
+        clickZones: [{
+            'toStep': "b-83",
+            'type': 'arrow',
+            'pos': {
+                'left': 74,
+                'top': 89,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-83",
+        img: "83.png",
+        clickZones: [{
+            'toStep': "b-84",
+            'type': 'arrow',
+            'pos': {
+                'left': 74,
+                'top': 72.5,
+                'width': 23,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-84",
+        img: "84.png",
+        clickZones: [{
+            'toStep': "attaquer-boule-neige",
+            'type': 'oval',
+            'pos': {
+                'left': 27,
+                'top': 10,
+                'width': 58,
+                'aspect-ratio': 1.6 / 1
+            }
+        }, {
+            'toStep': "foncer-frichtefracht",
+            'type': 'oval',
+            'pos': {
+                'left': 20,
+                'top': 56,
+                'width': 60,
+                'aspect-ratio': 1.35 / 1
+            }
+        }]
+    }, {
+        id: "foncer-frichtefracht",
+        img: "87.png",
+        clickZones: [{
+            'toStep': "b-88",
+            'type': 'arrow',
+            'pos': {
+                'left': 69,
+                'top': 87.5,
+                'width': 23,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "attaquer-boule-neige",
+        img: "85.png",
+        clickZones: [{
+            'toStep': "b-86",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 85.5,
+                'width': 23,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-86",
+        img: "86.png",
+        clickZones: [{
+            'toStep': "b-49",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 89.5,
+                'width': 24,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "chanter-berceuse",
+        img: "80.png",
+        clickZones: [{
+            'toStep': "b-49",
+            'throwStep': 'page-suspens',
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "b-88",
+        img: "88.png",
+        clickZones: [{
+            'toStep': "suivre-zblugzor-tyro",
+            'type': 'oval',
+            'pos': {
+                'left': 37,
+                'top': 2,
+                'width': 44,
+                'aspect-ratio': 1.3 / 1
+            }
+        }, {
+            'toStep': "SLPPE",
+            'path': 'SLPPE',
+            'type': 'oval',
+            'pos': {
+                'left': 42,
+                'top': 33,
+                'width': 33.5,
+                'aspect-ratio': 1.2 / 1
+            }
+        }, {
+            'toStep': "sauter-zblugzor-films",
+            'type': 'oval',
+            'pos': {
+                'left': 24,
+                'top': 62,
+                'width': 60.5,
+                'aspect-ratio': 1.6 / 1
+            }
+        }]
+    }, {
+        id: "sauter-zblugzor-films",
+        img: "89.png",
+        clickZones: [{
+            'toStep': "game-over",
+            'path': 'game-over',
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "suivre-zblugzor-tyro",
+        img: "89.png",
+        clickZones: [{
+            'toStep': "bouzin",
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8
             }
         }]
     }

@@ -32,15 +32,25 @@ const MarlenBrando = {
         }
         this.applyStep(this.currentGame.stepId, false, stepIdAfterThrower);
     },
-    showImage: function (src) {
+    showImage: function (src, superpose = false) {
         return new Promise((resolve) => {
+            const img = superpose ? new Image() : this.imageEl;
+
             const onLoad = () => {
-                this.imageEl.removeEventListener('load', onLoad);
-                resolve();
+                img.removeEventListener('load', onLoad);
+                resolve(img);
             };
-            this.imageEl.addEventListener('load', onLoad);
-            this.imageEl.src = 'media/' + src;
-            this.imageEl.classList.add("contain-full");
+
+            img.addEventListener('load', onLoad);
+            img.src = 'media/' + src;
+            img.classList.add("contain-full"); // si tu t'en sers encore
+
+            if (superpose) {
+                img.classList.add("overlay-img");
+                this.imageEl.parentNode.appendChild(img);
+            } else {
+                img.classList.add("current-img");
+            }
         });
     },
     addClickableZone: function (clickZone, stepIdAfterThrower = null) {
@@ -85,6 +95,9 @@ const MarlenBrando = {
             } else if (['game-over'].includes(toStepId)) {
                 this.currentGame.path = toStepId;
             }
+            if (toStepId == 'time-machine-construct') {
+                delete this.currentGame.endTime;
+            }
             await this.applyStep(toStepId, clickZone.isBack);
         };
     },
@@ -120,6 +133,7 @@ const MarlenBrando = {
     },
     removeElementsFromPreviousStep: function () {
         document.querySelectorAll('.clickable-zone').forEach(el => el.remove());
+        document.querySelectorAll('.overlay-img').forEach(el => el.remove());
         document.querySelector('.chrono-wrapper').classList.remove('visible');
         document.querySelector('.input-group').classList.remove('visible');
         document.getElementById("mdp-input").value = "";
@@ -200,6 +214,7 @@ const MarlenBrando = {
             })
         }
         if (this.currentGame.stepId == 'time-machine-construct') {
+            this.showImage(step.gif, true);
             document.querySelector('.chrono-wrapper').classList.add('visible');
             this.startCountDown();
         }
@@ -218,7 +233,7 @@ const MarlenBrando = {
     startCountDown: async function () {
         let remainingTime = 15 * 60; // 15 minutes
         if (this.adminMode) {
-            remainingTime = 15;
+            remainingTime = 30;
         }
         if (this.currentGame.endTime) {
             const now = Date.now();
@@ -263,7 +278,12 @@ const MarlenBrando = {
                 clickZones: [{
                     'toStep': "start-2",
                     'type': 'arrow',
-                    'pos': BOTTOM_RIGHT_ARROW
+                    'pos': {
+                        'left': 67,
+                        'top': 86.5,
+                        'width': 29,
+                        'height': 11
+                    }
                 }]
             }, {
                 id: "start-2",
@@ -271,7 +291,12 @@ const MarlenBrando = {
                 clickZones: [{
                     'toStep': "start-3",
                     'type': 'arrow',
-                    'pos': BOTTOM_RIGHT_ARROW
+                    'pos': {
+                        'left': 67,
+                        'top': 86.5,
+                        'width': 29,
+                        'height': 11
+                    }
                 }]
             }, {
                 id: "start-3",
@@ -279,7 +304,12 @@ const MarlenBrando = {
                 clickZones: [{
                     'toStep': "start-4",
                     'type': 'arrow',
-                    'pos': BOTTOM_RIGHT_ARROW
+                    'pos': {
+                        'left': 67,
+                        'top': 86.5,
+                        'width': 29,
+                        'height': 11
+                    }
                 }]
             }, {
                 id: "start-4",
@@ -288,9 +318,10 @@ const MarlenBrando = {
                     'toStep': "start-5",
                     'type': 'arrow',
                     'pos': {
-                        'left': 64,
-                        'top': 27.5,
-                        'width': 32
+                        'left': 64.5,
+                        'top': 26.5,
+                        'width': 32,
+                        'height': 11
                     }
                 }]
             }, {
@@ -299,7 +330,12 @@ const MarlenBrando = {
                 clickZones: [{
                     'toStep': "start-6",
                     'type': 'arrow',
-                    'pos': BOTTOM_RIGHT_ARROW
+                    'pos': {
+                        'left': 67,
+                        'top': 86.5,
+                        'width': 29,
+                        'height': 11
+                    }
                 }]
             }, {
                 id: "start-6",
@@ -361,7 +397,7 @@ const MarlenBrando = {
                     'pos': {
                         left: 74,
                         top: 90,
-                        width: 24,
+                        width: 23.5,
                         height: 9,
                     }
                 }]
@@ -374,8 +410,8 @@ const MarlenBrando = {
                     'pos': {
                         left: 74,
                         top: 90,
-                        width: 24,
-                        height: 9,
+                        width: 23.5,
+                        height: 8,
                     }
                 }]
             }, {
@@ -468,7 +504,18 @@ const MarlenBrando = {
             }]
         }, {
             id: "time-machine-construct",
-            img: "under-construction-animated-gif-8.gif"
+            gif: "under-construction-animated-gif-8.gif",
+            img: "construction machine.png",
+            clickZones: [{
+                'toStep': "partir-bouzin",
+                'type': 'oval',
+                'pos': {
+                    'left': 60,
+                    'top': 73.5,
+                    'width': 34,
+                    'aspect-ratio': 1.3 / 1
+                }
+            }]
         }, {
             id: "TROP-TARD5",
             img: "Trop tard5.png",
@@ -504,6 +551,29 @@ const MarlenBrando = {
                     'top': 89,
                     'width': 24,
                     'height': 10
+                }
+            }]
+        }, {
+            id: "partir-bouzin",
+            img: "partir_bouzin.png",
+            clickZones: [{
+                'toStep': "time-machine-construct",
+                'type': 'oval',
+                'pos': {
+                    'left': 60,
+                    'top': 73.5,
+                    'width': 34,
+                    'aspect-ratio': 1.3 / 1
+                }
+            }, {
+                'toStep': "game-over",
+                'path': 'game-over',
+                'type': 'oval',
+                'pos': {
+                    'left': 9.5,
+                    'top': 76.5,
+                    'width': 33,
+                    'aspect-ratio': 1.5 / 1
                 }
             }]
         }],
