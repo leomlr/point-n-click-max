@@ -919,26 +919,324 @@ const MARLENE_STEPS = [
         id: "rester-danser",
         img: "135.png",
         clickZones: [{
-            'toStep': "m-136",
+            'toStep': "marlene-danse",
             'type': 'oval',
             'pos': {
-                'left': 63.5,
-                'top': 76,
-                'width': 31,
-                'height': 15
+                'left': 32.5,
+                'top': 78.5,
+                'width': 35,
+                'height': 13
             }
         }]
     }, {
         id: "aller-bar",
-        img: "bouzin.png",
+        img: "138.png",
+        clickZones: [{
+            'toStep': "m-139",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 88.5,
+                'width': 23,
+                'height': 9
+            }
+        }]
+    }, {
+        id: "marlene-danse",
+        img: "136.png",
+        gif: "danse marlène.gif",
+        clickZones: [{
+            'toStep': "m-137",
+            'type': 'arrow',
+            'pos': {
+                'left': 70.5,
+                'top': 88,
+                'width': 25,
+                'height': 9
+            }
+        }]
+    }, {
+        id: "m-137",
+        img: "137.png",
         clickZones: [{
             'toStep': "bouzin",
             'type': 'oval',
             'pos': {
-                'left': 63.5,
-                'top': 76,
-                'width': 31,
-                'height': 15
+                'left': 60.5,
+                'top': 9.5,
+                'width': 26,
+                'height': 12
+            }
+        }]
+    }, {
+        id: "m-139",
+        img: "139.png",
+        clickZones: [{
+            'toStep': "m-140",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 88.5,
+                'width': 24,
+                'height': 9
+            }
+        }]
+    }, {
+        id: "m-140",
+        img: "140.png",
+        clickZones: [{
+            'toStep': "oubliettes",
+            'path': 'game-over',
+            'type': 'oval',
+            'pos': {
+                'left': 4,
+                'top': 82,
+                'width': 32,
+                'height': 13
+            }
+        }, {
+            'toStep': "defier-flechettes",
+            'type': 'oval',
+            'pos': {
+                'left': 63,
+                'top': 82,
+                'width': 29,
+                'height': 12.5
+            }
+        }]
+    }, {
+        id: "defier-flechettes",
+        img: "141.png",
+        clickZones: [{
+            'toStep': "m-142",
+            'type': 'arrow',
+            'pos': {
+                'left': 67,
+                'top': 87.5,
+                'width': 29.5,
+                'height': 11
+            }
+        }]
+    }, {
+        id: "m-142",
+        img: "142.png",
+        clickZones: [{
+            'toStep': null,
+            'randomSteps': ["m-143", "m-144", "m-145"],
+            'type': 'oval',
+            'pos': {
+                'left': 60.5,
+                'top': 77,
+                'width': 34.5,
+                'height': 16
+            }
+        }]
+    }, {
+        id: "m-143",
+        img: "143.png",
+        clickZones: [{
+            'toStep': "m-148",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 87.5,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-148",
+        img: "148.png",
+        clickZones: [{
+            'toStep': "m-149",
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 88,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-149",
+        img: "149.png",
+        clickZones: [{
+            'toStep': "m-146",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-144",
+        img: "144.png",
+        clickZones: [{
+            'toStep': "m-150",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 87.5,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-150",
+        img: "150.png",
+        clickZones: [{
+            'toStep': "m-151",
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 87.5,
+                'width': 23,
+                'height': 9.5
+            }
+        }]
+    }, {
+        id: "m-151",
+        img: "151.png",
+        clickZones: [{
+            'toStep': "m-146",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 24,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-145",
+        img: "145.png",
+        clickZones: [{
+            'toStep': "m-146",
+            'type': 'arrow',
+            'pos': {
+                'left': 68,
+                'top': 86,
+                'width': 24,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-146",
+        img: "146.png",
+        clickZones: [{
+            'toStep': "m-147",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 24,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-147",
+        img: "147.png",
+        clickZones: [{
+            'toStep': "m-152",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-152",
+        img: "152.png",
+        clickZones: [{
+            'toStep': "m-153",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 24,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-153",
+        img: "153.png",
+        clickZones: [{
+            'toStep': "m-154",
+            'type': 'arrow',
+            'pos': {
+                'left': 75,
+                'top': 87,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-154",
+        img: "154.png",
+        clickZones: [{
+            'toStep': "m-155",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 88,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-155",
+        img: "155.png",
+        clickZones: [{
+            'toStep': "m-156",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 88,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-156",
+        img: "156.png",
+        clickZones: [{
+            'toStep': "m-157",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 88,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-157",
+        img: "157.png",
+        clickZones: [{
+            'toStep': "m-158",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-158",
+        img: "158.png",
+        clickZones: [{
+            'toStep': "bouzin",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 23,
+                'height': 8.5
             }
         }]
     }

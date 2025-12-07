@@ -50,6 +50,12 @@ body {
     width: 100%;
 }
 
+.gif-marlene-danse {
+    left: 0%;
+    top: 55%;
+    width: 100%;
+}
+
 .overlay-video {
     position: absolute;
     inset: 0;

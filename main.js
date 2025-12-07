@@ -116,6 +116,9 @@ const MarlenBrando = {
                     delete this.currentGame.endTime;
                 }
             }
+            if (clickZone.randomSteps) {
+                toStepId = clickZone.randomSteps[Math.floor(Math.random() * clickZone.randomSteps.length)];
+            }
             await this.applyStep(toStepId, clickZone.isBack);
         };
     },
@@ -186,12 +189,12 @@ const MarlenBrando = {
                 return console.error("Le chemin '" + this.currentGame.path + "' est introuvable.")
             }
         }
+        console.log(step)
         if (!step) {
             console.error("Unable to find step: " + id + " for player " + this.currentGame.player + " (check also path)");
             return await this.applyStep('bouzin');
         }
         this.currentGame.stepId = step.id;
-        console.log(step)
         // show image
         if (!step.img && !step.video) {
             console.error("Unable to find image: " + step.id + " for player " + this.currentGame.player);
@@ -250,8 +253,10 @@ const MarlenBrando = {
                 }
             })
         }
-        if (this.currentGame.stepId == 'time-machine-construct') {
-            this.showImage(step.gif, { gif: true, class: "gif-time-machine-construct" });
+        if (step.gif) {
+            this.showImage(step.gif, { class: "gif-" + step.id });
+        }
+        if (step.id == 'time-machine-construct') {
             document.querySelector('.chrono-wrapper').classList.add('visible');
             this.startCountDown();
         }
@@ -315,7 +320,6 @@ const MarlenBrando = {
         await this.applyStep(step.atEndStep);
     },
     playVideo: async function (step) {
-        console.log(this.onEndsVideo[step.id])
         this.onEndsVideo[step.id] = async () => {
             await this.onVideoEnd(step);
         };
