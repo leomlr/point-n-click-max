@@ -462,7 +462,7 @@ const MARLENE_STEPS = [
         }]
     }, {
         id: "course-poursuite",
-        video: "course_poursuite_QQR_500_entier.mp4",
+        video: "course poursuite QQR 500 entier compressee.mp4",
         atEndStep: 'm-121'
     }, {
         id: "m-121",
