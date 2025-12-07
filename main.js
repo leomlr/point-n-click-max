@@ -3,21 +3,33 @@ const MarlenBrando = {
     currentGame: null,
     imageEl: document.getElementById("current-img"),
     gameContainer: document.querySelector(".img-wrapper"),
+    videoEl: document.getElementById("video-step"),
     adminMode: true,
+    onEndsVideo: {},
+    CONSTRUCT_DELAYS: {
+        'adminMode': 15,
+        'players': 15 * 60
+    },
     MDP: 'U0xJUFZPVVBMQUk=',
-    init: function () {
+    init: function (stepId, path) {
         this.isArrivingToGame = true;
         this.getGameFromLS();
-        if (!this.currentGame.stepId) {
+        if (stepId && path) {
             this.currentGame.history = [];
-            this.currentGame.stepId = 'start-1';
-            this.currentGame.path = 'starter';
+            this.currentGame.stepId = stepId;
+            this.currentGame.path = path;
         } else {
-            if (this.currentGame.player) {
-                // Set image for returning by player 
-            }
-            if (!this.currentGame.history) {
+            if (!this.currentGame.stepId) {
                 this.currentGame.history = [];
+                this.currentGame.stepId = stepId;
+                this.currentGame.path = path;
+            } else {
+                if (this.currentGame.player) {
+                    // Set image for returning by player 
+                }
+                if (!this.currentGame.history) {
+                    this.currentGame.history = [];
+                }
             }
         }
         let stepIdAfterThrower;
@@ -43,7 +55,6 @@ const MarlenBrando = {
 
             img.addEventListener('load', onLoad);
             img.src = 'media/' + src;
-            img.classList.add("contain-full"); // si tu t'en sers encore
 
             if (superpose) {
                 img.classList.add("overlay-img");
@@ -73,7 +84,6 @@ const MarlenBrando = {
                 const input = document.getElementById("mdp-input");
                 if (input.value) {
                     const inputValue = this.encodeText(input.value);
-                    console.log(clickZone.testPwd)
                     if (inputValue == this.MDP) {
                         return await this.applyStep(clickZone.testPwd.correct.toStep, clickZone.isBack, toStepId);
                     } else {
@@ -97,11 +107,14 @@ const MarlenBrando = {
             } else if (['game-over'].includes(toStepId)) {
                 this.currentGame.path = toStepId;
             }
+            // add time to machine construction
             if (toStepId == 'time-machine-construct') {
-                if (clickZone.addTime) {
-
-                } else {
+                console.log(clickZone)
+                console.log((this.adminMode ? this.CONSTRUCT_DELAYS['adminMode'] : this.CONSTRUCT_DELAYS['players']))
+                if (!clickZone.addTime) {
                     delete this.currentGame.endTime;
+                } else {
+                    this.currentGame.endTime += (this.adminMode ? this.CONSTRUCT_DELAYS['adminMode'] : this.CONSTRUCT_DELAYS['players']) * 1000;
                 }
             }
             await this.applyStep(toStepId, clickZone.isBack);
@@ -138,6 +151,10 @@ const MarlenBrando = {
         return z;
     },
     removeElementsFromPreviousStep: function () {
+        if (this.readingVideoId && this.onEndsVideo[this.readingVideoId]) {
+            this.videoEl.removeEventListener('ended', this.onEndsVideo[this.readingVideoId]);
+            delete this.onEndsVideo[this.readingVideoId];
+        }
         document.querySelectorAll('.clickable-zone').forEach(el => el.remove());
         document.querySelectorAll('.overlay-img').forEach(el => el.remove());
         document.querySelector('.chrono-wrapper').classList.remove('visible');
@@ -172,10 +189,18 @@ const MarlenBrando = {
         this.currentGame.stepId = step.id;
         // show image
         if (!step.img) {
-            console.error("Unable to find image: " + step.id + " for player " + this.currentGame.player);
-            return await this.applyStep('bouzin');
+            if (step.video) {
+                this.playVideo(step);
+            } else {
+                console.error("Unable to find image: " + step.id + " for player " + this.currentGame.player);
+                return await this.applyStep('bouzin');
+            }
         } else {
             await this.showImage(step.img);
+            if (this.readingVideoId) {
+                this.stopVideo();
+                delete this.readingVideoId;
+            }
         }
         // add click zones
         if (step.clickZones) {
@@ -237,14 +262,13 @@ const MarlenBrando = {
         }
     },
     startCountDown: async function () {
-        let remainingTime = 15 * 60; // 15 minutes
-        if (this.adminMode) {
-            remainingTime = 30;
-        }
+        let remainingTime;
+        console.log(this.currentGame.endTime)
         if (this.currentGame.endTime) {
             const now = Date.now();
             remainingTime = Math.floor((this.currentGame.endTime - now) / 1000); // en secondes
         } else {
+            remainingTime = this.adminMode ? this.CONSTRUCT_DELAYS['adminMode'] : this.CONSTRUCT_DELAYS['players'];
             this.currentGame.endTime = Date.now() + remainingTime * 1000;
             this.saveGameInLS();
         }
@@ -261,7 +285,6 @@ const MarlenBrando = {
             countdownEl.textContent = `${minStr}:${secStr}`;
             if (remainingTime <= 0) {
                 clearInterval(this.intervalId);
-                document.querySelector('.chrono-wrapper').classList.remove('visible');
                 this.currentGame.endTime = null;
                 await this.applyStep('TROP-TARD5');
             } else {
@@ -270,6 +293,33 @@ const MarlenBrando = {
         }
         updateCountdown();
         this.intervalId = setInterval(updateCountdown, 1000);
+    },
+    playVideo: function (step) {
+        this.onEndsVideo[step.id] = async () => {
+            this.videoEl.removeEventListener('ended', this.onEndsVideo[step.id]);
+            delete this.onEndsVideo[step.id];
+            this.imageEl.src = "";
+            await this.applyStep(step.atEndStep);
+        };
+        this.videoEl.addEventListener('ended', this.onEndsVideo[step.id]);
+        this.videoEl.src = "media/" + step.video;
+        this.videoEl.style.display = "block";
+        this.videoEl.autoplay = true;
+        this.videoEl.volume = 0.5;
+        if (this.adminMode) {
+            this.videoEl.playbackRate = 4;
+        }
+        this.readingVideoId = step.id;
+        this.videoEl.play().catch(() => {
+            // si besoin, gérer l’erreur (rare si muted)
+        });
+    },
+    stopVideo() {
+        this.videoEl.pause();          // stop la lecture
+        this.videoEl.currentTime = 0;  // remet au début
+        this.videoEl.removeAttribute('src'); // enlève la source (optionnel)
+        this.videoEl.load();           // force le vidage du buffer (optionnel)
+        this.videoEl.style.display = 'none'; // la rend invisible
     },
     GamePaths: {
         bouzin: {
@@ -565,6 +615,7 @@ const MarlenBrando = {
             clickZones: [{
                 'toStep': "time-machine-construct",
                 'type': 'oval',
+                'addTime': true,
                 'pos': {
                     'left': 60,
                     'top': 73.5,
@@ -634,4 +685,4 @@ const MarlenBrando = {
     },
 }
 
-MarlenBrando.init();
+MarlenBrando.init('m-121', 'marlene');

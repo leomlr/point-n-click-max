@@ -39,12 +39,22 @@ body {
 .overlay-img {
     position: absolute;
     inset: 0;
-    /* top:0; right:0; bottom:0; left:0 */
     margin: auto;
-    /* la centre comme l'image de fond */
     z-index: 2;
     pointer-events: none;
-    /* ne bloque pas les clics sur les zones */
+}
+
+.overlay-video {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: auto;
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
+    display: none;
 }
 
 /* Clickable zone */

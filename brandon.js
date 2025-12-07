@@ -1220,29 +1220,29 @@ const BRANDON_STEPS = [
             'toStep': "suivre-zblugzor-tyro",
             'type': 'oval',
             'pos': {
-                'left': 37,
-                'top': 2,
-                'width': 44,
-                'aspect-ratio': 1.3 / 1
+                'left': 27,
+                'top': 10,
+                'width': 58,
+                'aspect-ratio': 1.6 / 1
             }
         }, {
             'toStep': "SLPPE",
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {
-                'left': 42,
-                'top': 33,
-                'width': 33.5,
+                'left': 66,
+                'top': 38,
+                'width': 29.5,
                 'aspect-ratio': 1.2 / 1
             }
         }, {
             'toStep': "sauter-zblugzor-films",
             'type': 'oval',
             'pos': {
-                'left': 24,
-                'top': 62,
-                'width': 60.5,
-                'aspect-ratio': 1.6 / 1
+                'left': 21,
+                'top': 56,
+                'width': 57,
+                'aspect-ratio': 1.2 / 1
             }
         }]
     }, {
@@ -1253,15 +1253,15 @@ const BRANDON_STEPS = [
             'path': 'game-over',
             'type': 'arrow',
             'pos': {
-                'left': 72,
-                'top': 88.5,
+                'left': 70,
+                'top': 87.5,
                 'width': 23.5,
                 'height': 8
             }
         }]
     }, {
         id: "suivre-zblugzor-tyro",
-        img: "89.png",
+        img: "bouzin.png",
         clickZones: [{
             'toStep': "bouzin",
             'type': 'arrow',
