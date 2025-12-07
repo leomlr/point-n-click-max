@@ -45,11 +45,20 @@ const MARLENE_STEPS = [
             'toStep': "m-130",
             'type': 'square',
             'pos': {
-                'left': 42.5,
-                'top': 83.5,
+                'left': 65.5,
+                'top': 82.5,
                 'width': 18.5,
                 'height': 10.5,
                 'rotate': 45
+            }
+        }, {
+            'toStep': "bouzin",
+            'type': 'oval',
+            'pos': {
+                'left': 12.5,
+                'top': 77,
+                'width': 33,
+                'height': 14.5
             }
         }]
     }, {
@@ -701,7 +710,7 @@ const MARLENE_STEPS = [
         id: "m-101",
         img: "101.png",
         clickZones: [{
-            'toStep': "m-100",
+            'toStep': "m-98",
             'type': 'arrow',
             'pos': {
                 'left': 2,
@@ -835,7 +844,7 @@ const MARLENE_STEPS = [
                 'height': 11
             }
         }, {
-            'toStep': "ouvrir-porte",
+            'toStep': "m-134",
             'type': 'oval',
             'pos': {
                 'left': 63,
