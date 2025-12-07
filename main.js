@@ -4,7 +4,7 @@ const MarlenBrando = {
     imageEl: document.getElementById("current-img"),
     gameContainer: document.querySelector(".img-wrapper"),
     videoEl: document.getElementById("video-step"),
-    adminMode: true,
+    adminMode: false,
     onEndsVideo: {},
     CONSTRUCT_DELAYS: {
         'adminMode': 20,
