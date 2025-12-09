@@ -17,7 +17,7 @@ const BRANDON_STEPS = [
         img: "10.png",
         clickZones: [{
             'toStep': "b-12",
-            'throwStep': "page-suspens",
+            'throwSteps': ["page-suspens"],
             'type': 'arrow',
             'pos': {
                 'left': 77,
@@ -165,6 +165,7 @@ const BRANDON_STEPS = [
     }, {
         id: "plonger-lac",
         img: "22.png",
+        isSaveStep: true,
         clickZones: [{
             'toStep': "b-23",
             'type': 'arrow',
@@ -301,7 +302,7 @@ const BRANDON_STEPS = [
         img: "37.png",
         clickZones: [{
             'toStep': "b-49",
-            'throwStep': "page-suspens",
+            'throwSteps': ["page-suspens"],
             'type': 'arrow',
             'pos': {
                 'left': 69,
@@ -400,7 +401,7 @@ const BRANDON_STEPS = [
             }
         }, {
             'toStep': "b-40",
-            'throwStep': "page-suspens",
+            'throwSteps': ["page-suspens"],
             'type': 'oval',
             'pos': {
                 'left': 61,
@@ -520,7 +521,7 @@ const BRANDON_STEPS = [
         img: "45.png",
         clickZones: [{
             'toStep': "b-46",
-            'throwStep': "page-suspens",
+            'throwSteps': ["page-suspens"],
             'type': 'arrow',
             'pos': {
                 'left': 57.5,

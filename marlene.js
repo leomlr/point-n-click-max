@@ -17,7 +17,7 @@ const MARLENE_STEPS = [
         img: "14.png",
         clickZones: [{
             'toStep': "m-15",
-            'throwStep': "page-suspens",
+            'throwSteps': ["page-suspens"],
             'type': 'arrow',
             'pos': {
                 'left': 77,
@@ -27,6 +27,7 @@ const MARLENE_STEPS = [
         }]
     }, {
         id: "page-suspens",
+        isThrowStep: true,
         img: "11.png",
         clickZones: [{
             'toStep': null,
@@ -40,9 +41,10 @@ const MARLENE_STEPS = [
         }]
     }, {
         id: "page-suspens-bis",
+        isThrowStep: true,
         img: "11bis.png",
         clickZones: [{
-            'toStep': "m-130",
+            'toStep': null,
             'type': 'square',
             'pos': {
                 'left': 65.5,
@@ -52,7 +54,8 @@ const MARLENE_STEPS = [
                 'rotate': 45
             }
         }, {
-            'toStep': "bouzin",
+            'toStep': "game-over",
+            'path': 'game-over',
             'type': 'oval',
             'pos': {
                 'left': 12.5,
@@ -187,7 +190,8 @@ const MARLENE_STEPS = [
         id: "m-103",
         img: "103.png",
         clickZones: [{
-            'toStep': "m-104",
+            'toStep': "m-103",
+            'throwStep': "m-104",
             'type': 'oval',
             'pos': {
                 'left': 10,
@@ -209,7 +213,7 @@ const MARLENE_STEPS = [
         id: "m-104",
         img: "104.png",
         clickZones: [{
-            'toStep': "m-103",
+            'toStep': null,
             'type': 'arrow',
             'pos': {
                 'left': 11,
@@ -236,6 +240,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-106",
         img: "106.png",
+        isSaveStep: true,
         clickZones: [{
             'toStep': "m-107",
             'type': 'oval',
@@ -381,7 +386,7 @@ const MARLENE_STEPS = [
         id: "m-119",
         img: "119.png",
         clickZones: [{
-            'toStep': "m-116",
+            'toStep': "affront-QQR",
             'type': 'oval',
             'pos': {
                 'left': 11,
@@ -390,7 +395,7 @@ const MARLENE_STEPS = [
                 'aspect-ratio': 1.6 / 1
             }
         }, {
-            'toStep': "m-116",
+            'toStep': "affront-QQR",
             'type': 'oval',
             'pos': {
                 'left': 55,
@@ -399,7 +404,7 @@ const MARLENE_STEPS = [
                 'aspect-ratio': 1.2 / 1
             }
         }, {
-            'toStep': "m-116",
+            'toStep': "affront-QQR",
             'type': 'oval',
             'pos': {
                 'left': 11,
@@ -408,7 +413,7 @@ const MARLENE_STEPS = [
                 'aspect-ratio': 1.5 / 1
             }
         }, {
-            'toStep': "m-116",
+            'toStep': "affront-QQR",
             'type': 'oval',
             'pos': {
                 'left': 6,
@@ -447,7 +452,7 @@ const MARLENE_STEPS = [
         id: "m-115",
         img: "115.png",
         clickZones: [{
-            'toStep': "m-116",
+            'toStep': "affront-QQR",
             'type': 'arrow',
             'pos': {
                 'left': 72,
@@ -457,7 +462,7 @@ const MARLENE_STEPS = [
             }
         }]
     }, {
-        id: "m-116",
+        id: "affront-QQR",
         img: "116.png",
         clickZones: [{
             'toStep': "game-over",
@@ -820,8 +825,8 @@ const MARLENE_STEPS = [
         id: "m-129",
         img: "129.png",
         clickZones: [{
-            'toStep': "page-suspens-bis",
-            'throwStep': "page-suspens",
+            'toStep': "m-130",
+            'throwSteps': ["page-suspens", "page-suspens-bis"],
             'type': 'arrow',
             'pos': {
                 'left': 70,
@@ -967,6 +972,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-137",
         img: "137.png",
+        gif: "danse marlène.gif",
         clickZones: [{
             'toStep': "bouzin",
             'type': 'oval',
@@ -1070,7 +1076,7 @@ const MARLENE_STEPS = [
         id: "m-149",
         img: "149.png",
         clickZones: [{
-            'toStep': "m-146",
+            'toStep': "m-147",
             'type': 'arrow',
             'pos': {
                 'left': 73,
@@ -1109,7 +1115,7 @@ const MARLENE_STEPS = [
         id: "m-151",
         img: "151.png",
         clickZones: [{
-            'toStep': "m-146",
+            'toStep': "m-147",
             'type': 'arrow',
             'pos': {
                 'left': 73,
@@ -1239,12 +1245,365 @@ const MARLENE_STEPS = [
         id: "m-158",
         img: "158.png",
         clickZones: [{
-            'toStep': "bouzin",
+            'toStep': "terreur-QQR",
             'type': 'arrow',
             'pos': {
                 'left': 73,
                 'top': 89,
                 'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-159",
+        img: "159.png",
+        clickZones: [{
+            'toStep': "terreur-QQR",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "rentrer-chatiere",
+        img: "160.png",
+        clickZones: [{
+            'toStep': "affront-QQR",
+            'type': 'oval',
+            'pos': {
+                'left': 9,
+                'top': 78,
+                'width': 28,
+                'height': 12.5
+            }
+        }, {
+            'toStep': "sortir-grotte",
+            'type': 'oval',
+            'pos': {
+                'left': 61,
+                'top': 82,
+                'width': 28.5,
+                'height': 9
+            }
+        }]
+    }, {
+        id: "sortir-grotte",
+        img: "161.png",
+        clickZones: [{
+            'toStep': "terreur-QQR",
+            'throwSteps': ["page-suspens"],
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "terreur-QQR",
+        img: "162.png",
+        gif: "QQR_leo.gif",
+        clickZones: [{
+            'toStep': "m-163",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 89,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-163",
+        img: "163.png",
+        clickZones: [{
+            'toStep': "m-164",
+            'type': 'oval',
+            'pos': {
+                'left': 76.5,
+                'top': 15,
+                'width': 15,
+                'height': 7
+            }
+        }]
+    }, {
+        id: "m-164",
+        img: "164.png",
+        clickZones: [{
+            'toStep': "bombe-atomique",
+            'type': 'square',
+            'pos': {
+                'left': 9,
+                'top': 23.5,
+                'width': 27,
+                'height': 19
+            }
+        }, {
+            'toStep': "construire-catapulte",
+            'type': 'square',
+            'pos': {
+                'left': 63,
+                'top': 50.5,
+                'width': 27,
+                'height': 19
+            }
+        }, {
+            'toStep': "m-164",
+            'throwStep': 'm-104',
+            'type': 'square',
+            'pos': {
+                'left': 8,
+                'top': 75.5,
+                'width': 27,
+                'height': 19
+            }
+        }]
+    }, {
+        id: "construire-catapulte",
+        img: "165.png",
+        clickZones: [{
+            'toStep': "m-171",
+            'type': 'arrow',
+            'pos': {
+                'left': 71.5,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
+        id: "bombe-atomique",
+        img: "166.png",
+        clickZones: [{
+            'toStep': "m-167",
+            'type': 'arrow',
+            'pos': {
+                'left': 71.5,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-167",
+        img: "167.png",
+        clickZones: [{
+            'toStep': "m-168",
+            'type': 'square',
+            'pos': {
+                'left': 20.5,
+                'top': 59,
+                'width': 17,
+                'height': 30
+            }
+        }, {
+            'toStep': "construire-catapulte",
+            'type': 'square',
+            'pos': {
+                'left': 44.5,
+                'top': 68.5,
+                'width': 42,
+                'height': 18
+            }
+        }]
+    }, {
+        id: "m-168",
+        img: "168.png",
+        clickZones: [{
+            'toStep': "oui-appuyer",
+            'throwSteps': ["page-suspens"],
+            'type': 'oval',
+            'pos': {
+                'left': 9,
+                'top': 66.5,
+                'width': 31,
+                'height': 17
+            }
+        }, {
+            'toStep': "construire-catapulte",
+            'type': 'oval',
+            'pos': {
+                'left': 59,
+                'top': 67,
+                'width': 31,
+                'height': 17
+            }
+        }]
+    }, {
+        id: "oui-appuyer",
+        img: "169.png",
+        clickZones: [{
+            'toStep': "m-170",
+            'type': 'square',
+            'pos': {
+                'left': 81,
+                'top': 89.5,
+                'width': 14,
+                'height': 8,
+                'rotate': -45
+            }
+        }]
+    }, {
+        id: "m-170",
+        img: "170.png",
+        clickZones: [{
+            'toStep': "game-over",
+            'path': 'game-over',
+            'type': 'arrow',
+            'pos': {
+                'left': 72.5,
+                'top': 88,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-171",
+        img: "171.png",
+        clickZones: [{
+            'toStep': "tirer-avec-catapulte",
+            'throwSteps': ["page-suspens"],
+            'type': 'oval',
+            'pos': {
+                'left': 13,
+                'top': 85,
+                'width': 24,
+                'height': 9
+            }
+        }, {
+            'toStep': "affront-QQR",
+            'type': 'oval',
+            'pos': {
+                'left': 62,
+                'top': 81,
+                'width': 28,
+                'height': 12.5
+
+            }
+        }]
+    }, {
+        id: "tirer-avec-catapulte",
+        img: "172.png",
+        clickZones: [{
+            'toStep': "faire-rien",
+            'type': 'oval',
+            'pos': {
+                'left': 8.5,
+                'top': 25.5,
+                'width': 41,
+                'height': 22
+            }
+        }, {
+            'toStep': "oubliettes",
+            'path': 'game-over',
+            'type': 'oval',
+            'pos': {
+                'left': 50.5,
+                'top': 55,
+                'width': 39,
+                'height': 22
+            }
+        }]
+    }, {
+        id: "faire-rien",
+        img: "173.png",
+        clickZones: [{
+            'toStep': "m-174",
+            'type': 'arrow',
+            'pos': {
+                'left': 72.5,
+                'top': 88,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-174",
+        img: "174.png",
+        clickZones: [{
+            'toStep': "m-175",
+            'type': 'arrow',
+            'pos': {
+                'left': 72.5,
+                'top': 88,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-175",
+        img: "175.png",
+        clickZones: [{
+            'toStep': "m-176",
+            'type': 'arrow',
+            'pos': {
+                'left': 70.5,
+                'top': 87,
+                'width': 24,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-176",
+        img: "176.png",
+        clickZones: [{
+            'toStep': "m-177",
+            'type': 'arrow',
+            'pos': {
+                'left': 74.5,
+                'top': 90,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-177",
+        img: "177.png",
+        clickZones: [{
+            'toStep': "m-chargement",
+            'throwSteps': ["page-suspens", "page-suspens-bis"],
+            'type': 'arrow',
+            'pos': {
+                'left': 74.5,
+                'top': 90,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-chargement",
+        img: "178.png",
+        video: "chargement.webm",
+        playbackRate: 0.3,
+        atEndStep: "m-179",
+        clickZones: []
+    }, {
+        id: "m-179",
+        img: "179.png",
+        clickZones: [{
+            'toStep': "m-180",
+            'type': 'arrow',
+            'pos': {
+                'left': 74.5,
+                'top': 90,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-180",
+        img: "180.png",
+        clickZones: [{
+            'toStep': "bouzin",
+            'type': 'oval',
+            'pos': {
+                'left': 77,
+                'top': 86,
+                'width': 18,
                 'height': 8.5
             }
         }]

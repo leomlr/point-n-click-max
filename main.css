@@ -56,6 +56,18 @@ body {
     width: 100%;
 }
 
+.gif-m-137 {
+    left: 2%;
+    top: 75%;
+    width: 40%;
+}
+
+.gif-terreur-QQR {
+    left: 2%;
+    top: 65%;
+    width: 90%;
+}
+
 .overlay-video {
     position: absolute;
     inset: 0;
@@ -75,6 +87,12 @@ body {
 .video-game-over {
     left: 0%;
     top: 83%;
+    width: 80%;
+}
+
+.video-m-chargement {
+    left: 0%;
+    top: 70%;
     width: 80%;
 }
 
@@ -180,4 +198,25 @@ body {
     box-shadow: 0 0 0 4px rgba(79, 156, 255, 0.3);
     background: #121212;
     border-radius: 10px;
+}
+
+/* text */
+
+.img-wrapper {
+    position: relative;
+}
+
+/* Texte overlay dans le même esprit que le reste */
+.text-label {
+    position: absolute;
+    top: 93%;
+    left: 20%;
+    z-index: 10;
+    max-width: 100%;
+    text-align: center;
+    font-family: "Comic Sans MS", "Fredoka", system-ui, sans-serif;
+    font-weight: bold;
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    pointer-events: none;
+    display: none;
 }
