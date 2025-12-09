@@ -28,6 +28,7 @@ const BRANDON_STEPS = [
     }, {
         id: "page-suspens",
         img: "11.png",
+        isThrowStep: true,
         clickZones: [{
             'toStep': null,
             'type': 'arrow',
@@ -102,7 +103,7 @@ const BRANDON_STEPS = [
             }
         }, {
             'toStep': "b-32",
-            'throwStep': "continuer-plus-haut",
+            'throwSteps': ["continuer-plus-haut"],
             'type': 'arrow',
             'pos': {
                 'left': 60.5,
@@ -153,7 +154,7 @@ const BRANDON_STEPS = [
             }
         }, {
             'toStep': "b-32",
-            'throwStep': "continuer-plus-haut",
+            'throwSteps': ["continuer-plus-haut"],
             'type': 'arrow',
             'pos': {
                 'left': 45,
@@ -287,6 +288,7 @@ const BRANDON_STEPS = [
     }, {
         id: "continuer-plus-haut",
         img: "31.png",
+        isThrowStep: true,
         clickZones: [{
             'toStep': null,
             'type': 'arrow',
@@ -460,7 +462,7 @@ const BRANDON_STEPS = [
         img: "42.png",
         clickZones: [{
             'toStep': "b-43",
-            'throwStep': "continuer-plus-haut",
+            'throwSteps': ["continuer-plus-haut"],
             'type': 'arrow',
             'pos': {
                 'left': 2,
@@ -1055,7 +1057,7 @@ const BRANDON_STEPS = [
             }
         }, {
             'toStep': "game-over",
-            'throwStep': 'page-suspens',
+            'throwSteps': ["page-suspens"],
             'path': 'game-over',
             'type': 'oval',
             'pos': {
@@ -1214,7 +1216,7 @@ const BRANDON_STEPS = [
         img: "80.png",
         clickZones: [{
             'toStep': "b-49",
-            'throwStep': 'page-suspens',
+            'throwSteps': ["page-suspens"],
             'type': 'arrow',
             'pos': {
                 'left': 72,

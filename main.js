@@ -23,15 +23,11 @@ const MarlenBrando = {
     init: function (stepId, path) {
         this.isArrivingToGame = true;
         this.getGameFromLS();
-        if (stepId && path) {
-            this.currentGame.history = [];
-            this.currentGame.stepId = stepId;
-            this.currentGame.path = path;
-        } else {
             if (!this.currentGame.stepId) {
                 this.currentGame.history = [];
                 this.currentGame.stepId = 'start-1';
                 this.currentGame.path = 'starter';
+                this.currentGame.catapultes = 0;
             } else {
                 if (this.currentGame.player) {
                     // Set image for returning by player 
@@ -39,29 +35,41 @@ const MarlenBrando = {
                 if (!this.currentGame.history) {
                     this.currentGame.history = [];
                 }
+                if (!this.currentGame.catapultes) {
+                    this.currentGame.catapultes = 0;
+                }
             }
-        }
         console.log(this.currentGame.stepId, false)
         return this.applyStep(this.currentGame.stepId, false, this.getFollowingSteps(this.currentGame.stepId));
     },
     getFollowingSteps: function (toStepId) {
         let followingSteps = null;
-        const isThrowStep = ["page-suspens", "page-suspens-bis"].includes(toStepId);
+        const isThrowStep = ["page-suspens", "page-suspens-bis", "continuer-plus-haut", "m-104", "m-192", "m-187"].includes(toStepId);
         if (isThrowStep) {
             const Steps = this.GamePaths[this.currentGame.path];
             const getPreviousStepId = (previousStepId, index) => {
                 const previousStep = Steps.find(obj => obj.id == previousStepId);
-                if (previousStep.isThrowStep) {
-                    return getPreviousStepId(this.currentGame.history[index--].stepId, index);
-                } else {
-                    const previousStepZones = previousStep.clickZones;
-                    for (const zone of previousStepZones) {
-                        if (zone.throwSteps) {
-                            followingSteps = [];
-                            for (var i = zone.throwSteps.indexOf(toStepId) + 1; i < zone.throwSteps.length; i++) {
-                                followingSteps.push(zone.throwSteps[i]);
+                if (previousStep) {
+                    if (previousStep.isThrowStep) {
+                        return getPreviousStepId(this.currentGame.history[index--].stepId, index);
+                    } else {
+                        const previousStepZones = previousStep.clickZones;
+                        for (const zone of previousStepZones) {
+                            if (zone.throwSteps) {
+                                followingSteps = [];
+                                let throws = zone.throwSteps;
+                                if (!Array.isArray(zone.throwSteps) && zone.toStepCondition) {
+                                    throws = zone.throwSteps[zone.toStepCondition(this.currentGame.catapultes)];
+                                }
+                                for (var i = throws.indexOf(toStepId) + 1; i < throws.length; i++) {
+                                    followingSteps.push(throws[i]);
+                                }
+                                if (zone.toStepCondition) {
+                                    followingSteps.push(zone.toStepCondition(this.currentGame.catapultes))
+                                } else if (zone.toStep) {
+                                    followingSteps.push(zone.toStep);
+                                }   
                             }
-                            followingSteps.push(zone.toStep)
                         }
                     }
                 }
@@ -77,6 +85,7 @@ const MarlenBrando = {
             const img = overlay ? new Image() : this.imageEl;
             const onLoad = () => {
                 img.removeEventListener('load', onLoad);
+                this.resizeTextLabel();
                 resolve(img);
             };
             img.addEventListener('load', onLoad);
@@ -103,13 +112,13 @@ const MarlenBrando = {
                 clearInterval(this.intervalId);
                 this.currentGame.history.pop();
             }
+            if (clickZone.toStepCondition) {
+                clickZone.toStep = clickZone.toStepCondition(this.currentGame.catapultes);
+            }
             let toStepId = clickZone.toStep;
             if (toStepId == "demolir-machine") {
                 clearInterval(this.intervalId);
                 delete this.currentGame.endTime;
-            }
-            if (clickZone.testCatapultes) {
-
             }
             if (clickZone.testPwd) {
                 const input = document.getElementById("mdp-input");
@@ -124,17 +133,45 @@ const MarlenBrando = {
                     return false;
                 }
             }
+            if (['game-over'].includes(toStepId)) {
+                if (!clickZone.throwSteps) {
+                    this.currentGame.path = toStepId;
+                }
+            }
+            // add time to machine construction
+            if (toStepId == 'time-machine-construct') {
+                if (!clickZone.addTime) {
+                    delete this.currentGame.endTime;
+                }
+            }
+            console.log(clickZone.randomSteps)
+            if (clickZone.randomSteps) {
+                toStepId = clickZone.randomSteps[Math.floor(Math.random() * clickZone.randomSteps.length)];
+                console.log("RANDOM: " + toStepId)
+            }
+            if (clickZone.toSavedStep) {
+                toStepId = this.currentGame.saveStepId;
+                this.currentGame.path = this.currentGame.player;
+                delete this.currentGame.endTime;
+                delete this.currentGame.remainingTime;
+            }
             if (!clickZone.isBack) {
-                if (clickZone.toStep && clickZone.throwSteps) {
+                let throws;
+                if (Array.isArray(clickZone.throwSteps)) {
+                    throws = clickZone.throwSteps;
+                } else if (clickZone.throwSteps && clickZone.throwSteps[toStepId]) {
+                    throws = clickZone.throwSteps[toStepId];
+                }
+                if (clickZone.toStep && throws) {
                     followingSteps = [];
-                    if (clickZone.throwSteps) {
-                        toStepId = clickZone.throwSteps[0];
-                        for (var i = 1; i < clickZone.throwSteps.length; i++) {
-                            followingSteps.push(clickZone.throwSteps[i]);
+                    if (throws) {
+                        for (var i = 1; i < throws.length; i++) {
+                            followingSteps.push(throws[i]);
                         }
-                        followingSteps.push(clickZone.toStep);
+                        followingSteps.push(toStepId);
+                        toStepId = throws[0];
                     }
-                } else if (clickZone.toStep == null && followingSteps) {
+                } else if (clickZone.toStep == null && followingSteps && followingSteps.length > 0) {
                     toStepId = followingSteps.shift();
                 }
             }
@@ -143,30 +180,11 @@ const MarlenBrando = {
                 if (['brandon', 'marlene'].includes(clickZone.path)) {
                     this.currentGame.player = clickZone.path;
                 }
-            } else if (['game-over'].includes(toStepId)) {
-                this.currentGame.path = toStepId;
-            }
-            // add time to machine construction
-            if (toStepId == 'time-machine-construct') {
-                if (!clickZone.addTime) {
-                    delete this.currentGame.endTime;
-                }
-            }
-            if (clickZone.randomSteps) {
-                toStepId = clickZone.randomSteps[Math.floor(Math.random() * clickZone.randomSteps.length)];
-            }
-            if (clickZone.toSavedStep) {
-                toStepId = this.currentGame.saveStepId;
-                this.currentGame.path = this.currentGame.player;
-                delete this.currentGame.endTime;
-                delete this.currentGame.remainingTime;
             }
             if (clickZone.isBack) {
                 followingSteps = this.getFollowingSteps(toStepId);
             }
-            if (clickZone.toStepCondition) {
-                toStepId = clickZone.toStepCondition(this.currentGame.catapultes);
-            }
+            console.log(toStepId)
             await this.applyStep(toStepId, clickZone.isBack, followingSteps);
         };
     },
@@ -219,7 +237,6 @@ const MarlenBrando = {
                 delete this.readingVideoId;
             }
         }
-        console.log("\n\nADD CLICKABLE")
         // add click zones
         if (step.clickZones) {
             for (const newClickZone of step.clickZones) {
@@ -269,6 +286,9 @@ const MarlenBrando = {
             document.querySelector('.chrono-wrapper').classList.add('visible');
             this.startCountDown();
         }
+        if (["fabrique-de-catapultes", "fabrique-de-catapultes-2"].includes(step.id)) {
+            this.currentGame.catapultes = 0;
+        }
     },
     createZone: function (id, clickZone) {
         if (!id) {
@@ -300,6 +320,23 @@ const MarlenBrando = {
         }
         return z;
     },
+    resizeTextLabel: function () {
+        const img = this.imageEl;
+        if (!img) return;
+
+        const baseHeight = 900;
+        const baseFontPx = 22;
+
+        const h = img.clientHeight;
+        if (!h) return;
+
+        const scale = h / baseHeight;
+        const size = baseFontPx * scale;
+
+        document.querySelectorAll('.text-label').forEach(el => {
+            el.style.fontSize = size + 'px';
+        });
+    },
     removeElementsFromPreviousStep: function () {
         if (this.readingVideoId && this.onEndsVideo[this.readingVideoId]) {
             this.videoEl.removeEventListener('ended', this.onEndsVideo[this.readingVideoId]);
@@ -313,7 +350,6 @@ const MarlenBrando = {
         clearInterval(this.intervalId);
         document.getElementById("loading-text").style.display = 'none';
         this.cataEl.innerHTML = "";
-        delete this.currentGame.catapultes;
     },
     encodeText(str) {
         const utf8 = new TextEncoder().encode(str);
@@ -425,9 +461,6 @@ const MarlenBrando = {
         }
     },
     managingCatapultes: function (incrementor) {
-        if (typeof this.currentGame.catapultes !== "number") {
-            this.currentGame.catapultes = 0;
-        }
         const n = document.querySelectorAll('.catapulte').length;
         this.currentGame.catapultes = Math.max(0, Math.min(this.MAX_CATA, incrementor(this.currentGame.catapultes)));
         const diff = this.currentGame.catapultes - (isNaN(n) ? 0 : n);
@@ -454,8 +487,6 @@ const MarlenBrando = {
             const row = Math.floor((this.currentGame.catapultes - 1) / 8);  // 0 → 7
             img.style.left = (col * 12.5) + "%";
             img.style.top = (row * 12) + "%";
-            console.log(img)
-            console.log(this.cataEl)
             this.cataEl.appendChild(img);
         });
     },
@@ -854,3 +885,9 @@ const MarlenBrando = {
 }
 
 MarlenBrando.init();
+
+window.addEventListener('resize', () => {
+    if (MarlenBrando && typeof MarlenBrando.resizeTextLabel === 'function') {
+        MarlenBrando.resizeTextLabel();
+    }
+});
