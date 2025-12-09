@@ -68,6 +68,12 @@ body {
     width: 90%;
 }
 
+.gif-m-174 {
+    left: 54%;
+    top: 56%;
+    width: 47%;
+}
+
 .overlay-video {
     position: absolute;
     inset: 0;
@@ -219,4 +225,23 @@ body {
     font-size: clamp(1rem, 2.5vw, 2rem);
     pointer-events: none;
     display: none;
+}
+
+/* catapulte */
+
+#catapultes-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;      /* OK si ta bande jaune commence à 20% */
+    height: 45%;   /* OK si ta bande jaune fait 45% de l’image */
+    pointer-events: none;
+    z-index: 10;
+}
+
+.catapulte {
+    position: absolute;
+    height: auto;
+    width: 13%;
+    pointer-events: none;
 }

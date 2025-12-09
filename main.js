@@ -4,6 +4,7 @@ const MarlenBrando = {
     imageEl: document.getElementById("current-img"),
     gameContainer: document.querySelector(".img-wrapper"),
     videoEl: document.getElementById("video-step"),
+    cataEl: document.getElementById("catapultes-container"),
     adminMode: true,
     onEndsVideo: {},
     CONSTRUCT_DELAYS: {
@@ -15,6 +16,7 @@ const MarlenBrando = {
         'Redéfinition du modèle d\'IA ...',
         'Retour au village de Noël ...'
     ],
+    MAX_CATA: 64,
     MDP: 'U0xJUFZPVVBMQUk=',
     indexFollower: 0,
     sleep_ms: (ms) => new Promise(resolve => setTimeout(resolve, ms)),
@@ -42,7 +44,7 @@ const MarlenBrando = {
         console.log(this.currentGame.stepId, false)
         return this.applyStep(this.currentGame.stepId, false, this.getFollowingSteps(this.currentGame.stepId));
     },
-    getFollowingSteps: function (toStepId, ) {
+    getFollowingSteps: function (toStepId) {
         let followingSteps = null;
         const isThrowStep = ["page-suspens", "page-suspens-bis"].includes(toStepId);
         if (isThrowStep) {
@@ -70,18 +72,18 @@ const MarlenBrando = {
         }
         return followingSteps;
     },
-    showImage: function (src, gif = null) {
+    showImage: function (src, overlay = null) {
         return new Promise((resolve) => {
-            const img = gif ? new Image() : this.imageEl;
+            const img = overlay ? new Image() : this.imageEl;
             const onLoad = () => {
                 img.removeEventListener('load', onLoad);
                 resolve(img);
             };
             img.addEventListener('load', onLoad);
             img.src = 'media/' + src;
-            if (gif) {
+            if (overlay) {
                 img.classList.add("gif-overlay");
-                img.classList.add(gif.class ? gif.class : "");
+                img.classList.add(overlay.class ? overlay.class : "");
                 this.imageEl.parentNode.appendChild(img);
             } else {
                 img.classList.add("current-img");
@@ -94,6 +96,9 @@ const MarlenBrando = {
         this.gameContainer.appendChild(zone);
 
         zone.onclick = async () => {
+            if (clickZone.manageCatapultes && typeof clickZone.manageCatapultes == 'function') {
+                return this.managingCatapultes(clickZone.manageCatapultes);
+            }
             if (clickZone.isBack) {
                 clearInterval(this.intervalId);
                 this.currentGame.history.pop();
@@ -102,6 +107,9 @@ const MarlenBrando = {
             if (toStepId == "demolir-machine") {
                 clearInterval(this.intervalId);
                 delete this.currentGame.endTime;
+            }
+            if (clickZone.testCatapultes) {
+
             }
             if (clickZone.testPwd) {
                 const input = document.getElementById("mdp-input");
@@ -156,6 +164,9 @@ const MarlenBrando = {
             if (clickZone.isBack) {
                 followingSteps = this.getFollowingSteps(toStepId);
             }
+            if (clickZone.toStepCondition) {
+                toStepId = clickZone.toStepCondition(this.currentGame.catapultes);
+            }
             await this.applyStep(toStepId, clickZone.isBack, followingSteps);
         };
     },
@@ -166,6 +177,9 @@ const MarlenBrando = {
             delete this.currentGame.endTime;
             delete this.currentGame.remainingTime;
             delete this.currentGame.saveStepId;
+        }
+        if (id == "fabrique-de-catapultes") {
+            document.querySelector('#catapultes-container').style.display = 'block';
         }
         this.removeElementsFromPreviousStep();
         // get step by id
@@ -298,6 +312,8 @@ const MarlenBrando = {
         document.getElementById("mdp-input").value = "";
         clearInterval(this.intervalId);
         document.getElementById("loading-text").style.display = 'none';
+        this.cataEl.innerHTML = "";
+        delete this.currentGame.catapultes;
     },
     encodeText(str) {
         const utf8 = new TextEncoder().encode(str);
@@ -398,6 +414,7 @@ const MarlenBrando = {
     },
     onVideoEnd: async function (step) {
         if (step) {
+            this.videoEl.style.display = 'none';
             this.videoEl.removeEventListener('ended', this.onEndsVideo[step.id]);
             delete this.onEndsVideo[step.id];
             this.imageEl.src = "";
@@ -406,6 +423,41 @@ const MarlenBrando = {
             }
             await this.applyStep(step.atEndStep);
         }
+    },
+    managingCatapultes: function (incrementor) {
+        if (typeof this.currentGame.catapultes !== "number") {
+            this.currentGame.catapultes = 0;
+        }
+        const n = document.querySelectorAll('.catapulte').length;
+        this.currentGame.catapultes = Math.max(0, Math.min(this.MAX_CATA, incrementor(this.currentGame.catapultes)));
+        const diff = this.currentGame.catapultes - (isNaN(n) ? 0 : n);
+        if (diff > 0) {
+            this.showCatapulte();
+        } else if (diff < 0) {
+            const index = n;
+            const el = document.querySelector('.catapulte.cata-' + index);
+            if (el) el.remove();
+        }
+    },
+    showCatapulte: function () {
+        return new Promise((resolve) => {
+            const img = new Image();
+            const onLoad = () => {
+                img.removeEventListener('load', onLoad);
+                resolve(img);
+            };
+            img.addEventListener('load', onLoad);
+            img.src = 'media/catapulte.png';
+            img.classList.add("catapulte");
+            img.classList.add("cata-" + this.currentGame.catapultes);
+            const col = (this.currentGame.catapultes - 1) % 8;              // 0 → 8
+            const row = Math.floor((this.currentGame.catapultes - 1) / 8);  // 0 → 7
+            img.style.left = (col * 12.5) + "%";
+            img.style.top = (row * 12) + "%";
+            console.log(img)
+            console.log(this.cataEl)
+            this.cataEl.appendChild(img);
+        });
     },
     GamePaths: {
         bouzin: {

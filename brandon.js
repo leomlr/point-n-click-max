@@ -1099,6 +1099,15 @@ const BRANDON_STEPS = [
                 'width': 34,
                 'aspect-ratio': 1.3 / 1
             }
+        }, {
+            'toStep': "demander-n-catapultes",
+            'type': 'oval',
+            'pos': {
+                'left': 72.5,
+                'top': 57,
+                'width': 24,
+                'aspect-ratio': 1.2 / 1
+            }
         }]
     }, {
         id: "attaquer-monstre",
@@ -1271,6 +1280,28 @@ const BRANDON_STEPS = [
                 'top': 88.5,
                 'width': 23.5,
                 'height': 8
+            }
+        }]
+    }, {
+        id: "demander-n-catapultes",
+        img: "195.png",
+        clickZones: [{
+            'toStep': "attaquer-monstre",
+            'type': 'oval',
+            'pos': {
+                'left': 8.5,
+                'top': 77,
+                'width': 34,
+                'height': 12.5
+            }
+        }, {
+            'toStep': "chanter-berceuse",
+            'type': 'oval',
+            'pos': {
+                'left': 57,
+                'top': 75.5,
+                'width': 34.5,
+                'height': 15
             }
         }]
     }

@@ -1524,6 +1524,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-174",
         img: "174.png",
+        gif: "QQR_leo.gif",
         clickZones: [{
             'toStep': "m-175",
             'type': 'arrow',
@@ -1598,12 +1599,183 @@ const MARLENE_STEPS = [
         id: "m-180",
         img: "180.png",
         clickZones: [{
-            'toStep': "bouzin",
+            'toStep': "m-181",
             'type': 'oval',
             'pos': {
                 'left': 77,
                 'top': 86,
                 'width': 18,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-181",
+        img: "181.png",
+        clickZones: [{
+            'toStep': "m-182",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-182",
+        img: "182.png",
+        clickZones: [{
+            'toStep': "m-183",
+            'type': 'arrow',
+            'pos': {
+                'left': 71.5,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-183",
+        img: "183.png",
+        clickZones: [{
+            'toStep': "m-184",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 88.5,
+                'width': 24,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-184",
+        img: "184.png",
+        clickZones: [{
+            'toStep': "m-185",
+            'type': 'oval',
+            'pos': {
+                'left': 15,
+                'top': 75,
+                'width': 69,
+                'height': 18
+            }
+        }]
+    }, {
+        id: "m-185",
+        img: "185.png",
+        clickZones: [{
+            'toStep': "SLPPE",
+            'path': 'SLPPE',
+            'type': 'oval',
+            'pos': {
+                'left': 9.5,
+                'top': 74.5,
+                'width': 35,
+                'height': 15
+            }
+        }, {
+            'toStep': "reflechir",
+            'type': 'oval',
+            'pos': {
+                'left': 58,
+                'top': 77.5,
+                'width': 35,
+                'height': 12.5
+            }
+        }]
+    }, {
+        id: "reflechir",
+        img: "186.png",
+        clickZones: [{
+            'toStep': "partir-catapulte",
+            'type': 'oval',
+            'pos': {
+                'left': 6,
+                'top': 74,
+                'width': 35,
+                'height': 15
+            }
+        }, {
+            'toStep': "partir-multi-catapulte",
+            'type': 'oval',
+            'pos': {
+                'left': 54,
+                'top': 75.5,
+                'width': 35,
+                'height': 12.5
+            }
+        }]
+    }, {
+        id: "partir-catapulte",
+        img: "187.png",
+        clickZones: [{
+            'toStep': "m-188",
+            'type': 'arrow',
+            'pos': {
+                'left': 74,
+                'top': 89,
+                'width': 23,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-188",
+        img: "188.png",
+        clickZones: [{
+            'toStep': "game-over",
+            'path': 'game-over',
+            'type': 'arrow',
+            'pos': {
+                'left': 74,
+                'top': 89.5,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "partir-multi-catapulte",
+        img: "189.png",
+        clickZones: [{
+            'toStep': "fabrique-de-catapultes",
+            'type': 'arrow',
+            'pos': {
+                'left': 68,
+                'top': 88.5,
+                'width': 28.5,
+                'height': 10
+            }
+        }]
+    }, {
+        id: "fabrique-de-catapultes",
+        img: "190.png",
+        clickZones: [{
+            'toStep': null,
+            'type': 'oval',
+            'toStepCondition': (n) => n === 54 ? "m-192" : "m-191",
+            'pos': {
+                'left': 56,
+                'top': 73.5,
+                'width': 34.5,
+                'height': 14
+            }
+        }, {
+            'toStep': null,
+            'type': 'oval',
+            'manageCatapultes': (i) => i+=1,
+            'pos': {
+                'left': 10,
+                'top': 66,
+                'width': 26,
+                'height': 8.5
+            }
+        }, {
+            'toStep': null,
+            'type': 'oval',
+            'manageCatapultes': (i) => i-=1,
+            'pos': {
+                'left': 10,
+                'top': 83.5,
+                'width': 26,
                 'height': 8.5
             }
         }]
