@@ -5,6 +5,7 @@ const MarlenBrando = {
     gameContainer: document.querySelector(".img-wrapper"),
     videoEl: document.getElementById("video-step"),
     cataEl: document.getElementById("catapultes-container"),
+    audioEl: document.getElementById('bg-sound'),
     adminMode: true,
     onEndsVideo: {},
     CONSTRUCT_DELAYS: {
@@ -119,6 +120,9 @@ const MarlenBrando = {
         this.gameContainer.appendChild(zone);
 
         zone.onclick = async () => {
+            if (['start-1', 're-brandon', 're-marlene']) {
+                this.audioEl.play();
+            }
             if (clickZone.manageCatapultes && typeof clickZone.manageCatapultes == 'function') {
                 return this.managingCatapultes(clickZone.manageCatapultes);
             }
@@ -226,6 +230,7 @@ const MarlenBrando = {
             delete this.currentGame.endTime;
             delete this.currentGame.remainingTime;
             delete this.currentGame.saveStepId;
+            this.aud.play();
         }
         if (id == "fabrique-de-catapultes") {
             document.querySelector('#catapultes-container').style.display = 'block';
