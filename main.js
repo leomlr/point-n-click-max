@@ -230,7 +230,6 @@ const MarlenBrando = {
             delete this.currentGame.endTime;
             delete this.currentGame.remainingTime;
             delete this.currentGame.saveStepId;
-            this.aud.play();
         }
         if (id == "fabrique-de-catapultes") {
             document.querySelector('#catapultes-container').style.display = 'block';
