@@ -4,6 +4,8 @@ const BRANDON_STEPS = [
         img: "Re Brandon.png",
         clickZones: [{
             'toStep': null,
+            'music': true,
+            'isRe': true,
             'type': 'arrow',
             'pos': {
                 'left': 65.5,
@@ -1059,8 +1061,8 @@ const BRANDON_STEPS = [
             }
         }, {
             'toStep': "game-over",
+            'path': "game-over",
             'throwSteps': ["page-suspens"],
-            'path': 'game-over',
             'type': 'oval',
             'pos': {
                 'left': 24,

@@ -4,6 +4,8 @@ const MARLENE_STEPS = [
         img: "Re Marlène.png",
         clickZones: [{
             'toStep': null,
+            'music': true,
+            'isRe': true,
             'type': 'arrow',
             'pos': {
                 'left': 65.5,

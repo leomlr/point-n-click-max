@@ -58,10 +58,16 @@ const MarlenBrando = {
             return await this.applyStep(this.currentGame.stepId, false, followingSteps);
         }
     },
+    // addMenuIcon: function () {
+    //     this.showImage('gaufre sacrée.png', {
+    //         class: 'menu-icon', onclick: () => {
+    //         }
+    //     })
+    // },
+    isThrowStep: (id) => ["page-suspens", "page-suspens-bis", "continuer-plus-haut", "m-104", "m-192", "m-187"].includes(id),
     getFollowingSteps: function (toStepId) {
         let followingSteps = null;
-        const isThrowStep = ["page-suspens", "page-suspens-bis", "continuer-plus-haut", "m-104", "m-192", "m-187"].includes(toStepId);
-        if (isThrowStep) {
+        if (this.isThrowStep(toStepId)) {
             const Steps = this.GamePaths[this.currentGame.path];
             const getPreviousStepId = (previousStepId, index) => {
                 const previousStep = Steps.find(obj => obj.id == previousStepId);
@@ -120,7 +126,7 @@ const MarlenBrando = {
         this.gameContainer.appendChild(zone);
 
         zone.onclick = async () => {
-            if (['start-1', 're-brandon', 're-marlene']) {
+            if (clickZone.music) {
                 this.audioEl.play();
             }
             if (clickZone.manageCatapultes && typeof clickZone.manageCatapultes == 'function') {
@@ -151,16 +157,9 @@ const MarlenBrando = {
                     return false;
                 }
             }
-            if (['game-over'].includes(toStepId)) {
-                if (!clickZone.throwSteps) {
-                    this.currentGame.path = toStepId;
-                }
-            }
             // add time to machine construction
-            if (toStepId == 'time-machine-construct') {
-                if (!clickZone.addTime) {
-                    delete this.currentGame.endTime;
-                }
+            if (toStepId == 'time-machine-construct' && !clickZone.addTime && !clickZone.isRe) {
+                delete this.currentGame.endTime;
             }
             if (clickZone.randomSteps) {
                 toStepId = clickZone.randomSteps[Math.floor(Math.random() * clickZone.randomSteps.length)];
@@ -192,7 +191,11 @@ const MarlenBrando = {
                 }
             }
             if (clickZone.path) {
-                this.currentGame.path = clickZone.path;
+                if (clickZone.throwSteps) {
+                    this.currentGame.nextPath = clickZone.path;
+                } else {
+                    this.currentGame.path = clickZone.path;
+                }
                 if (['brandon', 'marlene'].includes(clickZone.path)) {
                     this.currentGame.player = clickZone.path;
                 }
@@ -236,6 +239,10 @@ const MarlenBrando = {
         if (id == 'bouzin') {
             step = this.GamePaths.bouzin;
         } else {
+            if (!this.isThrowStep(id) && this.currentGame.nextPath) {
+                this.currentGame.path = this.currentGame.nextPath;
+                delete this.currentGame.nextPath;
+            }
             const pathSteps = this.GamePaths[this.currentGame.path];
             if (pathSteps) {
                 step = pathSteps.find(obj => (obj.id === id));
@@ -332,6 +339,9 @@ const MarlenBrando = {
         if (step.id == "painters") {
             this.showTextWindow(PEINTRES);
         }
+        if (step.id == "TROP-TARD4") {
+            delete this.currentGame.remainingTime;
+        }
     },
     createZone: function (id, clickZone) {
         if (!id) {
@@ -386,7 +396,7 @@ const MarlenBrando = {
             delete this.onEndsVideo[this.readingVideoId];
         }
         document.querySelectorAll('.clickable-zone').forEach(el => el.remove());
-        document.querySelectorAll('.gif-overlay').forEach(el => el.remove());
+        document.querySelectorAll('.gif-overlay:not(.menu-icon)').forEach(el => el.remove());
         document.querySelector('.chrono-wrapper').classList.remove('visible');
         document.querySelector('.input-group').classList.remove('visible');
         document.getElementById("mdp-input").value = "";
@@ -563,6 +573,7 @@ const MarlenBrando = {
                 img: "1.png",
                 clickZones: [{
                     'toStep': "start-2",
+                    'music': true,
                     'type': 'arrow',
                     'pos': {
                         'left': 67,
@@ -803,7 +814,10 @@ const MarlenBrando = {
             }]
         }, {
             id: "time-machine-construct",
-            gif: "under-construction-animated-gif-8.gif",
+            gif: [{
+                src: "under-construction-animated-gif-8.gif",
+                class: "time-machine-construct"
+            }],
             img: "machine.png",
             clickZones: [{
                 'toStep': "demolir-machine",
