@@ -948,25 +948,13 @@ const BRANDON_STEPS = [
         id: "b-71",
         img: "71.png",
         clickZones: [{
-            'toStep': "b-72",
+            'toStep': "zz-72",
+            'path': 'Zblugzor',
             'type': 'arrow',
             'pos': {
                 'left': 73,
                 'top': 88.5,
                 'width': 23,
-                'height': 8.5
-            }
-        }]
-    }, {
-        id: "b-72",
-        img: "72.png",
-        clickZones: [{
-            'toStep': "bouzin",
-            'type': 'arrow',
-            'pos': {
-                'left': 73,
-                'top': 89,
-                'width': 23.5,
                 'height': 8.5
             }
         }]
@@ -1258,6 +1246,20 @@ const BRANDON_STEPS = [
             }
         }]
     }, {
+        id: "suivre-zblugzor-tyro",
+        img: "197.png",
+        clickZones: [{
+            'toStep': "zz-199",
+            'path': 'Zblugzor',
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8
+            }
+        }]
+    }, {
         id: "sauter-zblugzor-films",
         img: "89.png",
         clickZones: [{
@@ -1267,19 +1269,6 @@ const BRANDON_STEPS = [
             'pos': {
                 'left': 70,
                 'top': 87.5,
-                'width': 23.5,
-                'height': 8
-            }
-        }]
-    }, {
-        id: "suivre-zblugzor-tyro",
-        img: "bouzin.png",
-        clickZones: [{
-            'toStep': "bouzin",
-            'type': 'arrow',
-            'pos': {
-                'left': 72,
-                'top': 88.5,
                 'width': 23.5,
                 'height': 8
             }

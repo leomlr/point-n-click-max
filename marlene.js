@@ -959,7 +959,10 @@ const MARLENE_STEPS = [
     }, {
         id: "marlene-danse",
         img: "136.png",
-        gif: "danse marlène.gif",
+        gif: [{
+            src: "danse marlène.gif",
+            class: "danse-marlene"
+        }],
         clickZones: [{
             'toStep': "m-137",
             'type': 'arrow',
@@ -973,9 +976,12 @@ const MARLENE_STEPS = [
     }, {
         id: "m-137",
         img: "137.png",
-        gif: "danse marlène.gif",
+        gif: [{
+            src: "danse marlène.gif",
+            class: "danse-marlene-2"
+        }],
         clickZones: [{
-            'toStep': "bouzin",
+            'toStep': "m-211",
             'type': 'oval',
             'pos': {
                 'left': 60.5,
@@ -1307,7 +1313,10 @@ const MARLENE_STEPS = [
     }, {
         id: "terreur-QQR",
         img: "162.png",
-        gif: "QQR_leo.gif",
+        gif: [{
+            src: "QQR_leo.gif",
+            class: "QQR-0"
+        }],
         clickZones: [{
             'toStep': "m-163",
             'type': 'arrow',
@@ -1465,7 +1474,10 @@ const MARLENE_STEPS = [
     }, {
         id: "m-171",
         img: "171.png",
-        gif: "QQR_leo.gif",
+        gif: [{
+            src: "QQR_leo.gif",
+            class: "QQR-1"
+        }],
         clickZones: [{
             'toStep': "tirer-avec-catapulte",
             'throwSteps': ["page-suspens"],
@@ -1526,7 +1538,10 @@ const MARLENE_STEPS = [
     }, {
         id: "m-174",
         img: "174.png",
-        gif: "QQR_leo.gif",
+        gif: [{
+            src: "QQR_leo.gif",
+            class: "QQR-2"
+        }],
         clickZones: [{
             'toStep': "m-175",
             'type': 'arrow',
@@ -1871,6 +1886,311 @@ const MARLENE_STEPS = [
             'pos': {
                 'left': 72,
                 'top': 88.5,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-196",
+        img: "196.png",
+        clickZones: [{
+            'toStep': "m-198",
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 89,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-198",
+        img: "198.png",
+        clickZones: [{
+            'toStep': "zz-199",
+            'path': 'Zblugzor',
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 88.5,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-211",
+        img: "211.png",
+        clickZones: [{
+            'toStep': "m-212",
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 22,
+                'width': 24.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-212",
+        img: "212.png",
+        gif: [{
+            src: "danse marlène.gif",
+            class: "danse-marlene-2"
+        }],
+        clickZones: [{
+            'toStep': "m-213",
+            'type': 'arrow',
+            'pos': {
+                'left': 70,
+                'top': 12,
+                'width': 24.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-213",
+        img: "213.png",
+        gif: [{
+            src: "danse marlène.gif",
+            class: "danse-marlene-2"
+        }, {
+            src: "danse cheval.gif",
+            class: "danse-cheval"
+        }],
+        clickZones: [{
+            'toStep': "m-214",
+            'type': 'arrow',
+            'pos': {
+                'left': 70,
+                'top': 2.5,
+                'width': 24.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-214",
+        img: "214.png",
+        gif: [{
+            src: "danse marlène.gif",
+            class: "danse-marlene-2"
+        }],
+        clickZones: [{
+            'toStep': "m-215",
+            'type': 'arrow',
+            'pos': {
+                'left': 70,
+                'top': 2.5,
+                'width': 24.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-215",
+        img: "215.png",
+        gif: [{
+            src: "danse marlène.gif",
+            class: "danse-marlene-2"
+        }],
+        clickZones: [{
+            'toStep': "m-216",
+            'type': 'arrow',
+            'pos': {
+                'left': 70,
+                'top': 2.5,
+                'width': 24.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-216",
+        img: "216.png",
+        gif: [{
+            src: "danse marlène.gif",
+            class: "danse-marlene-2"
+        }],
+        clickZones: [{
+            'toStep': "aller-bar",
+            'type': 'oval',
+            'pos': {
+                'left': 59,
+                'top': 19.5,
+                'width': 30.5,
+                'height': 11.5
+            }
+        }, {
+            'toStep': "m-217",
+            'type': 'oval',
+            'pos': {
+                'left': 11,
+                'top': 17.5,
+                'width': 29.5,
+                'height': 13.5
+            }
+        }]
+    }, {
+        id: "m-217",
+        img: "217.png",
+        gif: [{
+            src: "danse marlène.gif",
+            class: "danse-marlene-2"
+        }],
+        clickZones: [{
+            'toStep': "m-218",
+            'type': 'oval',
+            'pos': {
+                'left': 17.5,
+                'top': 14.5,
+                'width': 25.5,
+                'height': 10.5
+            }
+        }, {
+            'toStep': "m-220",
+            'type': 'oval',
+            'pos': {
+                'left': 60,
+                'top': 15.5,
+                'width': 25.5,
+                'height': 10.5
+            }
+        }]
+    }, {
+        id: "m-218",
+        img: "218.png",
+        clickZones: [{
+            'toStep': "m-219",
+            'type': 'arrow',
+            'pos': {
+                'left': 71.5,
+                'top': 11,
+                'width': 24.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-219",
+        img: "219.png",
+        gif: [{
+            src: "danse marlène.gif",
+            class: "danse-marlene-2"
+        }],
+        clickZones: [{
+            'toStep': "m-220",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 12,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-220",
+        img: "220.png",
+        clickZones: [{
+            'toStep': "m-221",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 12,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-221",
+        img: "221.png",
+        clickZones: [{
+            'toStep': "m-222",
+            'type': 'arrow',
+            'pos': {
+                'left': 70,
+                'top': 7.5,
+                'width': 24,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-222",
+        img: "222.png",
+        clickZones: [{
+            'toStep': "m-223",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 10,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-223",
+        img: "223.png",
+        gif: [{
+            src: "danse marlène.gif",
+            class: "danse-marlene-2"
+        }],
+        clickZones: [{
+            'toStep': "m-224",
+            'type': 'arrow',
+            'pos': {
+                'left': 72,
+                'top': 5.5,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-224",
+        img: "224.png",
+        gif: [{
+            src: "danse marlène.gif",
+            class: "danse-marlene-2"
+        }],
+        clickZones: [{
+            'toStep': "m-225",
+            'type': 'arrow',
+            'pos': {
+                'left': 67,
+                'top': 11.5,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-225",
+        img: "225.png",
+        clickZones: [{
+            'toStep': "m-226",
+            'type': 'arrow',
+            'pos': {
+                'left': 72.5,
+                'top': 88,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-226",
+        img: "226.png",
+        clickZones: [{
+            'toStep': "m-227",
+            'type': 'arrow',
+            'pos': {
+                'left': 73,
+                'top': 21,
+                'width': 23.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-227",
+        img: "227.png",
+        clickZones: [{
+            'toStep': "bouzin",
+            'type': 'arrow',
+            'pos': {
+                'left': 72.5,
+                'top': 88,
                 'width': 23.5,
                 'height': 8.5
             }

@@ -23,22 +23,22 @@ const MarlenBrando = {
     init: function (stepId, path) {
         this.isArrivingToGame = true;
         this.getGameFromLS();
-            if (!this.currentGame.stepId) {
-                this.currentGame.history = [];
-                this.currentGame.stepId = 'start-1';
-                this.currentGame.path = 'starter';
-                this.currentGame.catapultes = 0;
-            } else {
-                if (this.currentGame.player) {
-                    // Set image for returning by player 
-                }
-                if (!this.currentGame.history) {
-                    this.currentGame.history = [];
-                }
-                if (!this.currentGame.catapultes) {
-                    this.currentGame.catapultes = 0;
-                }
+        if (!this.currentGame.stepId) {
+            this.currentGame.history = [];
+            this.currentGame.stepId = 'start-1';
+            this.currentGame.path = 'starter';
+            this.currentGame.catapultes = 0;
+        } else {
+            if (this.currentGame.player) {
+                // Set image for returning by player 
             }
+            if (!this.currentGame.history) {
+                this.currentGame.history = [];
+            }
+            if (!this.currentGame.catapultes) {
+                this.currentGame.catapultes = 0;
+            }
+        }
         console.log(this.currentGame.stepId, false)
         return this.applyStep(this.currentGame.stepId, false, this.getFollowingSteps(this.currentGame.stepId));
     },
@@ -68,7 +68,7 @@ const MarlenBrando = {
                                     followingSteps.push(zone.toStepCondition(this.currentGame.catapultes))
                                 } else if (zone.toStep) {
                                     followingSteps.push(zone.toStep);
-                                }   
+                                }
                             }
                         }
                     }
@@ -279,8 +279,11 @@ const MarlenBrando = {
                 }
             })
         }
-        if (step.gif) {
-            this.showImage(step.gif, { class: "gif-" + step.id });
+        if (Array.isArray(step.gif)) {
+            for (const gif of step.gif) {
+                console.log(gif)
+                this.showImage(gif.src, { class: "gif-" + gif.class });
+            }
         }
         if (step.id == 'time-machine-construct') {
             document.querySelector('.chrono-wrapper').classList.add('visible');
@@ -875,6 +878,199 @@ const MarlenBrando = {
                         'top': 89,
                         'width': 23,
                         'height': 8
+                    }
+                }]
+            }
+        ],
+        Zblugzor: [
+            {
+                id: "zz-199",
+                img: "199.png",
+                clickZones: [{
+                    'toStep': "zz-200",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 73,
+                        'top': 89,
+                        'width': 24,
+                        'height': 8
+                    }
+                }]
+            }, {
+                id: "zz-200",
+                img: "200.png",
+                clickZones: [{
+                    'toStep': "zz-fusionner",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 8.5,
+                        'top': 73,
+                        'width': 39,
+                        'height': 14
+                    }
+                }, {
+                    'toStep': "SLPPE",
+                    'path': 'SLPPE',
+                    'type': 'oval',
+                    'pos': {
+                        'left': 61,
+                        'top': 71.5,
+                        'width': 34.5,
+                        'height': 15
+                    }
+                }]
+            }, {
+                id: "zz-fusionner",
+                img: "201.png",
+                clickZones: [{
+                    'toStep': "zz-202",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 71,
+                        'top': 89.5,
+                        'width': 23.5,
+                        'height': 8
+                    }
+                }]
+            }, {
+                id: "zz-202",
+                img: "202.png",
+                clickZones: [{
+                    'toStep': "zz-203",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 34,
+                        'top': 79,
+                        'width': 26,
+                        'height': 12.5
+                    }
+                }]
+            }, {
+                id: "zz-203",
+                img: "203.png",
+                clickZones: [{
+                    'toStep': "brandir-frichtefracht",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 6,
+                        'top': 74,
+                        'width': 24,
+                        'height': 8.5
+                    }
+                }, {
+                    'toStep': "masque-halloween",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 49,
+                        'top': 79,
+                        'width': 29,
+                        'height': 12.5
+                    }
+                }]
+            }, {
+                id: "masque-halloween",
+                img: "204.png",
+                clickZones: [{
+                    'toStep': "game-over",
+                    'path': 'game-over',
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 72,
+                        'top': 88,
+                        'width': 23.5,
+                        'height': 8
+                    }
+                }]
+            }, {
+                id: "brandir-frichtefracht",
+                img: "205.png",
+                clickZones: [{
+                    'toStep': "zz-206",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 68,
+                        'top': 88,
+                        'width': 23.5,
+                        'height': 8
+                    }
+                }]
+            }, {
+                id: "zz-206",
+                img: "206.png",
+                clickZones: [{
+                    'toStep': "zz-207",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 72.5,
+                        'top': 90,
+                        'width': 23.5,
+                        'height': 8
+                    }
+                }]
+            }, {
+                id: "zz-207",
+                img: "207.png",
+                clickZones: [{
+                    'toStep': "zz-208",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 71,
+                        'top': 89,
+                        'width': 23.5,
+                        'height': 8
+                    }
+                }]
+            }, {
+                id: "zz-208",
+                img: "208.png",
+                clickZones: [{
+                    'toStep': "zz-209",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 72.5,
+                        'top': 88,
+                        'width': 23,
+                        'height': 8
+                    }
+                }]
+            }, {
+                id: "zz-209",
+                img: "209.png",
+                clickZones: [{
+                    'toStep': "zz-72",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 71.5,
+                        'top': 88.5,
+                        'width': 23.5,
+                        'height': 8
+                    }
+                }]
+            }, {
+                id: "zz-72",
+                img: "72.png",
+                clickZones: [{
+                    'toStep': "zz-210",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 73,
+                        'top': 89,
+                        'width': 23.5,
+                        'height': 8.5
+                    }
+                }]
+            },  {
+                id: "zz-210",
+                img: "210.png",
+                clickZones: [{
+                    'toStep': "SLPPE",
+                    'path': 'SLPPE',
+                    'type': 'oval',
+                    'pos': {
+                        'left': 31,
+                        'top': 73.5,
+                        'width': 33.5,
+                        'height': 15.5
                     }
                 }]
             }
