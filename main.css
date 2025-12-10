@@ -224,10 +224,13 @@ body {
     position: relative;
 }
 
+#loading-text {
+    top: 93%;
+}
+
 /* Texte overlay dans le même esprit que le reste */
 .text-label {
     position: absolute;
-    top: 93%;
     width: 100%;
     z-index: 10;
     max-width: 100%;

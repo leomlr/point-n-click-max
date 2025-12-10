@@ -115,7 +115,6 @@ const MarlenBrando = {
         });
     },
     addClickableZone: function (clickZone, followingSteps = null) {
-        console.log(clickZone.toStep, followingSteps)
         const zone = this.createZone(clickZone.toStep, clickZone);
         this.gameContainer.appendChild(zone);
 
@@ -162,10 +161,8 @@ const MarlenBrando = {
                     delete this.currentGame.endTime;
                 }
             }
-            console.log(clickZone.randomSteps)
             if (clickZone.randomSteps) {
                 toStepId = clickZone.randomSteps[Math.floor(Math.random() * clickZone.randomSteps.length)];
-                console.log("RANDOM: " + toStepId)
             }
             if (clickZone.toSavedStep) {
                 toStepId = this.currentGame.saveStepId;
@@ -202,7 +199,6 @@ const MarlenBrando = {
             if (clickZone.isBack) {
                 followingSteps = this.getFollowingSteps(toStepId);
             }
-            console.log(toStepId)
             await this.applyStep(toStepId, clickZone.isBack, followingSteps);
         };
     },
@@ -224,7 +220,6 @@ const MarlenBrando = {
         this.discoveryPercent = Math.round(this.currentGame.discovery.length / this.totalSteps * 100);
     },
     applyStep: async function (id, isBack = false, followingSteps = null) {
-        console.log(id, isBack, followingSteps)
         if (id == 'start-1') {
             this.currentGame.player = null;
             delete this.currentGame.endTime;
@@ -247,7 +242,6 @@ const MarlenBrando = {
                 return console.error("Le chemin '" + this.currentGame.path + "' est introuvable.")
             }
         }
-        console.log(step)
         if (!step) {
             console.error("Unable to find step: " + id + " for player " + this.currentGame.player + " (check also path)");
             return await this.applyStep('bouzin');
@@ -324,7 +318,6 @@ const MarlenBrando = {
         }
         if (Array.isArray(step.gif)) {
             for (const gif of step.gif) {
-                console.log(gif)
                 this.showImage(gif.src, { class: "gif-" + gif.class });
             }
         }
