@@ -6,6 +6,7 @@ const MarlenBrando = {
     videoEl: document.getElementById("video-step"),
     cataEl: document.getElementById("catapultes-container"),
     audioEl: document.getElementById('bg-sound'),
+    creditsWindowEl: document.getElementById('painter-credits'),
     adminMode: true,
     onEndsVideo: {},
     CONSTRUCT_DELAYS: {
@@ -328,6 +329,9 @@ const MarlenBrando = {
         if (["fabrique-de-catapultes", "fabrique-de-catapultes-2"].includes(step.id)) {
             this.currentGame.catapultes = 0;
         }
+        if (step.id == "painters") {
+            this.showTextWindow(PEINTRES);
+        }
     },
     createZone: function (id, clickZone) {
         if (!id) {
@@ -389,6 +393,7 @@ const MarlenBrando = {
         clearInterval(this.intervalId);
         document.getElementById("loading-text").style.display = 'none';
         this.cataEl.innerHTML = "";
+        this.hideTextWindow();
     },
     encodeText(str) {
         const utf8 = new TextEncoder().encode(str);
@@ -535,6 +540,17 @@ const MarlenBrando = {
             this.cataEl.appendChild(img);
         });
     },
+    showTextWindow: function (text) {
+        const content = document.getElementById('painter-credits-content');
+        content.textContent = text;
+        this.creditsWindowEl.style.display = 'block';
+        this.creditsWindowEl.scrollTop = this.creditsWindowEl.scrollHeight;
+    },
+    hideTextWindow: function () {
+        const content = document.getElementById('painter-credits-content');
+        content.textContent = '';
+        this.creditsWindowEl.style.display = 'none';
+    },
     GamePaths: {
         bouzin: {
             id: "bouzin",
@@ -670,6 +686,15 @@ const MarlenBrando = {
                         width: 23.5,
                         height: 9,
                     }
+                }, {
+                    'toStep': "painters",
+                    'type': 'arrow',
+                    'pos': {
+                        left: 10,
+                        top: 90,
+                        width: 23.5,
+                        height: 9,
+                    }
                 }]
             }, {
                 id: "SLPPE2",
@@ -708,6 +733,10 @@ const MarlenBrando = {
                         'aspect-ratio': 1.3 / 1
                     }
                 }]
+            }, {
+                id: "painters",
+                img: "126.png",
+                clickZones: []
             }
         ],
         troptard: [{
@@ -1129,3 +1158,34 @@ window.addEventListener('resize', () => {
         MarlenBrando.resizeTextLabel();
     }
 });
+
+const PEINTRES = `Léonard de Vinci
+Michel-Ange
+Raphaël
+Sandro Botticelli
+Le Caravage
+Rembrandt
+Johannes Vermeer
+Diego Velázquez
+Francisco de Goya
+William Turner
+Eugène Delacroix
+Jean-Auguste-Dominique Ingres
+Gustave Courbet
+Édouard Manet
+Claude Monet
+Edgar Degas
+Pierre-Auguste Renoir
+Paul Cézanne
+Vincent van Gogh
+Paul Gauguin
+Georges Seurat
+Henri de Toulouse-Lautrec
+Henri Matisse
+Pablo Picasso
+Wassily Kandinsky
+Piet Mondrian
+Salvador Dalí
+René Magritte
+Edward Hopper
+Jackson Pollock`;

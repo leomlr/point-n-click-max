@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="favicon.ico">
     <meta property="og:title" content="Gaufre sacrée de Noël">
     <meta property="og:description"
         content="Dans ce jeu hyper immersif, choisis ton enquêteureuse favorite et tente de retrouver la gauffre sacrée de Noël.">
@@ -28,7 +29,9 @@
             <p class="text-label" id="loading-text"></p>
             <div id="catapultes-container"></div>
             <audio id="bg-sound" src="media/petitougrand.mp3" loop></audio>
-            <p class="text-label" id="painter-credits"></p>
+            <div id="painter-credits" class="text-window">
+                <div id="painter-credits-content" class="text-window-content"></div>
+            </div>
         </div>
     </div>
 

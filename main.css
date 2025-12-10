@@ -224,6 +224,27 @@ body {
     position: relative;
 }
 
+/* catapulte */
+
+#catapultes-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    /* OK si ta bande jaune commence à 20% */
+    height: 45%;
+    /* OK si ta bande jaune fait 45% de l’image */
+    pointer-events: none;
+    z-index: 10;
+}
+
+.catapulte {
+    position: absolute;
+    height: auto;
+    width: 13%;
+    pointer-events: none;
+}
+
 #loading-text {
     top: 93%;
 }
@@ -242,21 +263,29 @@ body {
     display: none;
 }
 
-/* catapulte */
-
-#catapultes-container {
+/* credits painter*/
+.text-window {
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 20%;      /* OK si ta bande jaune commence à 20% */
-    height: 45%;   /* OK si ta bande jaune fait 45% de l’image */
-    pointer-events: none;
+    left: 5%;
+    right: 5%;
+    top: 10%;
+    bottom: 10%;
+    height: 80%;
     z-index: 10;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 12px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    display: none;
+    overflow-y: auto;
 }
 
-.catapulte {
-    position: absolute;
-    height: auto;
-    width: 13%;
-    pointer-events: none;
+.text-window-content {
+    text-align: center;
+    font-family: "DejaVu Sans", system-ui, sans-serif;
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #fff;
+    white-space: pre-wrap;
 }
