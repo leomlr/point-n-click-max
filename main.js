@@ -9,7 +9,7 @@ const MarlenBrando = {
     onEndsVideo: {},
     CONSTRUCT_DELAYS: {
         'adminMode': 20,
-        'players': 15 * 60
+        'players': 60
     },
     LOADING_TEXTS: [
         'Chargement du moteur 3D ...',
@@ -20,7 +20,8 @@ const MarlenBrando = {
     MDP: 'U0xJUFZPVVBMQUk=',
     indexFollower: 0,
     sleep_ms: (ms) => new Promise(resolve => setTimeout(resolve, ms)),
-    init: function (stepId, path) {
+    init: async function () {
+        this.totalSteps = this.getTotalSteps();
         this.isArrivingToGame = true;
         this.getGameFromLS();
         if (!this.currentGame.stepId) {
@@ -28,6 +29,8 @@ const MarlenBrando = {
             this.currentGame.stepId = 'start-1';
             this.currentGame.path = 'starter';
             this.currentGame.catapultes = 0;
+            this.currentGame.discovery = [];
+            this.currentGame.deads = 0;
         } else {
             if (this.currentGame.player) {
                 // Set image for returning by player 
@@ -39,8 +42,19 @@ const MarlenBrando = {
                 this.currentGame.catapultes = 0;
             }
         }
-        console.log(this.currentGame.stepId, false)
-        return this.applyStep(this.currentGame.stepId, false, this.getFollowingSteps(this.currentGame.stepId));
+        const followingSteps = this.getFollowingSteps(this.currentGame.stepId);
+        if (this.currentGame.player && ['brandon', 'marlene'].includes(this.currentGame.player) && this.currentGame.stepId !== 'game-over') {
+            const reStep = Object.assign({}, this.GamePaths[this.currentGame.player].find(obj => obj.id == 're-' + this.currentGame.player));
+            await this.showImage(reStep.img);
+            if (reStep.clickZones) {
+                for (const newClickZone of reStep.clickZones) {
+                    newClickZone.toStep = this.currentGame.stepId;
+                    this.addClickableZone(newClickZone, followingSteps);
+                }
+            }
+        } else {
+            return await this.applyStep(this.currentGame.stepId, false, followingSteps);
+        }
     },
     getFollowingSteps: function (toStepId) {
         let followingSteps = null;
@@ -188,6 +202,23 @@ const MarlenBrando = {
             await this.applyStep(toStepId, clickZone.isBack, followingSteps);
         };
     },
+    getTotalSteps: function () {
+        let n = 0;
+        for (const path in this.GamePaths) {
+            if (path !== 'bouzin') {
+                n += this.GamePaths[path].length;
+            }
+        }
+        return n - 3;
+    },
+    addDiscoveredStep: function (id) {
+        if (!this.currentGame.discovery.includes(id)) {
+            this.currentGame.discovery.push(id);
+        }
+    },
+    updateDiscoveryPercent: function () {
+        this.discoveryPercent = Math.round(this.currentGame.discovery.length / this.totalSteps * 100);
+    },
     applyStep: async function (id, isBack = false, followingSteps = null) {
         console.log(id, isBack, followingSteps)
         if (id == 'start-1') {
@@ -216,6 +247,14 @@ const MarlenBrando = {
         if (!step) {
             console.error("Unable to find step: " + id + " for player " + this.currentGame.player + " (check also path)");
             return await this.applyStep('bouzin');
+        } else {
+            this.addDiscoveredStep(step.id);
+            this.updateDiscoveryPercent();
+        }
+        if (step.id == "game-over") {
+            if (!this.currentGame.isArrivingToGame) {
+                this.currentGame.deads += 1;
+            }
         }
         if (step.isSaveStep) {
             this.currentGame.saveStepId = step.id;
@@ -369,6 +408,12 @@ const MarlenBrando = {
         this.currentGame = {};
         if (typeof localStorage !== 'undefined' && localStorage.currentGame) {
             this.currentGame = JSON.parse(localStorage.currentGame);
+        }
+        if (!this.currentGame.discovery) {
+            this.currentGame.discovery = [];
+        }
+        if (!this.currentGame.deads) {
+            this.currentGame.deads = 0;
         }
     },
     startCountDown: async function () {
@@ -1059,7 +1104,7 @@ const MarlenBrando = {
                         'height': 8.5
                     }
                 }]
-            },  {
+            }, {
                 id: "zz-210",
                 img: "210.png",
                 clickZones: [{

@@ -1,4 +1,18 @@
 const MARLENE_STEPS = [
+        {
+        id: "re-marlene",
+        img: "Re Marlène.png",
+        clickZones: [{
+            'toStep': null,
+            'type': 'arrow',
+            'pos': {
+                'left': 65.5,
+                'top': 86,
+                'width': 29,
+                'height': 10
+            }
+        }]
+    },
     {
         id: "m-9",
         img: "9.png",
@@ -2186,7 +2200,7 @@ const MARLENE_STEPS = [
         id: "m-227",
         img: "227.png",
         clickZones: [{
-            'toStep': "bouzin",
+            'toStep': "m-159",
             'type': 'arrow',
             'pos': {
                 'left': 72.5,

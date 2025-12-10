@@ -1,5 +1,19 @@
 const BRANDON_STEPS = [
     {
+        id: "re-brandon",
+        img: "Re Brandon.png",
+        clickZones: [{
+            'toStep': null,
+            'type': 'arrow',
+            'pos': {
+                'left': 65.5,
+                'top': 86,
+                'width': 29,
+                'height': 10
+            }
+        }]
+    },
+    {
         id: "b-8",
         img: "8.png",
         clickZones: [{
