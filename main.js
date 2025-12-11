@@ -20,6 +20,15 @@ const MarlenBrando = {
     MAX_CATA: 64,
     MDP: 'U0xJUFZPVVBMQUk=',
     indexFollower: 0,
+    audio: {
+        'starter': "petitougrand.mp3",
+        'marlene': "petitougrand.mp3",
+        'brandon': "petitougrand.mp3",
+        'game-over': "petitougrand.mp3",
+        'troptard': "petitougrand.mp3",
+        'SLPPE': "petitougrand.mp3",
+        'Zblugzor': "petitougrand.mp3"
+    },
     sleep_ms: (ms) => new Promise(resolve => setTimeout(resolve, ms)),
     init: async function () {
         this.totalSteps = this.getTotalSteps();
@@ -123,9 +132,6 @@ const MarlenBrando = {
         this.gameContainer.appendChild(zone);
 
         zone.onclick = async () => {
-            if (clickZone.music) {
-                this.audioEl.play();
-            }
             if (clickZone.reset) {
                 delete this.currentGame.playerWin;
                 delete this.currentGame.remainingTime;
@@ -229,6 +235,12 @@ const MarlenBrando = {
         this.discoveryPercent = Math.round(this.currentGame.discovery.length / this.totalSteps * 100);
     },
     applyStep: async function (id, isBack = false, followingSteps = null) {
+        const src = 'audio/' + this.audio[this.currentGame.path];
+        console.log(this.audioEl.src)
+        if (!this.audioEl.src.includes(src)) {
+            this.audioEl.src = src;
+        }
+        this.audioEl.play();
         console.log(id, isBack, followingSteps)
         if (id == 'start-1') {
             this.currentGame.player = null;
@@ -1536,5 +1548,13 @@ MarlenBrando.init();
 window.addEventListener('resize', () => {
     if (MarlenBrando && typeof MarlenBrando.resizeTextLabel === 'function') {
         MarlenBrando.resizeTextLabel();
+    }
+});
+
+window.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === 'visible') {
+        MarlenBrando.audioEl.play();
+    } else {
+        MarlenBrando.audioEl.pause();
     }
 });
