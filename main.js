@@ -44,6 +44,9 @@ const MarlenBrando = {
                 this.currentGame.catapultes = 0;
             }
         }
+        if (this.adminMode) {
+            document.getElementById("stepId-text").style.display = 'block';
+        }
         const followingSteps = this.getFollowingSteps(this.currentGame.stepId);
         if (this.currentGame.player && ['brandon', 'marlene'].includes(this.currentGame.player) && this.currentGame.stepId !== 'game-over') {
             const reStep = Object.assign({}, this.GamePaths[this.currentGame.player].find(obj => obj.id == 're-' + this.currentGame.player));
@@ -58,12 +61,6 @@ const MarlenBrando = {
             return await this.applyStep(this.currentGame.stepId, false, followingSteps);
         }
     },
-    // addMenuIcon: function () {
-    //     this.showImage('gaufre sacrée.png', {
-    //         class: 'menu-icon', onclick: () => {
-    //         }
-    //     })
-    // },
     isThrowStep: (id) => ["page-suspens", "page-suspens-bis", "continuer-plus-haut", "m-104", "m-192", "m-187"].includes(id),
     getFollowingSteps: function (toStepId) {
         let followingSteps = null;
@@ -224,6 +221,7 @@ const MarlenBrando = {
         this.discoveryPercent = Math.round(this.currentGame.discovery.length / this.totalSteps * 100);
     },
     applyStep: async function (id, isBack = false, followingSteps = null) {
+        console.log(id, isBack, followingSteps)
         if (id == 'start-1') {
             this.currentGame.player = null;
             delete this.currentGame.endTime;
@@ -256,19 +254,22 @@ const MarlenBrando = {
         } else {
             this.addDiscoveredStep(step.id);
             this.updateDiscoveryPercent();
+            if (this.adminMode) {
+                document.getElementById("stepId-text").textContent = id + ": " + step.img;
+            }
         }
-        if (step.id == "game-over") {
+        if (id == "game-over") {
             if (!this.currentGame.isArrivingToGame) {
                 this.currentGame.deads += 1;
             }
         }
         if (step.isSaveStep) {
-            this.currentGame.saveStepId = step.id;
+            this.currentGame.saveStepId = id;
         }
         this.currentGame.stepId = step.id;
         // show image
         if (!step.img && !step.video) {
-            console.error("Unable to find image: " + step.id + " for player " + this.currentGame.player);
+            console.error("Unable to find image: " + id + " for player " + this.currentGame.player);
             return await this.applyStep('bouzin');
         } else if (step.video && step.img) {
             await this.showImage(step.img);
@@ -342,6 +343,11 @@ const MarlenBrando = {
         if (step.id == "TROP-TARD4") {
             delete this.currentGame.remainingTime;
         }
+        if (step.id == "game-win") {
+            document.getElementById("stats-BG").style.display = 'block';
+            document.getElementById("stats-BG").innerHTML = "Tu as découvert " + this.discoveryPercent + " % des étapes.</b></br>Tu es mort "  + this.currentGame.deads + " fois.";
+            this.currentGame.playerWin = true;
+        }
     },
     createZone: function (id, clickZone) {
         if (!id) {
@@ -404,6 +410,7 @@ const MarlenBrando = {
         document.getElementById("loading-text").style.display = 'none';
         this.cataEl.innerHTML = "";
         this.hideTextWindow();
+        document.getElementById("stats-BG").style.display = 'none';
     },
     encodeText(str) {
         const utf8 = new TextEncoder().encode(str);
@@ -693,15 +700,6 @@ const MarlenBrando = {
                     'type': 'arrow',
                     'pos': {
                         left: 74,
-                        top: 90,
-                        width: 23.5,
-                        height: 9,
-                    }
-                }, {
-                    'toStep': "painters",
-                    'type': 'arrow',
-                    'pos': {
-                        left: 10,
                         top: 90,
                         width: 23.5,
                         height: 9,
@@ -1096,13 +1094,27 @@ const MarlenBrando = {
                 id: "zz-207",
                 img: "207.png",
                 clickZones: [{
-                    'toStep': "zz-208",
+                    'toStep': "zz-245",
                     'type': 'arrow',
                     'pos': {
                         'left': 71,
                         'top': 89,
                         'width': 23.5,
                         'height': 8
+                    }
+                }]
+            }, {
+                id: "zz-245",
+                img: "245.png",
+                isWin: true,
+                clickZones: [{
+                    'toStep': "zz-208",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 71.5,
+                        'top': 87.5,
+                        'width': 23,
+                        'height': 8.5
                     }
                 }]
             }, {
@@ -1148,14 +1160,27 @@ const MarlenBrando = {
                 id: "zz-210",
                 img: "210.png",
                 clickZones: [{
-                    'toStep': "SLPPE",
-                    'path': 'SLPPE',
+                    'toStep': "game-win",
                     'type': 'oval',
                     'pos': {
                         'left': 31,
                         'top': 73.5,
                         'width': 33.5,
                         'height': 15.5
+                    }
+                }]
+            }, {
+                id: "game-win",
+                img: "246.png",
+                clickZones: [{
+                    'toStep': "SLPPE-bis",
+                    'path': 'SLPPE',
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 73,
+                        'top': 89,
+                        'width': 23.5,
+                        'height': 8.5
                     }
                 }]
             }

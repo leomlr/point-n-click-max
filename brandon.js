@@ -579,6 +579,7 @@ const BRANDON_STEPS = [
         img: "48.png",
         clickZones: [{
             'toStep': "game-over",
+            'path': 'game-over',
             'type': 'arrow',
             'pos': {
                 'left': 74,
@@ -1269,8 +1270,8 @@ const BRANDON_STEPS = [
             'path': 'Zblugzor',
             'type': 'arrow',
             'pos': {
-                'left': 72,
-                'top': 88.5,
+                'left': 72.5,
+                'top': 89,
                 'width': 23.5,
                 'height': 8
             }

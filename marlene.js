@@ -185,17 +185,17 @@ const MARLENE_STEPS = [
             'toStep': "m-93",
             'type': 'arrow',
             'pos': {
-                'left': 4,
-                'top': 87.5,
+                'left': 4.5,
+                'top': 85.5,
                 'width': 24,
                 'height': 8.5,
                 'rotate': 90
             }
         }, {
-            'toStep': "m-103",
+            'toStep': "m-228",
             'type': 'arrow',
             'pos': {
-                'left': 69,
+                'left': 69.5,
                 'top': 86.5,
                 'width': 27.5,
                 'height': 8.5,
@@ -210,10 +210,10 @@ const MARLENE_STEPS = [
             'throwSteps': ["m-104"],
             'type': 'oval',
             'pos': {
-                'left': 10,
-                'top': 76,
-                'width': 28,
-                'aspect-ratio': 1.3 / 1
+                'left': 8.5,
+                'top': 68,
+                'width': 22,
+                'height': 9
             }
         }, {
             'toStep': "crier-fort",
@@ -223,6 +223,16 @@ const MARLENE_STEPS = [
                 'top': 75.5,
                 'width': 34,
                 'aspect-ratio': 1.5 / 1
+            }
+        }, {
+            'toStep': "m-237",
+            'type': 'arrow',
+            'pos': {
+                'left': 4.5,
+                'top': 86.5,
+                'width': 24,
+                'height': 8.5,
+                'rotate': 90
             }
         }]
     }, {
@@ -507,7 +517,7 @@ const MARLENE_STEPS = [
         }]
     }, {
         id: "course-poursuite",
-        video: "course poursuite QQR 500 entier compressee.mp4",
+        video: "QQR course poursuite.mp4",
         playbackRate: 4,
         atEndStep: 'm-121'
     }, {
@@ -567,8 +577,8 @@ const MARLENE_STEPS = [
             'toStep': "m-93",
             'type': 'arrow',
             'pos': {
-                'left': 12,
-                'top': 83,
+                'left': 5.5,
+                'top': 84,
                 'width': 24,
                 'height': 10,
                 'rotate': 90
@@ -591,9 +601,9 @@ const MARLENE_STEPS = [
             'toStep': "m-94",
             'type': 'arrow',
             'pos': {
-                'left': 3,
-                'top': 86,
-                'width': 23,
+                'left': 2.5,
+                'top': 85,
+                'width': 24,
                 'height': 9.5,
                 'rotate': 90
             }
@@ -616,8 +626,8 @@ const MARLENE_STEPS = [
             'type': 'arrow',
             'pos': {
                 'left': 2,
-                'top': 86.5,
-                'width': 25,
+                'top': 86,
+                'width': 23.5,
                 'height': 8.5,
                 'rotate': 90
             }
@@ -639,9 +649,9 @@ const MARLENE_STEPS = [
             'toStep': "m-96",
             'type': 'arrow',
             'pos': {
-                'left': 2,
-                'top': 86.5,
-                'width': 25,
+                'left': 3,
+                'top': 86,
+                'width': 23.5,
                 'height': 8.5,
                 'rotate': 90
             }
@@ -673,8 +683,8 @@ const MARLENE_STEPS = [
             'toStep': "m-97",
             'type': 'arrow',
             'pos': {
-                'left': 40,
-                'top': 83.5,
+                'left': 42,
+                'top': 84.5,
                 'width': 26,
                 'height': 9.5,
                 'rotate': 90
@@ -697,7 +707,7 @@ const MARLENE_STEPS = [
             'toStep': "m-98",
             'type': 'arrow',
             'pos': {
-                'left': 2,
+                'left': -1,
                 'top': 86.5,
                 'width': 25,
                 'height': 8.5,
@@ -721,8 +731,8 @@ const MARLENE_STEPS = [
             'toStep': "m-99",
             'type': 'arrow',
             'pos': {
-                'left': 2,
-                'top': 86.5,
+                'left': -1,
+                'top': 87,
                 'width': 25,
                 'height': 8.5,
                 'rotate': 90
@@ -735,9 +745,9 @@ const MARLENE_STEPS = [
             'toStep': "m-98",
             'type': 'arrow',
             'pos': {
-                'left': 2,
-                'top': 86.5,
-                'width': 25,
+                'left': 0.5,
+                'top': 86,
+                'width': 24,
                 'height': 8.5,
                 'rotate': 90
             }
@@ -759,17 +769,27 @@ const MARLENE_STEPS = [
             'toStep': "m-125",
             'type': 'arrow',
             'pos': {
-                'left': 4,
+                'left': 5,
                 'top': 85.5,
-                'width': 33,
+                'width': 31.5,
                 'height': 11,
                 'rotate': 180
             }
         }, {
-            'toStep': "bouzin",
+            'toStep': "m-101",
+            'type': 'arrow',
+            'pos': {
+                'left': 36,
+                'top': 86,
+                'width': 26,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-238",
             'type': 'square',
             'pos': {
-                'left': 54,
+                'left': 65,
                 'top': 83,
                 'width': 32,
                 'height': 7
@@ -782,19 +802,29 @@ const MARLENE_STEPS = [
             'toStep': "m-126",
             'type': 'arrow',
             'pos': {
-                'left': 6,
+                'left': 0.5,
                 'top': 84,
                 'width': 33.5,
                 'height': 12
             }
         }, {
-            'toStep': "bouzin",
+            'toStep': "m-124",
             'type': 'arrow',
             'pos': {
-                'left': 52,
-                'top': 81,
-                'width': 46,
-                'height': 16,
+                'left': 36.5,
+                'top': 86.5,
+                'width': 23.5,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-240",
+            'type': 'arrow',
+            'pos': {
+                'left': 60.5,
+                'top': 83,
+                'width': 40,
+                'height': 15,
                 'rotate': 180
             }
         }]
@@ -802,6 +832,16 @@ const MARLENE_STEPS = [
         id: "m-126",
         img: "126.png",
         clickZones: [{
+            'toStep': "m-125",
+            'type': 'arrow',
+            'pos': {
+                'left': 1.5,
+                'top': 86.5,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
             'toStep': "m-127",
             'type': 'arrow',
             'pos': {
@@ -815,6 +855,16 @@ const MARLENE_STEPS = [
         id: "m-127",
         img: "127.png",
         clickZones: [{
+            'toStep': "m-126",
+            'type': 'arrow',
+            'pos': {
+                'left': 0,
+                'top': 86,
+                'width': 26,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
             'toStep': "m-128",
             'type': 'oval',
             'pos': {
@@ -1284,9 +1334,9 @@ const MARLENE_STEPS = [
             'toStep': "terreur-QQR",
             'type': 'arrow',
             'pos': {
-                'left': 73,
-                'top': 89,
-                'width': 23,
+                'left': 34,
+                'top': 89.5,
+                'width': 23.5,
                 'height': 8.5
             }
         }]
@@ -1575,8 +1625,8 @@ const MARLENE_STEPS = [
             'toStep': "m-176",
             'type': 'arrow',
             'pos': {
-                'left': 70.5,
-                'top': 87,
+                'left': 71,
+                'top': 86.5,
                 'width': 24,
                 'height': 8.5
             }
@@ -1927,9 +1977,9 @@ const MARLENE_STEPS = [
             'path': 'Zblugzor',
             'type': 'arrow',
             'pos': {
-                'left': 72,
-                'top': 88.5,
-                'width': 23.5,
+                'left': 73.5,
+                'top': 19,
+                'width': 24,
                 'height': 8.5
             }
         }]
@@ -2046,10 +2096,6 @@ const MARLENE_STEPS = [
     }, {
         id: "m-217",
         img: "217.png",
-        gif: [{
-            src: "danse marlène.gif",
-            class: "danse-marlene-2"
-        }],
         clickZones: [{
             'toStep': "m-218",
             'type': 'oval',
@@ -2203,12 +2249,398 @@ const MARLENE_STEPS = [
         img: "227.png",
         clickZones: [{
             'toStep': "m-159",
+            'type': 'oval',
+            'pos': {
+                'left': 35,
+                'top': 84.5,
+                'width': 19.5,
+                'height': 8.5
+            }
+        }]
+    }, {
+        id: "m-228",
+        img: "228.png",
+        clickZones: [{
+            'toStep': "m-234",
             'type': 'arrow',
             'pos': {
-                'left': 72.5,
-                'top': 88,
-                'width': 23.5,
-                'height': 8.5
+                'left': 9.5,
+                'top': 81,
+                'width': 30,
+                'height': 11.5,
+                'rotate': 180
+            }
+        }, {
+            'toStep': "m-102",
+            'type': 'arrow',
+            'pos': {
+                'left': 42,
+                'top': 85.5,
+                'width': 26,
+                'height': 8,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-229",
+            'type': 'arrow',
+            'pos': {
+                'left': 66.5,
+                'top': 81.5,
+                'width': 30,
+                'height': 11,
+                'rotate': -90
+            }
+        }]
+    }, {
+        id: "m-229",
+        img: "229.png",
+        clickZones: [{
+            'toStep': "m-230",
+            'type': 'arrow',
+            'pos': {
+                'left': 8.5,
+                'top': 84,
+                'width': 30,
+                'height': 10.5,
+                'rotate': 180
+            }
+        }, {
+            'toStep': "m-228",
+            'type': 'arrow',
+            'pos': {
+                'left': 40,
+                'top': 85.5,
+                'width': 26,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-231",
+            'type': 'arrow',
+            'pos': {
+                'left': 66.5,
+                'top': 84,
+                'width': 29,
+                'height': 11
+            }
+        }]
+    }, {
+        id: "m-230",
+        img: "230.png",
+        clickZones: [{
+            'toStep': "m-229",
+            'type': 'arrow',
+            'pos': {
+                'left': 0.5,
+                'top': 85.5,
+                'width': 26,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-232",
+            'type': 'arrow',
+            'pos': {
+                'left': 57.5,
+                'top': 83.5,
+                'width': 29,
+                'height': 11,
+                'rotate': -90
+            }
+        }]
+    }, {
+        id: "m-232",
+        img: "232.png",
+        clickZones: [{
+            'toStep': "m-230",
+            'type': 'arrow',
+            'pos': {
+                'left': 0.5,
+                'top': 85.5,
+                'width': 26,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-233",
+            'type': 'arrow',
+            'pos': {
+                'left': 68.5,
+                'top': 84,
+                'width': 29.5,
+                'height': 11,
+                'rotate': -90
+            }
+        }]
+    }, {
+        id: "m-233",
+        img: "233.png",
+        clickZones: [{
+            'toStep': "m-232",
+            'type': 'arrow',
+            'pos': {
+                'left': 2,
+                'top': 86,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-243",
+            'type': 'arrow',
+            'pos': {
+                'left': 74.5,
+                'top': 86,
+                'width': 29.5,
+                'height': 11,
+                'rotate': -90
+            }
+        }]
+    }, {
+        id: "m-243",
+        img: "243.png",
+        clickZones: [{
+            'toStep': "m-233",
+            'type': 'arrow',
+            'pos': {
+                'left': -1,
+                'top': 87,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }]
+    }, {
+        id: "m-231",
+        img: "231.png",
+        clickZones: [{
+            'toStep': "m-229",
+            'type': 'arrow',
+            'pos': {
+                'left': 1.5,
+                'top': 85.5,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-242",
+            'type': 'arrow',
+            'pos': {
+                'left': 69.5,
+                'top': 84,
+                'width': 29.5,
+                'height': 11,
+                'rotate': -90
+            }
+        }]
+    }, {
+        id: "m-242",
+        img: "242.png",
+        clickZones: [{
+            'toStep': "m-231",
+            'type': 'arrow',
+            'pos': {
+                'left': -1,
+                'top': 87,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }]
+    }, {
+        id: "m-234",
+        img: "234.png",
+        clickZones: [{
+            'toStep': "m-235",
+            'type': 'arrow',
+            'pos': {
+                'left': 5.5,
+                'top': 85.5,
+                'width': 30,
+                'height': 10.5,
+                'rotate': 180
+            }
+        }, {
+            'toStep': "m-228",
+            'type': 'arrow',
+            'pos': {
+                'left': 36,
+                'top': 86,
+                'width': 26,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-236",
+            'type': 'arrow',
+            'pos': {
+                'left': 63.5,
+                'top': 85,
+                'width': 29,
+                'height': 11
+            }
+        }]
+    }, {
+        id: "m-235",
+        img: "235.png",
+        clickZones: [{
+            'toStep': "m-234",
+            'type': 'arrow',
+            'pos': {
+                'left': 1.5,
+                'top': 85.5,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-244",
+            'type': 'arrow',
+            'pos': {
+                'left': 69.5,
+                'top': 84,
+                'width': 29.5,
+                'height': 11,
+                'rotate': -90
+            }
+        }]
+    }, {
+        id: "m-244",
+        img: "244.png",
+        clickZones: [{
+            'toStep': "m-235",
+            'type': 'arrow',
+            'pos': {
+                'left': -1,
+                'top': 87,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }]
+    }, {
+        id: "m-236",
+        img: "236.png",
+        clickZones: [{
+            'toStep': "m-234",
+            'type': 'arrow',
+            'pos': {
+                'left': 1.5,
+                'top': 85.5,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-237",
+            'type': 'arrow',
+            'pos': {
+                'left': 63,
+                'top': 84,
+                'width': 30,
+                'height': 11,
+                'rotate': -90
+            }
+        }]
+    }, {
+        id: "m-237",
+        img: "237.png",
+        clickZones: [{
+            'toStep': "m-236",
+            'type': 'arrow',
+            'pos': {
+                'left': 1.5,
+                'top': 85.5,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-103",
+            'type': 'arrow',
+            'pos': {
+                'left': 63,
+                'top': 84,
+                'width': 30,
+                'height': 11,
+                'rotate': -90
+            }
+        }]
+    }, {
+        id: "m-238",
+        img: "238.png",
+        clickZones: [{
+            'toStep': "m-124",
+            'type': 'arrow',
+            'pos': {
+                'left': 1.5,
+                'top': 85.5,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-239",
+            'type': 'arrow',
+            'pos': {
+                'left': 69,
+                'top': 84,
+                'width': 30,
+                'height': 11,
+                'rotate': -90
+            }
+        }]
+    }, {
+        id: "m-239",
+        img: "239.png",
+        clickZones: [{
+            'toStep': "m-238",
+            'type': 'arrow',
+            'pos': {
+                'left': -1,
+                'top': 87,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }]
+    }, {
+        id: "m-240",
+        img: "240.png",
+        clickZones: [{
+            'toStep': "m-125",
+            'type': 'arrow',
+            'pos': {
+                'left': 1.5,
+                'top': 85.5,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "m-241",
+            'type': 'arrow',
+            'pos': {
+                'left': 69,
+                'top': 85,
+                'width': 28,
+                'height': 11,
+                'rotate': -90
+            }
+        }]
+    }, {
+        id: "m-241",
+        img: "241.png",
+        clickZones: [{
+            'toStep': "m-240",
+            'type': 'arrow',
+            'pos': {
+                'left': -1,
+                'top': 87,
+                'width': 25,
+                'height': 8.5,
+                'rotate': 90
             }
         }]
     }

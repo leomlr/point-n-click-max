@@ -249,6 +249,17 @@ body {
     top: 93%;
 }
 
+#stepId-text {
+    top: 0%;
+    color: #fff;
+}
+
+#stats-BG {
+    top: 58%;
+    left: 16%;
+    width: 35%;
+}
+
 /* Texte overlay dans le même esprit que le reste */
 .text-label {
     position: absolute;
