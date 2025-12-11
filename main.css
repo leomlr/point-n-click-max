@@ -260,6 +260,22 @@ body {
     width: 35%;
 }
 
+#SLPPE-stats-game-over {
+    top: 30%;
+    left: 16%;
+    width: 69%;
+}
+
+#SLPPE-stats-percent {
+    top: 49%;
+    left: 23%;
+    width: 55%;
+}
+
+.text-number {
+    font-size: 5rem;
+}
+
 /* Texte overlay dans le même esprit que le reste */
 .text-label {
     position: absolute;
@@ -300,11 +316,3 @@ body {
     color: #fff;
     white-space: pre-wrap;
 }
-
-/* menu icon
-.menu-icon {
-    height: 10%;
-    width: auto;
-    top: 3%;
-    left: 85%;
-} */

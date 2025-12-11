@@ -1836,7 +1836,7 @@ const MARLENE_STEPS = [
         clickZones: [{
             'toStep': null,
             'type': 'oval',
-            'toStepCondition': (n) => n === 54 ? "m-196" : "m-191",
+            'toStepCondition': (currentGame) => currentGame.catapultes === 54 ? "m-196" : "m-191",
             'throwSteps': {
                 "m-196": ["m-192"],
                 "m-191": null
@@ -1897,7 +1897,7 @@ const MARLENE_STEPS = [
         clickZones: [{
             'toStep': null,
             'type': 'oval',
-            'toStepCondition': (n) => n === 54 ? "m-196" : "m-194",
+            'toStepCondition': (currentGame) => currentGame.catapultes === 54 ? "m-196" : "m-194",
             'throwSteps': {
                 "m-196": ["m-192"],
                 "m-194": ["m-192", "m-187"]

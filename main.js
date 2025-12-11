@@ -6,7 +6,6 @@ const MarlenBrando = {
     videoEl: document.getElementById("video-step"),
     cataEl: document.getElementById("catapultes-container"),
     audioEl: document.getElementById('bg-sound'),
-    creditsWindowEl: document.getElementById('painter-credits'),
     adminMode: true,
     onEndsVideo: {},
     CONSTRUCT_DELAYS: {
@@ -31,8 +30,9 @@ const MarlenBrando = {
             this.currentGame.stepId = 'start-1';
             this.currentGame.path = 'starter';
             this.currentGame.catapultes = 0;
-            this.currentGame.discovery = [];
+            this.currentGame.discovery = ['start-1'];
             this.currentGame.deads = 0;
+            this.currentGame.tickets = 0;
         } else {
             if (this.currentGame.player) {
                 // Set image for returning by player 
@@ -78,13 +78,13 @@ const MarlenBrando = {
                                 followingSteps = [];
                                 let throws = zone.throwSteps;
                                 if (!Array.isArray(zone.throwSteps) && zone.toStepCondition) {
-                                    throws = zone.throwSteps[zone.toStepCondition(this.currentGame.catapultes)];
+                                    throws = zone.throwSteps[zone.toStepCondition(this.currentGame)];
                                 }
                                 for (var i = throws.indexOf(toStepId) + 1; i < throws.length; i++) {
                                     followingSteps.push(throws[i]);
                                 }
                                 if (zone.toStepCondition) {
-                                    followingSteps.push(zone.toStepCondition(this.currentGame.catapultes))
+                                    followingSteps.push(zone.toStepCondition(this.currentGame))
                                 } else if (zone.toStep) {
                                     followingSteps.push(zone.toStep);
                                 }
@@ -126,6 +126,14 @@ const MarlenBrando = {
             if (clickZone.music) {
                 this.audioEl.play();
             }
+            if (clickZone.reset) {
+                delete this.currentGame.playerWin;
+                delete this.currentGame.remainingTime;
+                this.currentGame.catapultes = 0;
+                this.currentGame.tickets = 0;
+                this.currentGame.discovery = ['start-1'];
+                this.currentGame.deads = 0;
+            }
             if (clickZone.manageCatapultes && typeof clickZone.manageCatapultes == 'function') {
                 return this.managingCatapultes(clickZone.manageCatapultes);
             }
@@ -134,7 +142,7 @@ const MarlenBrando = {
                 this.currentGame.history.pop();
             }
             if (clickZone.toStepCondition) {
-                clickZone.toStep = clickZone.toStepCondition(this.currentGame.catapultes);
+                clickZone.toStep = clickZone.toStepCondition(this.currentGame);
             }
             let toStepId = clickZone.toStep;
             if (toStepId == "demolir-machine") {
@@ -337,16 +345,26 @@ const MarlenBrando = {
         if (["fabrique-de-catapultes", "fabrique-de-catapultes-2"].includes(step.id)) {
             this.currentGame.catapultes = 0;
         }
-        if (step.id == "painters") {
-            this.showTextWindow(PEINTRES);
-        }
         if (step.id == "TROP-TARD4") {
             delete this.currentGame.remainingTime;
         }
         if (step.id == "game-win") {
+            const stats = "Tu as découvert " + this.discoveryPercent + " % des étapes.</b></br>Tu es mort " + this.currentGame.deads + " fois.";
             document.getElementById("stats-BG").style.display = 'block';
-            document.getElementById("stats-BG").innerHTML = "Tu as découvert " + this.discoveryPercent + " % des étapes.</b></br>Tu es mort "  + this.currentGame.deads + " fois.";
+            document.getElementById("stats-BG").innerHTML = stats;
             this.currentGame.playerWin = true;
+        }
+        if (step.id == "statistiques") {
+            document.getElementById("SLPPE-stats-game-over").style.display = 'block';
+            document.getElementById("SLPPE-stats-percent").style.display = 'block';
+            document.getElementById("SLPPE-stats-game-over").innerHTML = this.currentGame.deads;
+            document.getElementById("SLPPE-stats-percent").innerHTML = this.discoveryPercent + " %";
+        }
+        if (step.id == "non-sincere-2") {
+            this.currentGame.tickets += 1;
+        }
+        if (step.id == "piscine-1") {
+            this.currentGame.tickets -= 1;
         }
     },
     createZone: function (id, clickZone) {
@@ -384,15 +402,22 @@ const MarlenBrando = {
         if (!img) return;
 
         const baseHeight = 900;
-        const baseFontPx = 22;
+
 
         const h = img.clientHeight;
         if (!h) return;
 
         const scale = h / baseHeight;
-        const size = baseFontPx * scale;
 
-        document.querySelectorAll('.text-label').forEach(el => {
+        document.querySelectorAll('.text-label:not(.text-number)').forEach(el => {
+            const baseFontPx = 22;
+            const size = baseFontPx * scale;
+            el.style.fontSize = size + 'px';
+        });
+
+        document.querySelectorAll('.text-label.text-number').forEach(el => {
+            const baseFontPx = 78;
+            const size = baseFontPx * scale;
             el.style.fontSize = size + 'px';
         });
     },
@@ -402,15 +427,17 @@ const MarlenBrando = {
             delete this.onEndsVideo[this.readingVideoId];
         }
         document.querySelectorAll('.clickable-zone').forEach(el => el.remove());
-        document.querySelectorAll('.gif-overlay:not(.menu-icon)').forEach(el => el.remove());
+        document.querySelectorAll('.gif-overlay').forEach(el => el.remove());
         document.querySelector('.chrono-wrapper').classList.remove('visible');
         document.querySelector('.input-group').classList.remove('visible');
         document.getElementById("mdp-input").value = "";
         clearInterval(this.intervalId);
         document.getElementById("loading-text").style.display = 'none';
         this.cataEl.innerHTML = "";
-        this.hideTextWindow();
+        //this.hideTextWindow();
         document.getElementById("stats-BG").style.display = 'none';
+        document.getElementById("SLPPE-stats-game-over").style.display = 'none';
+        document.getElementById("SLPPE-stats-percent").style.display = 'none';
     },
     encodeText(str) {
         const utf8 = new TextEncoder().encode(str);
@@ -433,6 +460,12 @@ const MarlenBrando = {
         }
         if (!this.currentGame.deads) {
             this.currentGame.deads = 0;
+        }
+        if (!this.currentGame.tickets) {
+            this.currentGame.tickets = 0;
+        }
+        if (!this.currentGame.catapultes) {
+            this.currentGame.catapultes = 0;
         }
     },
     startCountDown: async function () {
@@ -556,17 +589,6 @@ const MarlenBrando = {
             img.style.top = (row * 12) + "%";
             this.cataEl.appendChild(img);
         });
-    },
-    showTextWindow: function (text) {
-        const content = document.getElementById('painter-credits-content');
-        content.textContent = text;
-        this.creditsWindowEl.style.display = 'block';
-        this.creditsWindowEl.scrollTop = this.creditsWindowEl.scrollHeight;
-    },
-    hideTextWindow: function () {
-        const content = document.getElementById('painter-credits-content');
-        content.textContent = '';
-        this.creditsWindowEl.style.display = 'none';
     },
     GamePaths: {
         bouzin: {
@@ -704,12 +726,22 @@ const MarlenBrando = {
                         width: 23.5,
                         height: 9,
                     }
+                }, {
+                    'toStep': "SLPPE-corridor",
+                    'type': 'square',
+                    'pos': {
+                        left: 69,
+                        top: 4,
+                        width: 14.5,
+                        height: 21,
+                    }
                 }]
             }, {
                 id: "SLPPE2",
                 img: "SLPPE2.png",
                 clickZones: [{
                     'toStep': "game-over",
+                    'path': "game-over",
                     'type': 'arrow',
                     'pos': {
                         left: 74,
@@ -719,33 +751,320 @@ const MarlenBrando = {
                     }
                 }]
             }, {
-                id: "SLPPE3",
-                img: "SLPPE3.png",
+                id: "SLPPE-corridor",
+                img: "SLPPE corridor.png",
                 clickZones: [{
+                    'toStep': null,
+                    'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 1,
+                        'top': 92,
+                        'width': 20.5,
+                        'height': 7.5,
+                        'rotate': 180
+                    }
+                }, {
+                    'toStep': "oeuvres",
+                    'type': 'square',
+                    'pos': {
+                        'left': 27.5,
+                        'top': 78.5,
+                        'width': 16,
+                        'height': 22
+                    }
+                }, {
+                    'toStep': "statistiques",
+                    'type': 'square',
+                    'pos': {
+                        'left': 52.5,
+                        'top': 78,
+                        'width': 16,
+                        'height': 22
+                    }
+                }, {
+                    'toStep': "credits",
+                    'type': 'square',
+                    'pos': {
+                        'left': 25.5,
+                        'top': 45.5,
+                        'width': 13,
+                        'height': 19
+                    }
+                }, {
+                    'toStep': null,
+                    'toStepCondition': (currentGame) => currentGame.tickets > 0 ? "porte-piscine-2" : "porte-piscine-1",
+                    'type': 'square',
+                    'pos': {
+                        'left': 43.5,
+                        'top': 42,
+                        'width': 21,
+                        'height': 23
+                    }
+                }, {
+                    'toStep': 'porte-SLPPE-premium',
+                    'type': 'square',
+                    'pos': {
+                        'left': 56.5,
+                        'top': 9,
+                        'width': 22,
+                        'height': 23
+                    }
+                }]
+            }, {
+                id: "oeuvres",
+                img: "Oeuvres.png",
+                clickZones: [{
+                    'toStep': "SLPPE-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 3.5,
+                        'top': 89.5,
+                        'width': 25,
+                        'height': 8,
+                        'rotate': 180
+                    }
+                }]
+            }, {
+                id: "statistiques",
+                img: "Statistiques.png",
+                clickZones: [{
+                    'toStep': "SLPPE-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 3.5,
+                        'top': 89.5,
+                        'width': 25,
+                        'height': 8,
+                        'rotate': 180
+                    }
+                }]
+            }, {
+                id: "credits",
+                img: "Crédits.png",
+                clickZones: [{
+                    'toStep': "SLPPE-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 7.5,
+                        'top': 89,
+                        'width': 23.5,
+                        'height': 8,
+                        'rotate': 180
+                    }
+                }]
+            }, {
+                id: "porte-piscine-1",
+                img: "Porte piscine1.png",
+                clickZones: [{
+                    'toStep': "SLPPE-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 3.5,
+                        'top': 89.5,
+                        'width': 22.5,
+                        'height': 8,
+                        'rotate': 180
+                    }
+                }]
+            }, {
+                id: "porte-piscine-2",
+                img: "Porte piscine2.png",
+                clickZones: [{
+                    'toStep': "SLPPE-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 3.5,
+                        'top': 89.5,
+                        'width': 22.5,
+                        'height': 8,
+                        'rotate': 180
+                    }
+                }, {
+                    'toStep': "piscine-1",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 48.5,
+                        'top': 84.5,
+                        'width': 24.5,
+                        'height': 9.5
+                    }
+                }]
+            }, {
+                id: "SLPPE-victoire",
+                img: "SLPPE victoire.png",
+                clickZones: [{
+                    'toStep': "start-1",
+                    'path': 'starter',
+                    'reset': true,
+                    'type': 'oval',
+                    'pos': {
+                        left: 7,
+                        top: 85.5,
+                        width: 17.5,
+                        height: 9,
+                    }
+                }, {
+                    'toStep': "SLPPE-corridor",
+                    'type': 'square',
+                    'pos': {
+                        left: 69,
+                        top: 4,
+                        width: 14.5,
+                        height: 21,
+                    }
+                }]
+            }, {
+                id: "porte-SLPPE-premium",
+                img: "Porte SLPPE premium.png",
+                clickZones: [{
+                    'toStep': "SLPPE-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 2.5,
+                        'top': 90,
+                        'width': 18.5,
+                        'height': 7.5,
+                        'rotate': 180
+                    }
+                }, {
+                    'toStep': null,
+                    'toStepCondition': (currentGame) => currentGame.playerWin ? "oui-sincere" : "oui-menteur",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 36.5,
+                        'top': 81.5,
+                        'width': 20.5,
+                        'height': 9.5,
+                        'rotate': 180
+                    }
+                }, {
+                    'toStep': null,
+                    'toStepCondition': (currentGame) => currentGame.playerWin ? "non-menteur" : "non-sincere",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 72.5,
+                        'top': 81.5,
+                        'width': 20.5,
+                        'height': 9.5,
+                        'rotate': 180
+                    }
+                }]
+            }, {
+                id: "oui-sincere",
+                img: "Oui sincère.png",
+                clickZones: [{
+                    'toStep': "bouzin",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 57.5,
+                        'top': 83.5,
+                        'width': 21,
+                        'height': 9.5
+                    }
+                }]
+            }, {
+                id: "oui-menteur",
+                img: "Oui menteur.png",
+                clickZones: [{
+                    'toStep': "game-over",
+                    'path': 'game-over',
+                    'type': 'oval',
+                    'pos': {
+                        'left': 11.5,
+                        'top': 82.5,
+                        'width': 24.5,
+                        'height': 10
+                    }
+                }]
+            }, {
+                id: "non-sincere",
+                img: "Non sincère1.png",
+                clickZones: [{
+                    'toStep': "non-sincere-2",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 40.5,
+                        'top': 79.5,
+                        'width': 23.5,
+                        'height': 11
+                    }
+                }]
+            }, {
+                id: "non-sincere-2",
+                img: "Non sincère2.png",
+                clickZones: [{
+                    'toStep': "SLPPE-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 8,
+                        'top': 86,
+                        'width': 28.5,
+                        'height': 11.5,
+                        'rotate': 180
+                    }
+                }]
+            }, {
+                id: "non-menteur",
+                img: "Non menteur.png",
+                clickZones: [{
+                    'toStep': "game-over",
+                    'path': 'game-over',
+                    'type': 'oval',
+                    'pos': {
+                        'left': 36.5,
+                        'top': 82.5,
+                        'width': 23.5,
+                        'height': 11
+                    }
+                }]
+            }, {
+                id: "piscine-1",
+                img: "Piscine1.png",
+                clickZones: [{
+                    'toStep': "SLPPE-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 2,
+                        'top': 90,
+                        'width': 21.5,
+                        'height': 8.5,
+                        'rotate': 180
+                    }
+                }, {
                     'toStep': "oubliettes",
                     'path': 'game-over',
                     'type': 'oval',
                     'pos': {
-                        'left': 4.5,
-                        'top': 76,
-                        'width': 40,
-                        'aspect-ratio': 1.5 / 1
+                        'left': 5.5,
+                        'top': 21.5,
+                        'width': 46.5,
+                        'height': 11
                     }
                 }, {
-                    'toStep': "TROP-TARD4",
-                    'path': 'troptard',
+                    'toStep': "piscine-2",
                     'type': 'oval',
                     'pos': {
-                        'left': 62.5,
-                        'top': 76,
-                        'width': 29,
-                        'aspect-ratio': 1.3 / 1
+                        'left': 63.5,
+                        'top': 22,
+                        'width': 34,
+                        'height': 10
                     }
                 }]
             }, {
-                id: "painters",
-                img: "126.png",
-                clickZones: []
+                id: "piscine-2",
+                img: "Piscine2.png",
+                clickZones: [{
+                    'toStep': "piscine-1",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 2,
+                        'top': 90,
+                        'width': 21.5,
+                        'height': 8.5,
+                        'rotate': 180
+                    }
+                }]
             }
         ],
         troptard: [{
@@ -778,8 +1097,7 @@ const MarlenBrando = {
             id: "TROP-TARD3",
             img: "Trop tard3.png",
             clickZones: [{
-                'toStep': "SLPPE3",
-                'path': 'SLPPE',
+                'toStep': "TROP-TARD7",
                 'type': 'oval',
                 'pos': {
                     'left': 32.5,
@@ -795,6 +1113,29 @@ const MarlenBrando = {
                     'top': 11,
                     'width': 38,
                     'aspect-ratio': 1.35 / 1
+                }
+            }]
+        }, {
+            id: "TROP-TARD7",
+            img: "Trop tard7.png",
+            clickZones: [{
+                'toStep': "oubliettes",
+                'path': 'game-over',
+                'type': 'oval',
+                'pos': {
+                    'left': 4.5,
+                    'top': 76,
+                    'width': 40,
+                    'aspect-ratio': 1.5 / 1
+                }
+            }, {
+                'toStep': "TROP-TARD4",
+                'type': 'oval',
+                'pos': {
+                    'left': 62.5,
+                    'top': 76,
+                    'width': 29,
+                    'aspect-ratio': 1.3 / 1
                 }
             }]
         }, {
@@ -1197,34 +1538,3 @@ window.addEventListener('resize', () => {
         MarlenBrando.resizeTextLabel();
     }
 });
-
-const PEINTRES = `Léonard de Vinci
-Michel-Ange
-Raphaël
-Sandro Botticelli
-Le Caravage
-Rembrandt
-Johannes Vermeer
-Diego Velázquez
-Francisco de Goya
-William Turner
-Eugène Delacroix
-Jean-Auguste-Dominique Ingres
-Gustave Courbet
-Édouard Manet
-Claude Monet
-Edgar Degas
-Pierre-Auguste Renoir
-Paul Cézanne
-Vincent van Gogh
-Paul Gauguin
-Georges Seurat
-Henri de Toulouse-Lautrec
-Henri Matisse
-Pablo Picasso
-Wassily Kandinsky
-Piet Mondrian
-Salvador Dalí
-René Magritte
-Edward Hopper
-Jackson Pollock`;
