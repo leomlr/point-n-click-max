@@ -1062,7 +1062,7 @@ const BRANDON_STEPS = [
             }
         }, {
             'toStep': "game-over",
-            'path': "game-over",
+            'path': 'game-over',
             'throwSteps': ["page-suspens"],
             'type': 'oval',
             'pos': {

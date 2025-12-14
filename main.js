@@ -6,6 +6,7 @@ const MarlenBrando = {
     videoEl: document.getElementById("video-step"),
     cataEl: document.getElementById("catapultes-container"),
     audioEl: document.getElementById('bg-sound'),
+    shortSoundEl: document.getElementById('short-sound'),
     adminMode: true,
     onEndsVideo: {},
     CONSTRUCT_DELAYS: {
@@ -22,7 +23,7 @@ const MarlenBrando = {
     indexFollower: 0,
     audio: {
         'starter': "petitougrand.mp3",
-        'marlene': "petitougrand.mp3",
+        'marlene': "Bougie_13_12_2025_001.mp3",
         'brandon': "petitougrand.mp3",
         'game-over': "petitougrand.mp3",
         'troptard': "petitougrand.mp3",
@@ -236,6 +237,7 @@ const MarlenBrando = {
     },
     applyStep: async function (id, isBack = false, followingSteps = null) {
         const src = 'audio/' + this.audio[this.currentGame.path];
+        console.log(src)
         console.log(this.audioEl.src)
         if (!this.audioEl.src.includes(src)) {
             this.audioEl.src = src;
@@ -1526,7 +1528,7 @@ const MarlenBrando = {
                 id: "game-win",
                 img: "246.png",
                 clickZones: [{
-                    'toStep': "SLPPE-bis",
+                    'toStep': "SLPPE-victoire",
                     'path': 'SLPPE',
                     'type': 'arrow',
                     'pos': {
