@@ -237,8 +237,6 @@ const MarlenBrando = {
     },
     applyStep: async function (id, isBack = false, followingSteps = null) {
         const src = 'audio/' + this.audio[this.currentGame.path];
-        console.log(src)
-        console.log(this.audioEl.src)
         if (!this.audioEl.src.includes(src)) {
             this.audioEl.src = src;
         }
