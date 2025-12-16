@@ -470,6 +470,7 @@ const MARLENE_STEPS = [
     }, {
         id: "non-je-reste",
         img: "113.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-114",
             'type': 'arrow',
@@ -483,6 +484,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-114",
         img: "114.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-115",
             'type': 'arrow',
@@ -496,6 +498,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-115",
         img: "115.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "affront-QQR",
             'type': 'arrow',
@@ -509,6 +512,7 @@ const MARLENE_STEPS = [
     }, {
         id: "affront-QQR",
         img: "116.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "game-over",
             'path': 'game-over',
@@ -537,7 +541,7 @@ const MARLENE_STEPS = [
     }, {
         id: "course-poursuite",
         video: "QQR course poursuite.mp4",
-        playbackRate: 4,
+        playbackRate: 1,
         atEndStep: 'm-121'
     }, {
         id: "m-121",
@@ -1079,7 +1083,7 @@ const MARLENE_STEPS = [
     }, {
         id: "marlene-danse",
         img: "136.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene"
@@ -1097,7 +1101,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-137",
         img: "137.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -1440,7 +1444,7 @@ const MARLENE_STEPS = [
         img: "161.png",
         clickZones: [{
             'toStep': "terreur-QQR",
-            'throwSteps': ["page-suspens"],
+            'throwSteps': ["page-suspens-bis"],
             'type': 'arrow',
             'pos': {
                 'left': 73,
@@ -2075,7 +2079,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-211",
         img: "211.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         clickZones: [{
             'toStep': "m-212",
             'type': 'arrow',
@@ -2089,7 +2093,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-212",
         img: "212.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2107,7 +2111,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-213",
         img: "213.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2128,7 +2132,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-214",
         img: "214.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2146,7 +2150,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-215",
         img: "215.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2164,7 +2168,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-216",
         img: "216.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2191,7 +2195,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-217",
         img: "217.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         clickZones: [{
             'toStep': "m-218",
             'type': 'oval',
@@ -2214,7 +2218,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-218",
         img: "218.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         clickZones: [{
             'toStep': "m-219",
             'type': 'arrow',
@@ -2228,7 +2232,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-219",
         img: "219.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2246,7 +2250,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-220",
         img: "220.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         clickZones: [{
             'toStep': "m-221",
             'type': 'arrow',
@@ -2260,7 +2264,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-221",
         img: "221.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         clickZones: [{
             'toStep': "m-222",
             'type': 'arrow',
@@ -2274,7 +2278,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-222",
         img: "222.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         clickZones: [{
             'toStep': "m-223",
             'type': 'arrow',
@@ -2288,7 +2292,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-223",
         img: "223.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2306,7 +2310,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-224",
         img: "224.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2337,7 +2341,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-226",
         img: "226.png",
-        ambiance: "dnb_club_marlene3.mp3",
+        ambiance: "dnb_club_marlene.mp3",
         clickZones: [{
             'toStep': "m-227",
             'type': 'arrow',

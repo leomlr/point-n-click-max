@@ -5,17 +5,16 @@ const MarlenBrando = {
     gameContainer: document.querySelector(".img-wrapper"),
     videoEl: document.getElementById("video-step"),
     cataEl: document.getElementById("catapultes-container"),
-    audioEl: document.getElementById('bg-sound-A'),
     shortSoundEl: document.getElementById('short-sound'),
     adminMode: false,
     onEndsVideo: {},
     CONSTRUCT_DELAYS: {
-        'adminMode': 20,
-        'players': 60
+        'adminMode': 10,
+        'players': 30
     },
     LOADING_TEXTS: [
         'Chargement du moteur 3D ...',
-        'Redéfinition du modèle d\'IA ...',
+        'Vidange du réservoir d\'huile du serveur...',
         'Retour au village de Noël ...'
     ],
     MAX_CATA: 64,
@@ -1667,8 +1666,8 @@ window.addEventListener("visibilitychange", function () {
     } else {
         cancelAnimationFrame(MarlenBrando._fadeInRaf);
         cancelAnimationFrame(MarlenBrando._fadeOutRaf);
-        if (MarlenBrando.audioEl) {
-            MarlenBrando.audioEl.pause();
+        if (MarlenBrando.bg_audio()) {
+            MarlenBrando.bg_audio().pause();
         }
     }
 });
