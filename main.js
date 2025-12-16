@@ -1687,7 +1687,6 @@ window.addEventListener('resize', () => {
 window.addEventListener("visibilitychange", function () {
     if (document.visibilityState === 'visible') {
         MarlenBrando.fadeInAndPlay(MarlenBrando.nextAmbianceEl);
-        MarlenBrando.fadeInAndPlay(MarlenBrando.nextShortEl);
     } else {
         for (const fade in MarlenBrando._fadeInRaf) {
             cancelAnimationFrame(MarlenBrando._fadeInRaf[fade]);
