@@ -5,7 +5,6 @@ const MarlenBrando = {
     gameContainer: document.querySelector(".img-wrapper"),
     videoEl: document.getElementById("video-step"),
     cataEl: document.getElementById("catapultes-container"),
-    shortSoundEl: document.getElementById('short-sound'),
     adminMode: false,
     onEndsVideo: {},
     CONSTRUCT_DELAYS: {
@@ -19,6 +18,8 @@ const MarlenBrando = {
     ],
     MAX_CATA: 64,
     MDP: 'U0xJUFZPVVBMQUk=',
+    _fadeInRaf: {},
+    _fadeOutRaf: {},
     sleep_ms: (ms) => new Promise(resolve => setTimeout(resolve, ms)),
     init: async function () {
         this.totalSteps = this.getTotalSteps();
@@ -42,7 +43,8 @@ const MarlenBrando = {
             if (!this.currentGame.catapultes) {
                 this.currentGame.catapultes = 0;
             }
-            this.nextAudioEl = 'bg-sound-B';
+            this.nextAmbianceEl = 'bg-sound-B';
+            this.nextShortEl = 'short-sound-B';
         }
         const followingSteps = this.getFollowingSteps(this.currentGame.stepId);
         if (this.currentGame.player && ['brandon', 'marlene'].includes(this.currentGame.player) && this.currentGame.stepId !== 'game-over') {
@@ -223,7 +225,7 @@ const MarlenBrando = {
         this.discoveryPercent = Math.round(this.currentGame.discovery.length / this.totalSteps * 100);
     },
     applyStep: async function (id, isBack = false, followingSteps = null) {
-        console.log(id, isBack, followingSteps)
+        //console.log(id, isBack, followingSteps)
         if (id == 'start-1') {
             this.currentGame.player = null;
             delete this.currentGame.endTime;
@@ -261,22 +263,33 @@ const MarlenBrando = {
                 document.getElementById("stepId-text").textContent = id + ": " + step.img;
             }
         }
-        if (!step.isThrowStep) {
-            if (step.ambiance) {
-                const src = 'audio/' + step.ambiance;
-                if (!this.bg_audio().src.endsWith(src)) {
-                    this.fadeOutAndStop();
-                    if (this.nextAudioEl == "bg-sound-A") {
-                        this.nextAudioEl = "bg-sound-B";
-                    } else if (this.nextAudioEl == "bg-sound-B") {
-                        this.nextAudioEl = "bg-sound-A";
-                    }
-                    this.bg_audio().src = src;
-                    this.fadeInAndPlay();
+        if (step.ambiance) {
+            const src = 'audio/' + step.ambiance;
+            if (!this.audioEl(this.nextAmbianceEl).src.endsWith(src)) {
+                this.fadeOutAndStop(this.nextAmbianceEl);
+                if (this.nextAmbianceEl == "bg-sound-A") {
+                    this.nextAmbianceEl = "bg-sound-B";
+                } else if (this.nextAmbianceEl == "bg-sound-B") {
+                    this.nextAmbianceEl = "bg-sound-A";
                 }
-            } else {
-                this.fadeOutAndStop();
+                this.audioEl(this.nextAmbianceEl).src = src;
+                this.fadeInAndPlay(this.nextAmbianceEl);
             }
+        } else {
+            this.fadeOutAndStop(this.nextAmbianceEl);
+        }
+        if (step.sound) {
+            const src = 'audio/' + step.sound;
+            this.fadeOutAndStop(this.nextShortEl);
+            if (this.nextShortEl == "short-sound-A") {
+                this.nextShortEl = "short-sound-B";
+            } else if (this.nextShortEl == "short-sound-B") {
+                this.nextShortEl = "short-sound-A";
+            }
+            this.audioEl(this.nextShortEl).src = src;
+            this.fadeInAndPlay(this.nextShortEl);
+        } else {
+            this.fadeOutAndStop(this.nextShortEl);
         }
         if (id == "game-over") {
             if (!this.currentGame.isArrivingToGame) {
@@ -602,51 +615,49 @@ const MarlenBrando = {
             this.cataEl.appendChild(img);
         });
     },
-    fadeOutAndStop: function (ms = 800) {
-        const audioEl = this.nextAudioEl;
-        if (!this.bg_audio(audioEl)) return;
-        if (this.bg_audio(audioEl).paused) return;
-        cancelAnimationFrame(this._fadeOutRaf);
-        const startVolume = this.bg_audio(audioEl).volume ?? 1;
+    fadeOutAndStop: function (id, ms = 1200) {
+        if (!this.audioEl(id)) return;
+        if (this.audioEl(id).paused) return;
+        cancelAnimationFrame(this._fadeOutRaf[id]);
+        const startVolume = this.audioEl(id).volume ?? 1;
         const startTime = performance.now();
         const tick = (now) => {
             const t = Math.min(1, (now - startTime) / ms);
             const v = startVolume * (1 - t);
-            this.bg_audio(audioEl).volume = Math.max(0, Math.min(1, v));
+            this.audioEl(id).volume = Math.max(0, Math.min(1, v));
             if (t < 1) {
-                this._fadeOutRaf = requestAnimationFrame(tick);
+                this._fadeOutRaf[id] = requestAnimationFrame(tick);
             } else {
-                this.bg_audio(audioEl).pause();
-                this.bg_audio(audioEl).currentTime = 0;
-                this.bg_audio(audioEl).removeAttribute('src');
-                this.bg_audio(audioEl).load();
-                this.bg_audio(audioEl).volume = startVolume;
+                this.audioEl(id).pause();
+                this.audioEl(id).currentTime = 0;
+                this.audioEl(id).removeAttribute('src');
+                this.audioEl(id).load();
+                this.audioEl(id).volume = startVolume;
             }
         }
-        this._fadeOutRaf = requestAnimationFrame(tick);
+        this._fadeOutRaf[id] = requestAnimationFrame(tick);
     },
-    fadeInAndPlay: function (ms = 800, targetVolume = 1) {
-        const audioEl = this.nextAudioEl;
-        if (!this.bg_audio(audioEl)) return;
-        cancelAnimationFrame(this._fadeInRaf);
+    fadeInAndPlay: function (id, ms = 1000, targetVolume = 1) {
+        if (!this.audioEl(id)) return;
+        cancelAnimationFrame(this._fadeInRaf[id]);
         const endVolume = Math.max(0, Math.min(1, targetVolume));
         const startTime = performance.now();
-        this.bg_audio(audioEl).volume = 0;
-        if (this.bg_audio(audioEl).paused) {
-            this.bg_audio(audioEl).play().catch(() => { });
+        this.audioEl(id).volume = 0;
+        if (this.audioEl(id).paused) {
+            this.audioEl(id).play().catch(() => { });
         }
         const tick = (now) => {
             const t = Math.min(1, (now - startTime) / ms);
             const v = endVolume * t;
-            this.bg_audio(audioEl).volume = Math.max(0, Math.min(1, v));
+            this.audioEl(id).volume = Math.max(0, Math.min(1, v));
             if (t < 1) {
-                this._fadeInRaf = requestAnimationFrame(tick);
+                this._fadeInRaf[id] = requestAnimationFrame(tick);
             }
         }
-        this._fadeInRaf = requestAnimationFrame(tick);
+        this._fadeInRaf[id] = requestAnimationFrame(tick);
     },
-    bg_audio: function (audioEl = null) {
-        return document.getElementById(audioEl ? audioEl : this.nextAudioEl);
+    audioEl: function (id = null) {
+        return document.getElementById(id ? id : this.nextAmbianceEl);
     },
     GamePaths: {
         bouzin: {
@@ -747,6 +758,7 @@ const MarlenBrando = {
             }, {
                 id: "player-select",
                 img: "7.png",
+                ambiance: "Attente.mp3",
                 clickZones: [{
                     'path': 'marlene',
                     'toStep': "m-9",
@@ -1180,6 +1192,7 @@ const MarlenBrando = {
         troptard: [{
             id: "TROP-TARD",
             img: "Trop tard.png",
+            sound: "Trop_tard.mp3",
             clickZones: [{
                 'toStep': "TROP-TARD2",
                 'type': 'arrow',
@@ -1228,6 +1241,7 @@ const MarlenBrando = {
         }, {
             id: "TROP-TARD7",
             img: "Trop tard7.png",
+            sound: "fail.mp3",
             clickZones: [{
                 'toStep': "oubliettes",
                 'path': 'game-over',
@@ -1305,6 +1319,7 @@ const MarlenBrando = {
         }, {
             id: "TROP-TARD6",
             img: "Trop tard6.png",
+            sound: "suspens.mp3",
             clickZones: [{
                 'toStep': null,
                 'toSavedStep': true,
@@ -1342,6 +1357,7 @@ const MarlenBrando = {
         }, {
             id: "partir-bouzin",
             img: "bouzin2.png",
+            sound: "epiphanie.mp3",
             clickZones: [{
                 'toStep': "bouzin-3",
                 'type': 'arrow',
@@ -1355,6 +1371,7 @@ const MarlenBrando = {
         }, {
             id: "bouzin-3",
             img: "bouzin3.png",
+            sound: "fail.mp3",
             clickZones: [{
                 'toStep': "game-over",
                 'path': 'game-over',
@@ -1371,6 +1388,7 @@ const MarlenBrando = {
             {
                 id: "game-over",
                 img: "Game over.png",
+                sound: "Game_over.mp3",
                 video: "chargement.webm",
                 playbackRate: 0.1,
                 atEndStep: "start-1",
@@ -1379,6 +1397,7 @@ const MarlenBrando = {
             }, {
                 id: "oubliettes",
                 img: "Oubliettes.png",
+                sound: "Oubliettes.mp3",
                 clickZones: [{
                     'toStep': "game-over",
                     'type': 'arrow',
@@ -1405,6 +1424,7 @@ const MarlenBrando = {
             }, {
                 id: "go-30",
                 img: "30.png",
+                ambiance: "Baston.mp3",
                 clickZones: [{
                     'toStep': "game-over",
                     'type': 'arrow',
@@ -1525,6 +1545,7 @@ const MarlenBrando = {
             }, {
                 id: "brandir-frichtefracht",
                 img: "205.png",
+                sound: "epiphanie.mp3",
                 clickZones: [{
                     'toStep': "zz-206",
                     'type': 'arrow',
@@ -1566,6 +1587,7 @@ const MarlenBrando = {
             }, {
                 id: "zz-245",
                 img: "245.png",
+                sound: "epiphanie.mp3",
                 isWin: true,
                 clickZones: [{
                     'toStep': "zz-208",
@@ -1608,6 +1630,7 @@ const MarlenBrando = {
             }, {
                 id: "zz-72",
                 img: "72.png",
+                ambiance: "emotion.mp3",
                 clickZones: [{
                     'toStep': "zz-210",
                     'type': 'arrow',
@@ -1634,6 +1657,7 @@ const MarlenBrando = {
             }, {
                 id: "game-win",
                 img: "246.png",
+                sound: "Bravo.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-victoire",
                     'path': 'SLPPE',
@@ -1662,12 +1686,20 @@ window.addEventListener('resize', () => {
 
 window.addEventListener("visibilitychange", function () {
     if (document.visibilityState === 'visible') {
-        MarlenBrando.fadeInAndPlay();
+        MarlenBrando.fadeInAndPlay(MarlenBrando.nextAmbianceEl);
+        MarlenBrando.fadeInAndPlay(MarlenBrando.nextShortEl);
     } else {
-        cancelAnimationFrame(MarlenBrando._fadeInRaf);
-        cancelAnimationFrame(MarlenBrando._fadeOutRaf);
-        if (MarlenBrando.bg_audio()) {
-            MarlenBrando.bg_audio().pause();
+        for (const fade in MarlenBrando._fadeInRaf) {
+            cancelAnimationFrame(MarlenBrando._fadeInRaf[fade]);
+        }
+        for (const fade in MarlenBrando._fadeOutRaf) {
+            cancelAnimationFrame(MarlenBrando._fadeOutRaf[fade]);
+        }
+        if (MarlenBrando.audioEl(MarlenBrando.nextAmbianceEl)) {
+            MarlenBrando.audioEl(MarlenBrando.nextAmbianceEl).pause();
+        }
+        if (MarlenBrando.audioEl(MarlenBrando.nextShortEl)) {
+            MarlenBrando.audioEl(MarlenBrando.nextShortEl).pause();
         }
     }
 });

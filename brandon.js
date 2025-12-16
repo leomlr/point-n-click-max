@@ -44,6 +44,7 @@ const BRANDON_STEPS = [
     }, {
         id: "page-suspens",
         img: "11.png",
+        sound: "suspens.mp3",
         isThrowStep: true,
         clickZones: [{
             'toStep': null,
@@ -58,6 +59,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-12",
         img: "12.png",
+        sound: "terreur.mp3",
         clickZones: [{
             'toStep': "b-13",
             'type': 'arrow',
@@ -187,6 +189,7 @@ const BRANDON_STEPS = [
     }, {
         id: "plonger-lac",
         img: "22.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         isSaveStep: true,
         clickZones: [{
             'toStep': "b-23",
@@ -561,6 +564,7 @@ const BRANDON_STEPS = [
     }, {
         id: "rentrer-grotte",
         img: "45.png",
+        sound: "epiphanie.mp3",
         clickZones: [{
             'toStep': "b-46",
             'throwSteps': ["page-suspens"],
@@ -575,6 +579,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-46",
         img: "46.png",
+        sound: "fail.mp3",
         clickZones: [{
             'toStep': "b-47",
             'type': 'arrow',
@@ -601,6 +606,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-48",
         img: "48.png",
+        sound: "usine_de_recyclage.mp3",
         clickZones: [{
             'toStep': "game-over",
             'path': 'game-over',
@@ -703,6 +709,7 @@ const BRANDON_STEPS = [
     }, {
         id: "frite",
         img: "53.png",
+        sound: "epiphanie.mp3",
         clickZones: [{
             'toStep': "b-54",
             'type': 'arrow',
@@ -716,6 +723,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-54",
         img: "54.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "oubliettes",
             'path': 'game-over',
@@ -849,6 +857,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-61",
         img: "61.png",
+        sound: "epiphanie.mp3",
         clickZones: [{
             'toStep': "b-63",
             'type': 'arrow',
@@ -901,6 +910,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-64",
         img: "64.png",
+        sound: "Bravo.mp3",
         clickZones: [{
             'toStep': "b-65",
             'type': 'arrow',
@@ -962,6 +972,8 @@ const BRANDON_STEPS = [
     }, {
         id: "b-68",
         img: "68.png",
+        sound: "terreur.mp3",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-69",
             'type': 'arrow',
@@ -988,6 +1000,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-70",
         img: "70.png",
+        sound: "Bravo.mp3",
         clickZones: [{
             'toStep': "b-71",
             'type': 'arrow',
@@ -1001,6 +1014,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-71",
         img: "71.png",
+        ambiance: "emotion.mp3",
         clickZones: [{
             'toStep': "zz-72",
             'path': 'Zblugzor',
@@ -1177,6 +1191,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-82",
         img: "82.png",
+        sound: "Bravo.mp3",
         clickZones: [{
             'toStep': "b-83",
             'type': 'arrow',
@@ -1331,6 +1346,7 @@ const BRANDON_STEPS = [
     }, {
         id: "sauter-zblugzor-films",
         img: "89.png",
+        sound: "fail.mp3",
         clickZones: [{
             'toStep': "game-over",
             'path': 'game-over',

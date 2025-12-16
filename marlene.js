@@ -45,6 +45,7 @@ const MARLENE_STEPS = [
         id: "page-suspens",
         isThrowStep: true,
         img: "11.png",
+        sound: "suspens.mp3",
         clickZones: [{
             'toStep': null,
             'type': 'arrow',
@@ -58,6 +59,7 @@ const MARLENE_STEPS = [
     }, {
         id: "page-suspens-bis",
         isThrowStep: true,
+        sound: "Hyper_suspens.mp3",
         img: "11bis.png",
         clickZones: [{
             'toStep': null,
@@ -83,6 +85,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-15",
         img: "15.png",
+        sound: "terreur.mp3",
         clickZones: [{
             'toStep': "m-16",
             'type': 'arrow',
@@ -244,7 +247,6 @@ const MARLENE_STEPS = [
     }, {
         id: "m-104",
         img: "104.png",
-        ambiance: "Bougie.mp3",
         isThrowStep: true,
         clickZones: [{
             'toStep': null,
@@ -512,7 +514,7 @@ const MARLENE_STEPS = [
     }, {
         id: "affront-QQR",
         img: "116.png",
-        ambiance: "Bougie.mp3",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "game-over",
             'path': 'game-over',
@@ -546,7 +548,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-121",
         img: "121.png",
-        ambiance: "Bougie.mp3",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "rentrer-chatiere",
             'type': 'arrow',
@@ -570,7 +572,7 @@ const MARLENE_STEPS = [
     }, {
         id: "continuer-fuir",
         img: "122.png",
-        ambiance: "Bougie.mp3",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "m-123",
             'type': 'arrow',
@@ -584,7 +586,6 @@ const MARLENE_STEPS = [
     }, {
         id: "m-123",
         img: "123.png",
-        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "TROP-TARD",
             'path': 'troptard',
@@ -1119,6 +1120,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-139",
         img: "139.png",
+        sound: "epiphanie.mp3",
         clickZones: [{
             'toStep': "m-140",
             'type': 'arrow',
@@ -1420,6 +1422,7 @@ const MARLENE_STEPS = [
     }, {
         id: "rentrer-chatiere",
         img: "160.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "affront-QQR",
             'type': 'oval',
@@ -1442,6 +1445,7 @@ const MARLENE_STEPS = [
     }, {
         id: "sortir-grotte",
         img: "161.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "terreur-QQR",
             'throwSteps': ["page-suspens-bis"],
@@ -1519,6 +1523,7 @@ const MARLENE_STEPS = [
     }, {
         id: "construire-catapulte",
         img: "165.png",
+        sound: "epiphanie.mp3",
         clickZones: [{
             'toStep': "m-171",
             'type': 'arrow',
@@ -1532,6 +1537,7 @@ const MARLENE_STEPS = [
     }, {
         id: "bombe-atomique",
         img: "166.png",
+        sound: "epiphanie.mp3", 
         clickZones: [{
             'toStep': "m-167",
             'type': 'arrow',
@@ -1590,6 +1596,7 @@ const MARLENE_STEPS = [
     }, {
         id: "oui-appuyer",
         img: "169.png",
+        sound: "terreur.mp3",
         clickZones: [{
             'toStep': "m-170",
             'type': 'square',
@@ -1746,7 +1753,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-chargement",
         img: "178.png",
-        ambiance: "emotion.mp3",
+        ambiance: "Attente.mp3",
         video: "chargement.webm",
         playbackRate: 0.3,
         atEndStep: "m-179",
@@ -1810,6 +1817,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-183",
         img: "183.png",
+        ambiance: "emotion.mp3",
         clickZones: [{
             'toStep': "m-184",
             'type': 'arrow',
@@ -1836,6 +1844,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-185",
         img: "185.png",
+        sound: "Bravo.mp3",
         clickZones: [{
             'toStep': "SLPPE",
             'path': 'SLPPE',
@@ -1896,6 +1905,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-188",
         img: "188.png",
+        sound: "usine_de_recyclage.mp3",
         clickZones: [{
             'toStep': "game-over",
             'path': 'game-over',
@@ -1910,6 +1920,7 @@ const MARLENE_STEPS = [
     }, {
         id: "partir-multi-catapulte",
         img: "189.png",
+        ambiance: "Attente.mp3",
         clickZones: [{
             'toStep': "fabrique-de-catapultes",
             'type': 'arrow',
@@ -1962,6 +1973,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-191",
         img: "191.png",
+        ambiance: "Attente.mp3",
         clickZones: [{
             'toStep': "fabrique-de-catapultes-2",
             'type': 'square',
@@ -2024,6 +2036,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-192",
         img: "192.png",
+        sound: "Bravo.mp3",
         isThrowStep: true,
         clickZones: [{
             'toStep': null,
@@ -2038,6 +2051,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-194",
         img: "194.png",
+        sound: "epiphanie.mp3",
         clickZones: [{
             'toStep': "m-188",
             'type': 'arrow',
@@ -2328,6 +2342,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-225",
         img: "225.png",
+        sound: "epiphanie.mp3",
         clickZones: [{
             'toStep': "m-226",
             'type': 'arrow',
