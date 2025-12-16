@@ -5,7 +5,7 @@ const MarlenBrando = {
     gameContainer: document.querySelector(".img-wrapper"),
     videoEl: document.getElementById("video-step"),
     cataEl: document.getElementById("catapultes-container"),
-    audioEl: document.getElementById('bg-sound'),
+    audioEl: document.getElementById('bg-sound-A'),
     shortSoundEl: document.getElementById('short-sound'),
     adminMode: false,
     onEndsVideo: {},
@@ -44,9 +44,7 @@ const MarlenBrando = {
             if (!this.currentGame.catapultes) {
                 this.currentGame.catapultes = 0;
             }
-        }
-        if (this.adminMode) {
-            document.getElementById("stepId-text").style.display = 'block';
+            this.nextAudioEl = 'bg-sound-B';
         }
         const followingSteps = this.getFollowingSteps(this.currentGame.stepId);
         if (this.currentGame.player && ['brandon', 'marlene'].includes(this.currentGame.player) && this.currentGame.stepId !== 'game-over') {
@@ -261,14 +259,21 @@ const MarlenBrando = {
             this.addDiscoveredStep(step.id);
             this.updateDiscoveryPercent();
             if (this.adminMode) {
+                document.getElementById("stepId-text").style.display = 'block';
                 document.getElementById("stepId-text").textContent = id + ": " + step.img;
             }
         }
         if (!step.isThrowStep) {
             if (step.ambiance) {
                 const src = 'audio/' + step.ambiance;
-                if (!this.audioEl.src.endsWith(src)) {
-                    this.audioEl.src = src;
+                if (!this.bg_audio().src.endsWith(src)) {
+                    this.fadeOutAndStop();
+                    if (this.nextAudioEl == "bg-sound-A") {
+                        this.nextAudioEl = "bg-sound-B";
+                    } else if (this.nextAudioEl == "bg-sound-B") {
+                        this.nextAudioEl = "bg-sound-A";
+                    }
+                    this.bg_audio().src = src;
                     this.fadeInAndPlay();
                 }
             } else {
@@ -600,45 +605,50 @@ const MarlenBrando = {
         });
     },
     fadeOutAndStop: function (ms = 800) {
-        if (!this.audioEl) return;
-        if (this.audioEl.paused) return;
-        cancelAnimationFrame(this._fadeRaf);
-        const startVolume = this.audioEl.volume ?? 1;
+        const audioEl = this.nextAudioEl;
+        if (!this.bg_audio(audioEl)) return;
+        if (this.bg_audio(audioEl).paused) return;
+        cancelAnimationFrame(this._fadeOutRaf);
+        const startVolume = this.bg_audio(audioEl).volume ?? 1;
         const startTime = performance.now();
         const tick = (now) => {
             const t = Math.min(1, (now - startTime) / ms);
             const v = startVolume * (1 - t);
-            this.audioEl.volume = Math.max(0, Math.min(1, v));
+            this.bg_audio(audioEl).volume = Math.max(0, Math.min(1, v));
             if (t < 1) {
-                this._fadeRaf = requestAnimationFrame(tick);
+                this._fadeOutRaf = requestAnimationFrame(tick);
             } else {
-                this.audioEl.pause();
-                this.audioEl.currentTime = 0;
-                this.audioEl.removeAttribute('src');
-                this.audioEl.load();
-                this.audioEl.volume = startVolume;
+                this.bg_audio(audioEl).pause();
+                this.bg_audio(audioEl).currentTime = 0;
+                this.bg_audio(audioEl).removeAttribute('src');
+                this.bg_audio(audioEl).load();
+                this.bg_audio(audioEl).volume = startVolume;
             }
         }
-        this._fadeRaf = requestAnimationFrame(tick);
+        this._fadeOutRaf = requestAnimationFrame(tick);
     },
     fadeInAndPlay: function (ms = 800, targetVolume = 1) {
-        if (!this.audioEl) return;
-        cancelAnimationFrame(this._fadeRaf);
+        const audioEl = this.nextAudioEl;
+        if (!this.bg_audio(audioEl)) return;
+        cancelAnimationFrame(this._fadeInRaf);
         const endVolume = Math.max(0, Math.min(1, targetVolume));
         const startTime = performance.now();
-        this.audioEl.volume = 0;
-        if (this.audioEl.paused) {
-            this.audioEl.play().catch(() => { });
+        this.bg_audio(audioEl).volume = 0;
+        if (this.bg_audio(audioEl).paused) {
+            this.bg_audio(audioEl).play().catch(() => { });
         }
         const tick = (now) => {
             const t = Math.min(1, (now - startTime) / ms);
             const v = endVolume * t;
-            this.audioEl.volume = Math.max(0, Math.min(1, v));
+            this.bg_audio(audioEl).volume = Math.max(0, Math.min(1, v));
             if (t < 1) {
-                this._fadeRaf = requestAnimationFrame(tick);
+                this._fadeInRaf = requestAnimationFrame(tick);
             }
         }
-        this._fadeRaf = requestAnimationFrame(tick);
+        this._fadeInRaf = requestAnimationFrame(tick);
+    },
+    bg_audio: function (audioEl = null) {
+        return document.getElementById(audioEl ? audioEl : this.nextAudioEl);
     },
     GamePaths: {
         bouzin: {
@@ -1048,7 +1058,8 @@ const MarlenBrando = {
                 id: "oui-sincere",
                 img: "Oui sincère.png",
                 ambiance: "SLPPE.mp3",
-                clickZones: [{
+                clickZones: [
+                    /*{
                     'toStep': "bouzin",
                     'type': 'oval',
                     'pos': {
@@ -1057,7 +1068,7 @@ const MarlenBrando = {
                         'width': 21,
                         'height': 9.5
                     }
-                }]
+                }*/]
             }, {
                 id: "oui-menteur",
                 img: "Oui menteur.png",
@@ -1655,7 +1666,8 @@ window.addEventListener("visibilitychange", function () {
     if (document.visibilityState === 'visible') {
         MarlenBrando.fadeInAndPlay();
     } else {
-        cancelAnimationFrame(MarlenBrando._fadeRaf);
+        cancelAnimationFrame(MarlenBrando._fadeInRaf);
+        cancelAnimationFrame(MarlenBrando._fadeOutRaf);
         if (MarlenBrando.audioEl) {
             MarlenBrando.audioEl.pause();
         }
