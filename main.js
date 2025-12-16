@@ -7,7 +7,7 @@ const MarlenBrando = {
     cataEl: document.getElementById("catapultes-container"),
     audioEl: document.getElementById('bg-sound'),
     shortSoundEl: document.getElementById('short-sound'),
-    adminMode: true,
+    adminMode: false,
     onEndsVideo: {},
     CONSTRUCT_DELAYS: {
         'adminMode': 20,
