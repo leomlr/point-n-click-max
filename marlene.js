@@ -934,7 +934,6 @@ const MARLENE_STEPS = [
         ambiance: "dnb_club_marlene2.mp3",
         clickZones: [{
             'toStep': "m-130",
-            'throwSteps': ["page-suspens", "page-suspens-bis"],
             'type': 'arrow',
             'pos': {
                 'left': 70,
@@ -959,6 +958,7 @@ const MARLENE_STEPS = [
             }
         }, {
             'toStep': "m-134",
+            'throwSteps': ["page-suspens", "page-suspens-bis"],
             'type': 'oval',
             'pos': {
                 'left': 63,
@@ -1022,6 +1022,7 @@ const MARLENE_STEPS = [
         ambiance: "dnb_club_marlene2.mp3",
         clickZones: [{
             'toStep': "m-134",
+            'throwSteps': ["page-suspens", "page-suspens-bis"],
             'type': 'oval',
             'pos': {
                 'left': 63.5,
