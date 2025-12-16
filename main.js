@@ -20,7 +20,6 @@ const MarlenBrando = {
     ],
     MAX_CATA: 64,
     MDP: 'U0xJUFZPVVBMQUk=',
-    indexFollower: 0,
     sleep_ms: (ms) => new Promise(resolve => setTimeout(resolve, ms)),
     init: async function () {
         this.totalSteps = this.getTotalSteps();
