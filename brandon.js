@@ -94,6 +94,7 @@ const BRANDON_STEPS = [
     }, {
         id: "montagnes-lugubres",
         img: "17.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "b-18",
             'type': 'arrow',
@@ -107,6 +108,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-18",
         img: "18.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "couper-gauche",
             'type': 'arrow',
@@ -132,6 +134,7 @@ const BRANDON_STEPS = [
     }, {
         id: "couper-gauche",
         img: "19.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "b-20",
             'type': 'arrow',
@@ -145,6 +148,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-20",
         img: "20.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "b-21",
             'type': 'arrow',
@@ -158,6 +162,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-21",
         img: "21.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "plonger-lac",
             'type': 'arrow',
@@ -196,6 +201,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-23",
         img: "23.png",
+        ambiance: "Sous_l'eau.mp3",
         clickZones: [{
             'toStep': "b-24",
             'type': 'arrow',
@@ -209,6 +215,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-24",
         img: "24.png",
+        ambiance: "Sous_l'eau.mp3",
         clickZones: [{
             'toStep': "parler-poisson-combattant",
             'type': 'oval',
@@ -231,6 +238,7 @@ const BRANDON_STEPS = [
     }, {
         id: "parler-poisson-combattant",
         img: "25.png",
+        ambiance: "Sous_l'eau.mp3",
         clickZones: [{
             'toStep': "partir-37",
             'type': 'square',
@@ -253,6 +261,7 @@ const BRANDON_STEPS = [
     }, {
         id: "ecole-poisson",
         img: "26.png",
+        ambiance: "Sous_l'eau.mp3",
         clickZones: [{
             'toStep': "b-27",
             'type': 'arrow',
@@ -266,6 +275,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-27",
         img: "27.png",
+        ambiance: "Sous_l'eau.mp3",
         clickZones: [{
             'toStep': "SLPPE",
             'path': 'SLPPE',
@@ -290,6 +300,7 @@ const BRANDON_STEPS = [
     }, {
         id: "parler-poisson-combattant-2",
         img: "28.png",
+        ambiance: "Sous_l'eau.mp3",
         clickZones: [{
             'toStep': "TROP-TARD",
             'path': 'troptard',
@@ -304,6 +315,7 @@ const BRANDON_STEPS = [
     }, {
         id: "continuer-plus-haut",
         img: "31.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         isThrowStep: true,
         clickZones: [{
             'toStep': null,
@@ -318,6 +330,7 @@ const BRANDON_STEPS = [
     }, {
         id: "partir-37",
         img: "37.png",
+        ambiance: "Sous_l'eau.mp3",
         clickZones: [{
             'toStep': "b-49",
             'throwSteps': ["page-suspens"],
@@ -332,6 +345,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-32",
         img: "32.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "b-33",
             'type': 'arrow',
@@ -345,6 +359,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-33",
         img: "33.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "b-34",
             'type': 'arrow',
@@ -359,6 +374,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-34",
         img: "34.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "b-35",
             'type': 'arrow',
@@ -372,6 +388,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-35",
         img: "35.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "lecher-empreinte",
             'type': 'oval',
@@ -395,6 +412,7 @@ const BRANDON_STEPS = [
     }, {
         id: "lecher-empreinte",
         img: "36.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-38",
             'type': 'arrow',
@@ -408,6 +426,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-38",
         img: "38.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-39",
             'type': 'oval',
@@ -431,6 +450,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-39",
         img: "39.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "SLPPE",
             'path': 'SLPPE',
@@ -454,6 +474,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-40",
         img: "40.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-41",
             'type': 'oval',
@@ -476,6 +497,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-42",
         img: "42.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "b-43",
             'throwSteps': ["continuer-plus-haut"],
@@ -491,6 +513,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-43",
         img: "43.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "b-44",
             'type': 'arrow',
@@ -504,6 +527,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-44",
         img: "44.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "SLPPE",
             'path': 'SLPPE',
@@ -591,6 +615,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-41",
         img: "41.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "b-42",
             'type': 'arrow',
@@ -604,6 +629,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-49",
         img: "49.png",
+        ambiance: "Hopital.mp3",
         clickZones: [{
             'toStep': "b-50",
             'type': 'arrow',
@@ -617,6 +643,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-50",
         img: "50.png",
+        ambiance: "Hopital.mp3",
         clickZones: [{
             'toStep': "b-51",
             'type': 'arrow',
@@ -630,6 +657,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-51",
         img: "51.png",
+        ambiance: "Hopital.mp3",
         clickZones: [{
             'toStep': "cantine",
             'type': 'oval',
@@ -652,6 +680,7 @@ const BRANDON_STEPS = [
     }, {
         id: "cantine",
         img: "52.png",
+        ambiance: "Hopital.mp3",
         clickZones: [{
             'toStep': "frite",
             'type': 'oval',
@@ -701,6 +730,7 @@ const BRANDON_STEPS = [
     }, {
         id: "gauffre",
         img: "55.png",
+        ambiance: "Hopital.mp3",
         clickZones: [{
             'toStep': "b-56",
             'type': 'arrow',
@@ -714,6 +744,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-56",
         img: "56.png",
+        ambiance: "Hopital.mp3",
         onInput: true,
         clickZones: [{
             'toStep': "aucune-idee",
@@ -744,6 +775,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-57",
         img: "57.png",
+        ambiance: "Hopital.mp3",
         onInput: true,
         clickZones: [{
             'toStep': "aucune-idee",
@@ -775,6 +807,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-58",
         img: "58.png",
+        ambiance: "Hopital.mp3",
         clickZones: [{
             'toStep': "aucune-idee",
             'type': 'arrow',
@@ -788,6 +821,7 @@ const BRANDON_STEPS = [
     }, {
         id: "aucune-idee",
         img: "59.png",
+        ambiance: "Hopital.mp3",
         clickZones: [{
             'toStep': "b-62",
             'type': 'arrow',
@@ -801,6 +835,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-60",
         img: "60.png",
+        ambiance: "Hopital.mp3",
         clickZones: [{
             'toStep': "b-61",
             'type': 'arrow',
@@ -827,6 +862,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-62",
         img: "62.png",
+        ambiance: "Hopital.mp3",
         clickZones: [{
             'toStep': "TROP-TARD",
             'path': 'troptard',
@@ -841,6 +877,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-63",
         img: "63.png",
+        ambiance: "Hopital.mp3",
         clickZones: [{
             'toStep': "SLPPE",
             'path': 'SLPPE',
@@ -978,6 +1015,7 @@ const BRANDON_STEPS = [
     }, {
         id: "se-battre",
         img: "73.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-74",
             'type': 'arrow',
@@ -991,6 +1029,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-74",
         img: "74.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "SLPPE",
             'path': 'SLPPE',
@@ -1015,6 +1054,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-75",
         img: "75.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "b-76",
             'type': 'arrow',
@@ -1028,6 +1068,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-76",
         img: "76.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "b-77",
             'type': 'arrow',
@@ -1041,6 +1082,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-77",
         img: "77.png",
+        ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
             'toStep': "SLPPE",
             'path': 'SLPPE',
@@ -1075,6 +1117,7 @@ const BRANDON_STEPS = [
     }, {
         id: "continuer-grimper",
         img: "78.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-79",
             'type': 'arrow',
@@ -1088,6 +1131,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-79",
         img: "79.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "attaquer-monstre",
             'type': 'oval',
@@ -1119,6 +1163,7 @@ const BRANDON_STEPS = [
     }, {
         id: "attaquer-monstre",
         img: "81.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-82",
             'type': 'arrow',
@@ -1145,6 +1190,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-83",
         img: "83.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-84",
             'type': 'arrow',
@@ -1158,6 +1204,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-84",
         img: "84.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "attaquer-boule-neige",
             'type': 'oval',
@@ -1180,6 +1227,7 @@ const BRANDON_STEPS = [
     }, {
         id: "foncer-frichtefracht",
         img: "87.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-88",
             'type': 'arrow',
@@ -1193,6 +1241,7 @@ const BRANDON_STEPS = [
     }, {
         id: "attaquer-boule-neige",
         img: "85.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-86",
             'type': 'arrow',
@@ -1219,6 +1268,7 @@ const BRANDON_STEPS = [
     }, {
         id: "chanter-berceuse",
         img: "80.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-49",
             'throwSteps': ["page-suspens"],
@@ -1233,6 +1283,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-88",
         img: "88.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "suivre-zblugzor-tyro",
             'type': 'oval',
@@ -1265,6 +1316,7 @@ const BRANDON_STEPS = [
     }, {
         id: "suivre-zblugzor-tyro",
         img: "197.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "zz-199",
             'path': 'Zblugzor',
@@ -1293,6 +1345,7 @@ const BRANDON_STEPS = [
     }, {
         id: "demander-n-catapultes",
         img: "195.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "attaquer-monstre",
             'type': 'oval',

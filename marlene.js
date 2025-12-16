@@ -119,6 +119,7 @@ const MARLENE_STEPS = [
     }, {
         id: "souterrains-poisseuses",
         img: "90.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-91",
             'type': 'arrow',
@@ -132,6 +133,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-91",
         img: "91.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-92",
             'type': 'arrow',
@@ -145,6 +147,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-92",
         img: "92.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-93",
             'type': 'arrow',
@@ -158,6 +161,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-93",
         img: "93.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-102",
             'type': 'arrow',
@@ -181,6 +185,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-102",
         img: "102.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-93",
             'type': 'arrow',
@@ -205,6 +210,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-103",
         img: "103.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-103",
             'throwSteps': ["m-104"],
@@ -238,6 +244,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-104",
         img: "104.png",
+        ambiance: "Bougie.mp3",
         isThrowStep: true,
         clickZones: [{
             'toStep': null,
@@ -253,6 +260,7 @@ const MARLENE_STEPS = [
     }, {
         id: "crier-fort",
         img: "105.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-106",
             'type': 'arrow',
@@ -267,6 +275,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-106",
         img: "106.png",
+        ambiance: "Bougie.mp3",
         isSaveStep: true,
         clickZones: [{
             'toStep': "m-107",
@@ -281,6 +290,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-107",
         img: "107.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-108",
             'type': 'oval',
@@ -294,6 +304,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-108",
         img: "108.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-110",
             'type': 'oval',
@@ -316,6 +327,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-109",
         img: "109.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-111",
             'type': 'oval',
@@ -329,6 +341,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-110",
         img: "110.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-111",
             'type': 'oval',
@@ -342,6 +355,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-111",
         img: "111.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-112",
             'type': 'arrow',
@@ -355,6 +369,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-112",
         img: "112.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "non-je-reste",
             'type': 'oval',
@@ -377,6 +392,7 @@ const MARLENE_STEPS = [
     }, {
         id: "daccord-je-suis",
         img: "117.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "suivre-individu",
             'type': 'oval',
@@ -399,6 +415,7 @@ const MARLENE_STEPS = [
     }, {
         id: "direction-bruit",
         img: "118.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "m-119",
             'type': 'arrow',
@@ -412,6 +429,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-119",
         img: "119.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "affront-QQR",
             'type': 'oval',
@@ -505,6 +523,7 @@ const MARLENE_STEPS = [
     }, {
         id: "suivre-individu",
         img: "120.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "course-poursuite",
             'type': 'oval',
@@ -523,6 +542,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-121",
         img: "121.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "rentrer-chatiere",
             'type': 'arrow',
@@ -546,6 +566,7 @@ const MARLENE_STEPS = [
     }, {
         id: "continuer-fuir",
         img: "122.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-123",
             'type': 'arrow',
@@ -559,6 +580,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-123",
         img: "123.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "TROP-TARD",
             'path': 'troptard',
@@ -573,6 +595,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-94",
         img: "94.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-93",
             'type': 'arrow',
@@ -597,6 +620,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-95",
         img: "95.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-94",
             'type': 'arrow',
@@ -621,6 +645,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-96",
         img: "96.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-95",
             'type': 'arrow',
@@ -645,6 +670,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-97",
         img: "97.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-96",
             'type': 'arrow',
@@ -669,6 +695,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-98",
         img: "98.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-99",
             'type': 'arrow',
@@ -703,6 +730,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-99",
         img: "99.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-98",
             'type': 'arrow',
@@ -727,6 +755,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-100",
         img: "100.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-99",
             'type': 'arrow',
@@ -741,6 +770,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-101",
         img: "101.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-98",
             'type': 'arrow',
@@ -765,6 +795,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-124",
         img: "124.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-125",
             'type': 'arrow',
@@ -798,6 +829,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-125",
         img: "125.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-126",
             'type': 'arrow',
@@ -831,6 +863,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-126",
         img: "126.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-125",
             'type': 'arrow',
@@ -854,6 +887,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-127",
         img: "127.png",
+        ambiance: "dnb_club_marlene2.mp3",
         clickZones: [{
             'toStep': "m-126",
             'type': 'arrow',
@@ -877,6 +911,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-128",
         img: "128.png",
+        ambiance: "dnb_club_marlene2.mp3",
         clickZones: [{
             'toStep': "m-129",
             'type': 'arrow',
@@ -891,6 +926,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-129",
         img: "129.png",
+        ambiance: "dnb_club_marlene2.mp3",
         clickZones: [{
             'toStep': "m-130",
             'throwSteps': ["page-suspens", "page-suspens-bis"],
@@ -906,6 +942,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-130",
         img: "130.png",
+        ambiance: "dnb_club_marlene2.mp3",
         clickZones: [{
             'toStep': "aller-lidl",
             'type': 'oval',
@@ -943,7 +980,7 @@ const MARLENE_STEPS = [
         id: "m-132",
         img: "132.png",
         clickZones: [{
-            'toStep': "m-133",
+            'toStep': "m-132-5",
             'type': 'oval',
             'pos': {
                 'left': 9,
@@ -952,7 +989,7 @@ const MARLENE_STEPS = [
                 'height': 13
             }
         }, {
-            'toStep': "m-133",
+            'toStep': "m-132-5",
             'type': 'oval',
             'pos': {
                 'left': 54,
@@ -962,8 +999,22 @@ const MARLENE_STEPS = [
             }
         }]
     }, {
+        id: "m-132-5",
+        img: "132,5.png",
+        clickZones: [{
+            'toStep': "m-133",
+            'type': 'arrow',
+            'pos': {
+                'left': 71,
+                'top': 88.5,
+                'width': 24,
+                'height': 9
+            }
+        }]
+    }, {
         id: "m-133",
         img: "133.png",
+        ambiance: "dnb_club_marlene2.mp3",
         clickZones: [{
             'toStep': "m-134",
             'type': 'oval',
@@ -977,6 +1028,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-134",
         img: "134.png",
+        ambiance: "dnb_club_marlene3.mp3",
         clickZones: [{
             'toStep': "aller-bar",
             'type': 'oval',
@@ -999,6 +1051,7 @@ const MARLENE_STEPS = [
     }, {
         id: "rester-danser",
         img: "135.png",
+        ambiance: "dnb_club_marlene3.mp3",
         clickZones: [{
             'toStep': "marlene-danse",
             'type': 'oval',
@@ -1012,6 +1065,7 @@ const MARLENE_STEPS = [
     }, {
         id: "aller-bar",
         img: "138.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "m-139",
             'type': 'arrow',
@@ -1025,6 +1079,7 @@ const MARLENE_STEPS = [
     }, {
         id: "marlene-danse",
         img: "136.png",
+        ambiance: "dnb_club_marlene3.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene"
@@ -1042,6 +1097,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-137",
         img: "137.png",
+        ambiance: "dnb_club_marlene3.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -1072,6 +1128,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-140",
         img: "140.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "oubliettes",
             'path': 'game-over',
@@ -1095,6 +1152,7 @@ const MARLENE_STEPS = [
     }, {
         id: "defier-flechettes",
         img: "141.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "m-142",
             'type': 'arrow',
@@ -1108,6 +1166,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-142",
         img: "142.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': null,
             'randomSteps': ["m-143", "m-144", "m-145"],
@@ -1122,6 +1181,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-143",
         img: "143.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "m-148",
             'type': 'arrow',
@@ -1135,6 +1195,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-148",
         img: "148.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "m-149",
             'type': 'arrow',
@@ -1148,6 +1209,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-149",
         img: "149.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "m-147",
             'type': 'arrow',
@@ -1161,6 +1223,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-144",
         img: "144.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "m-150",
             'type': 'arrow',
@@ -1174,6 +1237,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-150",
         img: "150.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "m-151",
             'type': 'arrow',
@@ -1187,6 +1251,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-151",
         img: "151.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "m-147",
             'type': 'arrow',
@@ -1200,6 +1265,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-145",
         img: "145.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "m-146",
             'type': 'arrow',
@@ -1213,6 +1279,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-146",
         img: "146.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "m-147",
             'type': 'arrow',
@@ -1226,6 +1293,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-147",
         img: "147.png",
+        ambiance: "ambiance_bar.mp3",
         clickZones: [{
             'toStep': "m-152",
             'type': 'arrow',
@@ -1239,6 +1307,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-152",
         img: "152.png",
+        ambiance: "dechirax.mp3",
         clickZones: [{
             'toStep': "m-153",
             'type': 'arrow',
@@ -1252,6 +1321,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-153",
         img: "153.png",
+        ambiance: "dechirax.mp3",
         clickZones: [{
             'toStep': "m-154",
             'type': 'arrow',
@@ -1265,6 +1335,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-154",
         img: "154.png",
+        ambiance: "dechirax.mp3",
         clickZones: [{
             'toStep': "m-155",
             'type': 'arrow',
@@ -1278,6 +1349,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-155",
         img: "155.png",
+        ambiance: "dechirax.mp3",
         clickZones: [{
             'toStep': "m-156",
             'type': 'arrow',
@@ -1291,6 +1363,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-156",
         img: "156.png",
+        ambiance: "dechirax.mp3",
         clickZones: [{
             'toStep': "m-157",
             'type': 'arrow',
@@ -1379,6 +1452,7 @@ const MARLENE_STEPS = [
     }, {
         id: "terreur-QQR",
         img: "162.png",
+        ambiance: "Baston.mp3",
         gif: [{
             src: "QQR_leo.gif",
             class: "QQR-0"
@@ -1540,6 +1614,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-171",
         img: "171.png",
+        ambiance: "Baston.mp3",
         gif: [{
             src: "QQR_leo.gif",
             class: "QQR-1"
@@ -1568,6 +1643,7 @@ const MARLENE_STEPS = [
     }, {
         id: "tirer-avec-catapulte",
         img: "172.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "faire-rien",
             'type': 'oval',
@@ -1591,6 +1667,7 @@ const MARLENE_STEPS = [
     }, {
         id: "faire-rien",
         img: "173.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "m-174",
             'type': 'arrow',
@@ -1604,6 +1681,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-174",
         img: "174.png",
+        ambiance: "Baston.mp3",
         gif: [{
             src: "QQR_leo.gif",
             class: "QQR-2"
@@ -1621,6 +1699,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-175",
         img: "175.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "m-176",
             'type': 'arrow',
@@ -1634,6 +1713,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-176",
         img: "176.png",
+        ambiance: "emotion.mp3",
         clickZones: [{
             'toStep': "m-177",
             'type': 'arrow',
@@ -1647,6 +1727,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-177",
         img: "177.png",
+        ambiance: "emotion.mp3",
         clickZones: [{
             'toStep': "m-chargement",
             'throwSteps': ["page-suspens", "page-suspens-bis"],
@@ -1661,6 +1742,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-chargement",
         img: "178.png",
+        ambiance: "emotion.mp3",
         video: "chargement.webm",
         playbackRate: 0.3,
         atEndStep: "m-179",
@@ -1668,6 +1750,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-179",
         img: "179.png",
+        ambiance: "emotion.mp3",
         clickZones: [{
             'toStep': "m-180",
             'type': 'arrow',
@@ -1681,6 +1764,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-180",
         img: "180.png",
+        ambiance: "emotion.mp3",
         clickZones: [{
             'toStep': "m-181",
             'type': 'oval',
@@ -1694,6 +1778,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-181",
         img: "181.png",
+        ambiance: "emotion.mp3",
         clickZones: [{
             'toStep': "m-182",
             'type': 'arrow',
@@ -1707,6 +1792,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-182",
         img: "182.png",
+        ambiance: "emotion.mp3",
         clickZones: [{
             'toStep': "m-183",
             'type': 'arrow',
@@ -1833,6 +1919,7 @@ const MARLENE_STEPS = [
     }, {
         id: "fabrique-de-catapultes",
         img: "190.png",
+        ambiance: "Attente.mp3",
         clickZones: [{
             'toStep': null,
             'type': 'oval',
@@ -1894,6 +1981,7 @@ const MARLENE_STEPS = [
     }, {
         id: "fabrique-de-catapultes-2",
         img: "193.png",
+        ambiance: "Attente.mp3",
         clickZones: [{
             'toStep': null,
             'type': 'oval',
@@ -1972,6 +2060,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-198",
         img: "198.png",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "zz-199",
             'path': 'Zblugzor',
@@ -1986,6 +2075,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-211",
         img: "211.png",
+        ambiance: "dnb_club_marlene3.mp3",
         clickZones: [{
             'toStep': "m-212",
             'type': 'arrow',
@@ -1999,6 +2089,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-212",
         img: "212.png",
+        ambiance: "dnb_club_marlene3.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2016,6 +2107,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-213",
         img: "213.png",
+        ambiance: "dnb_club_marlene3.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2036,6 +2128,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-214",
         img: "214.png",
+        ambiance: "dnb_club_marlene3.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2053,6 +2146,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-215",
         img: "215.png",
+        ambiance: "dnb_club_marlene3.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2070,6 +2164,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-216",
         img: "216.png",
+        ambiance: "dnb_club_marlene3.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2096,6 +2191,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-217",
         img: "217.png",
+        ambiance: "dnb_club_marlene3.mp3",
         clickZones: [{
             'toStep': "m-218",
             'type': 'oval',
@@ -2118,6 +2214,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-218",
         img: "218.png",
+        ambiance: "dnb_club_marlene3.mp3",
         clickZones: [{
             'toStep': "m-219",
             'type': 'arrow',
@@ -2131,6 +2228,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-219",
         img: "219.png",
+        ambiance: "dnb_club_marlene3.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2148,6 +2246,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-220",
         img: "220.png",
+        ambiance: "dnb_club_marlene3.mp3",
         clickZones: [{
             'toStep': "m-221",
             'type': 'arrow',
@@ -2161,6 +2260,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-221",
         img: "221.png",
+        ambiance: "dnb_club_marlene3.mp3",
         clickZones: [{
             'toStep': "m-222",
             'type': 'arrow',
@@ -2174,6 +2274,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-222",
         img: "222.png",
+        ambiance: "dnb_club_marlene3.mp3",
         clickZones: [{
             'toStep': "m-223",
             'type': 'arrow',
@@ -2187,6 +2288,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-223",
         img: "223.png",
+        ambiance: "dnb_club_marlene3.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2204,6 +2306,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-224",
         img: "224.png",
+        ambiance: "dnb_club_marlene3.mp3",
         gif: [{
             src: "danse marlène.gif",
             class: "danse-marlene-2"
@@ -2234,6 +2337,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-226",
         img: "226.png",
+        ambiance: "dnb_club_marlene3.mp3",
         clickZones: [{
             'toStep': "m-227",
             'type': 'arrow',
@@ -2260,6 +2364,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-228",
         img: "228.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-234",
             'type': 'arrow',
@@ -2294,6 +2399,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-229",
         img: "229.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-230",
             'type': 'arrow',
@@ -2327,6 +2433,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-230",
         img: "230.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-229",
             'type': 'arrow',
@@ -2351,6 +2458,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-232",
         img: "232.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-230",
             'type': 'arrow',
@@ -2375,6 +2483,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-233",
         img: "233.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-232",
             'type': 'arrow',
@@ -2399,6 +2508,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-243",
         img: "243.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-233",
             'type': 'arrow',
@@ -2413,6 +2523,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-231",
         img: "231.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-229",
             'type': 'arrow',
@@ -2437,6 +2548,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-242",
         img: "242.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-231",
             'type': 'arrow',
@@ -2451,6 +2563,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-234",
         img: "234.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-235",
             'type': 'arrow',
@@ -2484,6 +2597,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-235",
         img: "235.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-234",
             'type': 'arrow',
@@ -2508,6 +2622,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-244",
         img: "244.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-235",
             'type': 'arrow',
@@ -2522,6 +2637,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-236",
         img: "236.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-234",
             'type': 'arrow',
@@ -2546,6 +2662,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-237",
         img: "237.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-236",
             'type': 'arrow',
@@ -2570,6 +2687,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-238",
         img: "238.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-124",
             'type': 'arrow',
@@ -2594,6 +2712,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-239",
         img: "239.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-238",
             'type': 'arrow',
@@ -2608,6 +2727,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-240",
         img: "240.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-125",
             'type': 'arrow',
@@ -2632,6 +2752,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-241",
         img: "241.png",
+        ambiance: "Bougie.mp3",
         clickZones: [{
             'toStep': "m-240",
             'type': 'arrow',

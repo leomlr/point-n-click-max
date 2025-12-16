@@ -21,15 +21,6 @@ const MarlenBrando = {
     MAX_CATA: 64,
     MDP: 'U0xJUFZPVVBMQUk=',
     indexFollower: 0,
-    audio: {
-        'starter': "petitougrand.mp3",
-        'marlene': "Bougie_13_12_2025_001.mp3",
-        'brandon': "petitougrand.mp3",
-        'game-over': "petitougrand.mp3",
-        'troptard': "petitougrand.mp3",
-        'SLPPE': "petitougrand.mp3",
-        'Zblugzor': "petitougrand.mp3"
-    },
     sleep_ms: (ms) => new Promise(resolve => setTimeout(resolve, ms)),
     init: async function () {
         this.totalSteps = this.getTotalSteps();
@@ -236,11 +227,6 @@ const MarlenBrando = {
         this.discoveryPercent = Math.round(this.currentGame.discovery.length / this.totalSteps * 100);
     },
     applyStep: async function (id, isBack = false, followingSteps = null) {
-        const src = 'audio/' + this.audio[this.currentGame.path];
-        if (!this.audioEl.src.includes(src)) {
-            this.audioEl.src = src;
-        }
-        this.audioEl.play();
         console.log(id, isBack, followingSteps)
         if (id == 'start-1') {
             this.currentGame.player = null;
@@ -276,6 +262,17 @@ const MarlenBrando = {
             this.updateDiscoveryPercent();
             if (this.adminMode) {
                 document.getElementById("stepId-text").textContent = id + ": " + step.img;
+            }
+        }
+        if (!step.isThrowStep) {
+            if (step.ambiance) {
+                const src = 'audio/' + step.ambiance;
+                if (!this.audioEl.src.endsWith(src)) {
+                    this.audioEl.src = src;
+                    this.fadeInAndPlay();
+                }
+            } else {
+                this.fadeOutAndStop();
             }
         }
         if (id == "game-over") {
@@ -602,6 +599,47 @@ const MarlenBrando = {
             this.cataEl.appendChild(img);
         });
     },
+    fadeOutAndStop: function (ms = 800) {
+        if (!this.audioEl) return;
+        if (this.audioEl.paused) return;
+        cancelAnimationFrame(this._fadeRaf);
+        const startVolume = this.audioEl.volume ?? 1;
+        const startTime = performance.now();
+        const tick = (now) => {
+            const t = Math.min(1, (now - startTime) / ms);
+            const v = startVolume * (1 - t);
+            this.audioEl.volume = Math.max(0, Math.min(1, v));
+            if (t < 1) {
+                this._fadeRaf = requestAnimationFrame(tick);
+            } else {
+                this.audioEl.pause();
+                this.audioEl.currentTime = 0;
+                this.audioEl.removeAttribute('src');
+                this.audioEl.load();
+                this.audioEl.volume = startVolume;
+            }
+        }
+        this._fadeRaf = requestAnimationFrame(tick);
+    },
+    fadeInAndPlay: function (ms = 800, targetVolume = 1) {
+        if (!this.audioEl) return;
+        cancelAnimationFrame(this._fadeRaf);
+        const endVolume = Math.max(0, Math.min(1, targetVolume));
+        const startTime = performance.now();
+        this.audioEl.volume = 0;
+        if (this.audioEl.paused) {
+            this.audioEl.play().catch(() => { });
+        }
+        const tick = (now) => {
+            const t = Math.min(1, (now - startTime) / ms);
+            const v = endVolume * t;
+            this.audioEl.volume = Math.max(0, Math.min(1, v));
+            if (t < 1) {
+                this._fadeRaf = requestAnimationFrame(tick);
+            }
+        }
+        this._fadeRaf = requestAnimationFrame(tick);
+    },
     GamePaths: {
         bouzin: {
             id: "bouzin",
@@ -729,6 +767,7 @@ const MarlenBrando = {
             {
                 id: "SLPPE",
                 img: "SLPPE.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "SLPPE2",
                     'type': 'arrow',
@@ -751,6 +790,7 @@ const MarlenBrando = {
             }, {
                 id: "SLPPE2",
                 img: "SLPPE2.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "game-over",
                     'path': "game-over",
@@ -765,6 +805,7 @@ const MarlenBrando = {
             }, {
                 id: "SLPPE-corridor",
                 img: "SLPPE corridor.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': null,
                     'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
@@ -826,6 +867,7 @@ const MarlenBrando = {
             }, {
                 id: "oeuvres",
                 img: "Oeuvres.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-corridor",
                     'type': 'arrow',
@@ -840,6 +882,7 @@ const MarlenBrando = {
             }, {
                 id: "statistiques",
                 img: "Statistiques.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-corridor",
                     'type': 'arrow',
@@ -854,20 +897,57 @@ const MarlenBrando = {
             }, {
                 id: "credits",
                 img: "Crédits.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-corridor",
                     'type': 'arrow',
                     'pos': {
-                        'left': 7.5,
+                        'left': 4.5,
                         'top': 89,
                         'width': 23.5,
                         'height': 8,
                         'rotate': 180
                     }
+                }, {
+                    'toStep': "credits-2",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 36.5,
+                        'top': 87,
+                        'width': 15.5,
+                        'height': 7.5
+                    }
+                }]
+            }, {
+                id: "credits-2",
+                img: "Crédits2.png",
+                ambiance: "SLPPE.mp3",
+                clickZones: [{
+                    'toStep': "credits",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 4.5,
+                        'top': 89,
+                        'width': 23.5,
+                        'height': 8,
+                        'rotate': 180
+                    }
+                }, {
+                    'toStep': "start-1",
+                    'path': 'starter',
+                    'reset': true,
+                    'type': 'oval',
+                    'pos': {
+                        'left': 36.5,
+                        'top': 38,
+                        'width': 25.5,
+                        'height': 12.5
+                    }
                 }]
             }, {
                 id: "porte-piscine-1",
                 img: "Porte piscine1.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-corridor",
                     'type': 'arrow',
@@ -882,6 +962,7 @@ const MarlenBrando = {
             }, {
                 id: "porte-piscine-2",
                 img: "Porte piscine2.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-corridor",
                     'type': 'arrow',
@@ -905,10 +986,10 @@ const MarlenBrando = {
             }, {
                 id: "SLPPE-victoire",
                 img: "SLPPE victoire.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "start-1",
                     'path': 'starter',
-                    'reset': true,
                     'type': 'oval',
                     'pos': {
                         left: 7,
@@ -929,6 +1010,7 @@ const MarlenBrando = {
             }, {
                 id: "porte-SLPPE-premium",
                 img: "Porte SLPPE premium.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-corridor",
                     'type': 'arrow',
@@ -965,6 +1047,7 @@ const MarlenBrando = {
             }, {
                 id: "oui-sincere",
                 img: "Oui sincère.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "bouzin",
                     'type': 'oval',
@@ -978,6 +1061,7 @@ const MarlenBrando = {
             }, {
                 id: "oui-menteur",
                 img: "Oui menteur.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "game-over",
                     'path': 'game-over',
@@ -992,6 +1076,7 @@ const MarlenBrando = {
             }, {
                 id: "non-sincere",
                 img: "Non sincère1.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "non-sincere-2",
                     'type': 'oval',
@@ -1005,6 +1090,7 @@ const MarlenBrando = {
             }, {
                 id: "non-sincere-2",
                 img: "Non sincère2.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-corridor",
                     'type': 'arrow',
@@ -1019,6 +1105,7 @@ const MarlenBrando = {
             }, {
                 id: "non-menteur",
                 img: "Non menteur.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "game-over",
                     'path': 'game-over',
@@ -1033,6 +1120,7 @@ const MarlenBrando = {
             }, {
                 id: "piscine-1",
                 img: "Piscine1.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-corridor",
                     'type': 'arrow',
@@ -1066,6 +1154,7 @@ const MarlenBrando = {
             }, {
                 id: "piscine-2",
                 img: "Piscine2.png",
+                ambiance: "SLPPE.mp3",
                 clickZones: [{
                     'toStep': "piscine-1",
                     'type': 'arrow',
@@ -1165,6 +1254,7 @@ const MarlenBrando = {
             }]
         }, {
             id: "time-machine-construct",
+            ambiance: "Attente.mp3",
             gif: [{
                 src: "under-construction-animated-gif-8.gif",
                 class: "time-machine-construct"
@@ -1322,6 +1412,7 @@ const MarlenBrando = {
             {
                 id: "zz-199",
                 img: "199.png",
+                ambiance: "Baston.mp3",
                 clickZones: [{
                     'toStep': "zz-200",
                     'type': 'arrow',
@@ -1335,6 +1426,7 @@ const MarlenBrando = {
             }, {
                 id: "zz-200",
                 img: "200.png",
+                ambiance: "Baston.mp3",
                 clickZones: [{
                     'toStep': "zz-fusionner",
                     'type': 'oval',
@@ -1358,6 +1450,7 @@ const MarlenBrando = {
             }, {
                 id: "zz-fusionner",
                 img: "201.png",
+                ambiance: "Baston.mp3",
                 clickZones: [{
                     'toStep': "zz-202",
                     'type': 'arrow',
@@ -1371,6 +1464,7 @@ const MarlenBrando = {
             }, {
                 id: "zz-202",
                 img: "202.png",
+                ambiance: "Baston.mp3",
                 clickZones: [{
                     'toStep': "zz-203",
                     'type': 'oval',
@@ -1384,6 +1478,7 @@ const MarlenBrando = {
             }, {
                 id: "zz-203",
                 img: "203.png",
+                ambiance: "Baston.mp3",
                 clickZones: [{
                     'toStep': "brandir-frichtefracht",
                     'type': 'oval',
@@ -1406,6 +1501,7 @@ const MarlenBrando = {
             }, {
                 id: "masque-halloween",
                 img: "204.png",
+                ambiance: "Baston.mp3",
                 clickZones: [{
                     'toStep': "game-over",
                     'path': 'game-over',
@@ -1433,6 +1529,7 @@ const MarlenBrando = {
             }, {
                 id: "zz-206",
                 img: "206.png",
+                ambiance: "Baston.mp3",
                 clickZones: [{
                     'toStep': "zz-207",
                     'type': 'arrow',
@@ -1446,6 +1543,7 @@ const MarlenBrando = {
             }, {
                 id: "zz-207",
                 img: "207.png",
+                ambiance: "Baston.mp3",
                 clickZones: [{
                     'toStep': "zz-245",
                     'type': 'arrow',
@@ -1473,6 +1571,7 @@ const MarlenBrando = {
             }, {
                 id: "zz-208",
                 img: "208.png",
+                ambiance: "emotion.mp3",
                 clickZones: [{
                     'toStep': "zz-209",
                     'type': 'arrow',
@@ -1486,6 +1585,7 @@ const MarlenBrando = {
             }, {
                 id: "zz-209",
                 img: "209.png",
+                ambiance: "emotion.mp3",
                 clickZones: [{
                     'toStep': "zz-72",
                     'type': 'arrow',
@@ -1553,8 +1653,11 @@ window.addEventListener('resize', () => {
 
 window.addEventListener("visibilitychange", function () {
     if (document.visibilityState === 'visible') {
-        MarlenBrando.audioEl.play();
+        MarlenBrando.fadeInAndPlay();
     } else {
-        MarlenBrando.audioEl.pause();
+        cancelAnimationFrame(MarlenBrando._fadeRaf);
+        if (MarlenBrando.audioEl) {
+            MarlenBrando.audioEl.pause();
+        }
     }
 });
