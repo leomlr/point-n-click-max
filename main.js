@@ -545,6 +545,9 @@ const MarlenBrando = {
         this.videoEl.autoplay = true;
         this.videoEl.volume = 0.5;
         this.videoEl.playbackRate = step.playbackRate ? step.playbackRate : 1;
+        if (this.adminMode && step.id == "course-poursuite") {
+            this.videoEl.playbackRate = 5;
+        }
         this.readingVideoId = step.id;
         this.videoEl.play().catch(() => {
             // si besoin, gérer l’erreur (rare si muted)

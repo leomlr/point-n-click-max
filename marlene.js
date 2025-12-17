@@ -589,6 +589,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-123",
         img: "123.png",
+        sound: "Bravo.mp3",
         clickZones: [{
             'toStep': "TROP-TARD",
             'path': 'troptard',
