@@ -18,6 +18,7 @@ const BRANDON_STEPS = [
     {
         id: "b-8",
         img: "8.png",
+        ambiance: "Attente.mp3",
         clickZones: [{
             'toStep': "b-10",
             'type': 'arrow',
@@ -31,6 +32,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-10",
         img: "10.png",
+        ambiance: "Attente.mp3",
         clickZones: [{
             'toStep': "b-12",
             'throwSteps': ["page-suspens"],
@@ -74,7 +76,8 @@ const BRANDON_STEPS = [
         id: "b-13",
         img: "13.png",
         clickZones: [{
-            'toStep': "SLPPE",
+            'toStep': null,
+            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {
@@ -280,7 +283,8 @@ const BRANDON_STEPS = [
         img: "27.png",
         ambiance: "Sous_l'eau.mp3",
         clickZones: [{
-            'toStep': "SLPPE",
+            'toStep': null,
+            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
             'path': 'SLPPE',
             'type': 'arrow',
             'pos': {
@@ -333,7 +337,7 @@ const BRANDON_STEPS = [
     }, {
         id: "partir-37",
         img: "37.png",
-        ambiance: "Sous_l'eau.mp3",
+        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-49",
             'throwSteps': ["page-suspens"],
@@ -402,7 +406,8 @@ const BRANDON_STEPS = [
                 'aspect-ratio': 1.5 / 1
             }
         }, {
-            'toStep': "SLPPE",
+            'toStep': null,
+            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {
@@ -455,7 +460,8 @@ const BRANDON_STEPS = [
         img: "39.png",
         ambiance: "Baston.mp3",
         clickZones: [{
-            'toStep': "SLPPE",
+            'toStep': null,
+            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {
@@ -532,7 +538,8 @@ const BRANDON_STEPS = [
         img: "44.png",
         ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
-            'toStep': "SLPPE",
+            'toStep': null,
+            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {
@@ -888,7 +895,8 @@ const BRANDON_STEPS = [
         img: "63.png",
         ambiance: "Hopital.mp3",
         clickZones: [{
-            'toStep': "SLPPE",
+            'toStep': null,
+            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {
@@ -973,7 +981,6 @@ const BRANDON_STEPS = [
         id: "b-68",
         img: "68.png",
         sound: "terreur.mp3",
-        ambiance: "Baston.mp3",
         clickZones: [{
             'toStep': "b-69",
             'type': 'arrow',
@@ -1045,7 +1052,8 @@ const BRANDON_STEPS = [
         img: "74.png",
         ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
-            'toStep': "SLPPE",
+            'toStep': null,
+            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {
@@ -1098,7 +1106,8 @@ const BRANDON_STEPS = [
         img: "77.png",
         ambiance: "Montagnes_hallucinees.mp3",
         clickZones: [{
-            'toStep': "SLPPE",
+            'toStep': null,
+            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {
@@ -1270,6 +1279,7 @@ const BRANDON_STEPS = [
     }, {
         id: "b-86",
         img: "86.png",
+        sound: "fail.mp3",
         clickZones: [{
             'toStep': "b-49",
             'type': 'arrow',
@@ -1309,7 +1319,8 @@ const BRANDON_STEPS = [
                 'aspect-ratio': 1.6 / 1
             }
         }, {
-            'toStep': "SLPPE",
+            'toStep': null,
+            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {

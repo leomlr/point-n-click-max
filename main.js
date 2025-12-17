@@ -265,7 +265,8 @@ const MarlenBrando = {
         }
         if (step.ambiance) {
             const src = 'audio/' + step.ambiance;
-            if (!this.audioEl(this.nextAmbianceEl).src.endsWith(src)) {
+            const audioEl = this.audioEl(this.nextAmbianceEl);
+            if (audioEl && !audioEl.src.endsWith(src)) {
                 this.fadeOutAndStop(this.nextAmbianceEl);
                 if (this.nextAmbianceEl == "bg-sound-A") {
                     this.nextAmbianceEl = "bg-sound-B";
@@ -1082,7 +1083,7 @@ const MarlenBrando = {
             }, {
                 id: "oui-menteur",
                 img: "Oui menteur.png",
-                ambiance: "SLPPE.mp3",
+                ambiance: "Baston.mp3",
                 clickZones: [{
                     'toStep': "game-over",
                     'path': 'game-over',
@@ -1296,6 +1297,7 @@ const MarlenBrando = {
         }, {
             id: "TROP-TARD5",
             img: "Trop tard5.png",
+            sound: "Bravo.mp3",
             clickZones: [{
                 'toStep': "TROP-TARD6",
                 'type': 'oval',
@@ -1306,7 +1308,8 @@ const MarlenBrando = {
                     'aspect-ratio': 1.3 / 1
                 }
             }, {
-                'toStep': "SLPPE",
+                'toStep': null,
+                'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
                 'path': 'SLPPE',
                 'type': 'oval',
                 'pos': {
@@ -1466,7 +1469,8 @@ const MarlenBrando = {
                         'height': 14
                     }
                 }, {
-                    'toStep': "SLPPE",
+                    'toStep': null,
+                    'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
                     'path': 'SLPPE',
                     'type': 'oval',
                     'pos': {
@@ -1530,7 +1534,7 @@ const MarlenBrando = {
             }, {
                 id: "masque-halloween",
                 img: "204.png",
-                ambiance: "Baston.mp3",
+                sound: "fail.mp3",
                 clickZones: [{
                     'toStep': "game-over",
                     'path': 'game-over',

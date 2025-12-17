@@ -18,6 +18,7 @@ const MARLENE_STEPS = [
     {
         id: "m-9",
         img: "9.png",
+        ambiance: "Attente.mp3",
         clickZones: [{
             'toStep': "m-14",
             'type': 'arrow',
@@ -31,6 +32,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-14",
         img: "14.png",
+        ambiance: "Attente.mp3",
         clickZones: [{
             'toStep': "m-15",
             'throwSteps': ["page-suspens"],
@@ -100,7 +102,8 @@ const MARLENE_STEPS = [
         id: "m-16",
         img: "16.png",
         clickZones: [{
-            'toStep': "SLPPE",
+            'toStep': null,
+            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {
@@ -1847,7 +1850,8 @@ const MARLENE_STEPS = [
         img: "185.png",
         sound: "Bravo.mp3",
         clickZones: [{
-            'toStep': "SLPPE",
+            'toStep': null,
+            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
             'path': 'SLPPE',
             'type': 'oval',
             'pos': {
