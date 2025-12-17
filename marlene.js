@@ -61,7 +61,7 @@ const MARLENE_STEPS = [
     }, {
         id: "page-suspens-bis",
         isThrowStep: true,
-        sound: "Hyper_suspens.mp3",
+        sound: "hyper_suspens.mp3",
         img: "11bis.png",
         clickZones: [{
             'toStep': null,
