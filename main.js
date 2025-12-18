@@ -1119,7 +1119,6 @@ const MarlenBrando = {
             }, {
                 id: "non-sincere-2",
                 img: "Non sincère2.png",
-                ambiance: "SLPPE.mp3",
                 sound: "epiphanie.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-corridor",
@@ -1335,7 +1334,6 @@ const MarlenBrando = {
             }, {
                 id: "SLPPE-premium-ticket",
                 img: "SLPPE premium ticket.png",
-                ambiance: "SLPPE.mp3",
                 sound: "epiphanie.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-premium-corridor",
@@ -1604,7 +1602,7 @@ const MarlenBrando = {
             {
                 id: "zz-199",
                 img: "199.png",
-                ambiance: "Baston.mp3",
+                ambiance: "Mozart.mp3",
                 clickZones: [{
                     'toStep': "zz-200",
                     'type': 'arrow',

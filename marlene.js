@@ -1,5 +1,5 @@
 const MARLENE_STEPS = [
-        {
+    {
         id: "re-marlene",
         img: "Re Marlène.png",
         clickZones: [{
@@ -775,6 +775,16 @@ const MARLENE_STEPS = [
                 'height': 8.5,
                 'rotate': 90
             }
+        }, {
+            'toStep': "catatract-249",
+            'type': 'catatract',
+            'pos': {
+                'left': 10,
+                'top': 64,
+                'width': 24,
+                'height': 13,
+                'rotate': 90
+            }
         }]
     }, {
         id: "m-101",
@@ -1542,7 +1552,7 @@ const MARLENE_STEPS = [
     }, {
         id: "bombe-atomique",
         img: "166.png",
-        sound: "epiphanie.mp3", 
+        sound: "epiphanie.mp3",
         clickZones: [{
             'toStep': "m-167",
             'type': 'arrow',
@@ -2544,6 +2554,15 @@ const MARLENE_STEPS = [
                 'height': 8.5,
                 'rotate': 90
             }
+        }, {
+            'toStep': "catatract-247",
+            'type': 'catatract',
+            'pos': {
+                'left': 50,
+                'top': 53.5,
+                'width': 23,
+                'height': 12.5
+            }
         }]
     }, {
         id: "m-231",
@@ -2656,6 +2675,16 @@ const MARLENE_STEPS = [
                 'top': 87,
                 'width': 25,
                 'height': 8.5,
+                'rotate': 90
+            }
+        }, {
+            'toStep': "catatract-248",
+            'type': 'catatract',
+            'pos': {
+                'left': 83,
+                'top': 16,
+                'width': 24,
+                'height': 21.5,
                 'rotate': 90
             }
         }]
@@ -2787,6 +2816,48 @@ const MARLENE_STEPS = [
                 'width': 25,
                 'height': 8.5,
                 'rotate': 90
+            }
+        }]
+    }, {
+        id: "catatract-247",
+        img: "247.png",
+        ambiance: "Bougie.mp3",
+        clickZones: [{
+            'toStep': "m-243",
+            'type': 'oval',
+            'pos': {
+                'left': 41.5,
+                'top': 83,
+                'width': 14,
+                'height': 7
+            }
+        }]
+    }, {
+        id: "catatract-248",
+        img: "248.png",
+        ambiance: "Bougie.mp3",
+        clickZones: [{
+            'toStep': "m-244",
+            'type': 'oval',
+            'pos': {
+                'left': 44.5,
+                'top': 82,
+                'width': 13,
+                'height': 6
+            }
+        }]
+    }, {
+        id: "catatract-249",
+        img: "249.png",
+        ambiance: "Bougie.mp3",
+        clickZones: [{
+            'toStep': "m-100",
+            'type': 'oval',
+            'pos': {
+                'left': 41,
+                'top': 87,
+                'width': 14,
+                'height': 7
             }
         }]
     }
