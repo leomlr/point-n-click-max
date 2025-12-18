@@ -671,7 +671,7 @@ const MarlenBrando = {
     GamePaths: {
         bouzin: {
             id: "bouzin",
-            img: "bouzin.png",
+            img: "bouzin-error.png",
             clickZones: []
         },
         starter: [
@@ -1496,7 +1496,7 @@ const MarlenBrando = {
             }]
         }, {
             id: "demolir-machine",
-            img: "bouzin-machine.png",
+            img: "bouzin.png",
             clickZones: [{
                 'toStep': "partir-bouzin",
                 'type': 'oval',
