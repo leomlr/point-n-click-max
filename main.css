@@ -114,6 +114,12 @@ body {
     width: 80%;
 }
 
+.video-SLPPE-premium-cine {
+    left: -2.5%;
+    top: -11.5%;
+    width: 73%;
+}
+
 /* Clickable zone */
 
 .clickable-zone {
@@ -144,6 +150,15 @@ body {
     aspect-ratio: 2 / 1;
 }
 
+.clickable-door {
+    clip-path: polygon(0% 85%,
+            0% 0%,
+            100% 4%,
+            100% 77%);
+    aspect-ratio: 2 / 1;
+}
+
+.clickable-door:hover,
 .clickable-square:hover,
 .clickable-oval:hover,
 .clickable-arrow:hover {

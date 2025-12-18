@@ -107,7 +107,7 @@ const MarlenBrando = {
                 resolve(img);
             };
             img.addEventListener('load', onLoad);
-            img.src = 'media/' + src;
+            img.src = 'image/' + src;
             if (overlay) {
                 img.classList.add("gif-overlay");
                 img.classList.add(overlay.class ? overlay.class : "");
@@ -380,17 +380,19 @@ const MarlenBrando = {
             document.getElementById("stats-BG").innerHTML = stats;
             this.currentGame.playerWin = true;
         }
-        if (step.id == "statistiques") {
-            document.getElementById("SLPPE-stats-game-over").style.display = 'block';
-            document.getElementById("SLPPE-stats-percent").style.display = 'block';
-            document.getElementById("SLPPE-stats-game-over").innerHTML = this.currentGame.deads;
-            document.getElementById("SLPPE-stats-percent").innerHTML = this.discoveryPercent + " %";
-        }
-        if (step.id == "non-sincere-2") {
-            this.currentGame.tickets += 1;
-        }
-        if (step.id == "piscine-1") {
-            this.currentGame.tickets -= 1;
+        if (this.currentGame.path == 'SLPPE') {
+            if (step.id == "statistiques") {
+                document.getElementById("SLPPE-stats-game-over").style.display = 'block';
+                document.getElementById("SLPPE-stats-percent").style.display = 'block';
+                document.getElementById("SLPPE-stats-game-over").innerHTML = this.currentGame.deads;
+                document.getElementById("SLPPE-stats-percent").innerHTML = this.discoveryPercent + " %";
+            }
+            if (["non-sincere-2", "SLPPE-premium-ticket"].includes(step.id)) {
+                this.currentGame.tickets += 1;
+            }
+            if (step.id == "piscine-1") {
+                this.currentGame.tickets -= 1;
+            }
         }
     },
     createZone: function (id, clickZone) {
@@ -532,18 +534,21 @@ const MarlenBrando = {
         this.intervalId = setInterval(updateCountdown, 1000);
     },
     playVideo: async function (step) {
-        this.onEndsVideo[step.id] = async () => {
-            await this.onVideoEnd(step);
-        };
-        this.videoEl.addEventListener('ended', this.onEndsVideo[step.id]);
+        if (!step.loopVideo) {
+            this.onEndsVideo[step.id] = async () => {
+                await this.onVideoEnd(step);
+            };
+            this.videoEl.addEventListener('ended', this.onEndsVideo[step.id]);
+        }
         if (this.isArrivingToGame && step.video) {
             return await this.onVideoEnd(step);
         }
-        this.videoEl.src = "media/" + step.video;
+        this.videoEl.src = "video/" + step.video;
         this.videoEl.style.display = "block";
         this.videoEl.classList.add("video-" + step.id);
         this.videoEl.autoplay = true;
-        this.videoEl.volume = 0.5;
+        this.videoEl.volume = 1;
+        this.videoEl.loop = step.loopVideo ? true : false;
         this.videoEl.playbackRate = step.playbackRate ? step.playbackRate : 1;
         if (this.adminMode && step.id == "course-poursuite") {
             this.videoEl.playbackRate = 5;
@@ -609,7 +614,7 @@ const MarlenBrando = {
                 resolve(img);
             };
             img.addEventListener('load', onLoad);
-            img.src = 'media/catapulte.png';
+            img.src = 'image/catapulte.png';
             img.classList.add("catapulte");
             img.classList.add("cata-" + this.currentGame.catapultes);
             const col = (this.currentGame.catapultes - 1) % 8;              // 0 → 8
@@ -1072,9 +1077,8 @@ const MarlenBrando = {
                 id: "oui-sincere",
                 img: "Oui sincère.png",
                 ambiance: "SLPPE.mp3",
-                clickZones: [
-                    /*{
-                    'toStep': "bouzin",
+                clickZones: [{
+                    'toStep': "SLPPE-premium-corridor",
                     'type': 'oval',
                     'pos': {
                         'left': 57.5,
@@ -1082,7 +1086,7 @@ const MarlenBrando = {
                         'width': 21,
                         'height': 9.5
                     }
-                }*/]
+                }]
             }, {
                 id: "oui-menteur",
                 img: "Oui menteur.png",
@@ -1116,6 +1120,7 @@ const MarlenBrando = {
                 id: "non-sincere-2",
                 img: "Non sincère2.png",
                 ambiance: "SLPPE.mp3",
+                sound: "epiphanie.mp3",
                 clickZones: [{
                     'toStep': "SLPPE-corridor",
                     'type': 'arrow',
@@ -1188,6 +1193,158 @@ const MarlenBrando = {
                         'top': 90,
                         'width': 21.5,
                         'height': 8.5,
+                        'rotate': 180
+                    }
+                }]
+            }, {
+                id: "SLPPE-premium-corridor",
+                img: "SLPPE premium corridor.png",
+                ambiance: "SLPPE.mp3",
+                clickZones: [{
+                    'toStep': "SLPPE-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': -2,
+                        'top': 88,
+                        'width': 23.5,
+                        'height': 8.5,
+                        'rotate': 90
+                    }
+                }, {
+                    'toStep': "SLPPE-premium-bibliotheque",
+                    'type': 'door',
+                    'pos': {
+                        'left': 7,
+                        'top': 40,
+                        'width': 22,
+                        'height': 43
+                    }
+                }, {
+                    'toStep': "SLPPE-premium-cine",
+                    'type': 'door',
+                    'pos': {
+                        'left': 48,
+                        'top': 47.5,
+                        'width': 16,
+                        'height': 27
+                    }
+                }, {
+                    'toStep': "SLPPE-premium-distributeur",
+                    'type': 'square',
+                    'pos': {
+                        'left': 75.5,
+                        'top': 49,
+                        'width': 8,
+                        'height': 7.5
+                    }
+                }]
+            }, {
+                id: "SLPPE-premium-bibliotheque",
+                img: "SLPPE premium bibliothèque.png",
+                ambiance: "SLPPE.mp3",
+                clickZones: [{
+                    'toStep': "SLPPE-premium-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': -2,
+                        'top': 88,
+                        'width': 23.5,
+                        'height': 8.5,
+                        'rotate': 90
+                    }
+                }, {
+                    'toStep': "mag-1",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 38,
+                        'top': 81,
+                        'width': 25.5,
+                        'height': 12
+                    }
+                }]
+            }, {
+                id: "mag-1",
+                img: "mag1.png",
+                ambiance: "SLPPE.mp3",
+                clickZones: [{
+                    'toStep': "mag-2",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 62,
+                        'top': 87.5,
+                        'width': 30,
+                        'height': 10.5
+                    }
+                }]
+            }, {
+                id: "mag-2",
+                img: "mag2.png",
+                ambiance: "SLPPE.mp3",
+                clickZones: [{
+                    'toStep': "SLPPE-premium-bibliotheque",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 62,
+                        'top': 87.5,
+                        'width': 30,
+                        'height': 10.5
+                    }
+                }]
+            }, {
+                id: "SLPPE-premium-cine",
+                img: "SLPPE premium ciné.png",
+                video: "Rencontre Brandon_Marlene.mp4",
+                playbackRate: 1,
+                loopVideo: true,
+                atEndStep: "SLPPE-premium-corridor",
+                clickZones: [{
+                    'toStep': "SLPPE-premium-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 82,
+                        'top': 90,
+                        'width': 17.5,
+                        'height': 7,
+                        'rotate': 90
+                    }
+                }]
+            }, {
+                id: "SLPPE-premium-distributeur",
+                img: "SLPPE premium distributeur.png",
+                ambiance: "SLPPE.mp3",
+                clickZones: [{
+                    'toStep': "SLPPE-premium-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 2.5,
+                        'top': 90,
+                        'width': 16.5,
+                        'height': 7,
+                        'rotate': 90
+                    }
+                }, {
+                    'toStep': "SLPPE-premium-ticket",
+                    'type': 'oval',
+                    'pos': {
+                        'left': 32,
+                        'top': 73.5,
+                        'width': 34.5,
+                        'height': 15
+                    }
+                }]
+            }, {
+                id: "SLPPE-premium-ticket",
+                img: "SLPPE premium ticket.png",
+                ambiance: "SLPPE.mp3",
+                sound: "epiphanie.mp3",
+                clickZones: [{
+                    'toStep': "SLPPE-premium-corridor",
+                    'type': 'arrow',
+                    'pos': {
+                        'left': 7.5,
+                        'top': 86,
+                        'width': 29.5,
+                        'height': 11,
                         'rotate': 180
                     }
                 }]
