@@ -7,6 +7,8 @@ const MarlenBrando = {
     cataEl: document.getElementById("catapultes-container"),
     adminMode: false,
     onEndsVideo: {},
+    nextAmbianceEl: 'bg-sound-B',
+    nextShortEl: 'short-sound-B',
     CONSTRUCT_DELAYS: {
         'adminMode': 10,
         'players': 30
@@ -43,8 +45,6 @@ const MarlenBrando = {
             if (!this.currentGame.catapultes) {
                 this.currentGame.catapultes = 0;
             }
-            this.nextAmbianceEl = 'bg-sound-B';
-            this.nextShortEl = 'short-sound-B';
         }
         const followingSteps = this.getFollowingSteps(this.currentGame.stepId);
         if (this.currentGame.player && ['brandon', 'marlene'].includes(this.currentGame.player) && this.currentGame.stepId !== 'game-over') {
@@ -665,8 +665,8 @@ const MarlenBrando = {
         }
         this._fadeInRaf[id] = requestAnimationFrame(tick);
     },
-    audioEl: function (id = null) {
-        return document.getElementById(id ? id : this.nextAmbianceEl);
+    audioEl: function (id) {
+        return document.getElementById(id);
     },
     GamePaths: {
         bouzin: {
@@ -678,9 +678,9 @@ const MarlenBrando = {
             {
                 id: "start-1",
                 img: "1.png",
+                sound: "village_de_noel.mp3",
                 clickZones: [{
                     'toStep': "start-2",
-                    'music': true,
                     'type': 'arrow',
                     'pos': {
                         'left': 67,
@@ -718,6 +718,7 @@ const MarlenBrando = {
             }, {
                 id: "start-4",
                 img: "4.png",
+                sound: "hyper_suspens.mp3",
                 clickZones: [{
                     'toStep': "start-5",
                     'type': 'arrow',

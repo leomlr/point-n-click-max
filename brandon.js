@@ -4,7 +4,6 @@ const BRANDON_STEPS = [
         img: "Re Brandon.png",
         clickZones: [{
             'toStep': null,
-            'music': true,
             'isRe': true,
             'type': 'arrow',
             'pos': {
