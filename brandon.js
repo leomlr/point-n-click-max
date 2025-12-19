@@ -282,9 +282,8 @@ const BRANDON_STEPS = [
         img: "27.png",
         ambiance: "Sous_l'eau.mp3",
         clickZones: [{
-            'toStep': null,
-            'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",
-            'path': 'SLPPE',
+            'toStep': "TROP-TARD7",
+            'path': 'troptard',
             'type': 'arrow',
             'pos': {
                 'left': 4,

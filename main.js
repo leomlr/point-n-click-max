@@ -281,14 +281,17 @@ const MarlenBrando = {
         }
         if (step.sound) {
             const src = 'audio/' + step.sound;
-            this.fadeOutAndStop(this.nextShortEl);
-            if (this.nextShortEl == "short-sound-A") {
-                this.nextShortEl = "short-sound-B";
-            } else if (this.nextShortEl == "short-sound-B") {
-                this.nextShortEl = "short-sound-A";
+            const audioEl = this.audioEl(this.nextShortEl);
+            if (audioEl && !audioEl.src.endsWith(src)) {
+                this.fadeOutAndStop(this.nextShortEl);
+                if (this.nextShortEl == "short-sound-A") {
+                    this.nextShortEl = "short-sound-B";
+                } else if (this.nextShortEl == "short-sound-B") {
+                    this.nextShortEl = "short-sound-A";
+                }
+                this.audioEl(this.nextShortEl).src = src;
+                this.fadeInAndPlay(this.nextShortEl);
             }
-            this.audioEl(this.nextShortEl).src = src;
-            this.fadeInAndPlay(this.nextShortEl);
         } else {
             this.fadeOutAndStop(this.nextShortEl);
         }
@@ -692,6 +695,7 @@ const MarlenBrando = {
             }, {
                 id: "start-2",
                 img: "2.png",
+                sound: "village_de_noel.mp3",
                 clickZones: [{
                     'toStep': "start-3",
                     'type': 'arrow',

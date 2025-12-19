@@ -1492,6 +1492,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-163",
         img: "163.png",
+        sound: "Reflexion1.mp3",
         clickZones: [{
             'toStep': "m-164",
             'type': 'oval',
@@ -1505,6 +1506,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-164",
         img: "164.png",
+        sound: "Reflexion1.mp3",
         clickZones: [{
             'toStep': "bombe-atomique",
             'type': 'square',
@@ -1565,6 +1567,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-167",
         img: "167.png",
+        sound: "Reflexion2.mp3",
         clickZones: [{
             'toStep': "m-168",
             'type': 'square',
@@ -1587,6 +1590,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-168",
         img: "168.png",
+        sound: "Reflexion2.mp3",
         clickZones: [{
             'toStep': "oui-appuyer",
             'throwSteps': ["page-suspens"],
