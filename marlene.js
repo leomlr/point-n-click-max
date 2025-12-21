@@ -1410,6 +1410,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-158",
         img: "158.png",
+        sound: "suspens.mp3",
         clickZones: [{
             'toStep': "terreur-QQR",
             'type': 'arrow',
@@ -1423,6 +1424,7 @@ const MARLENE_STEPS = [
     }, {
         id: "m-159",
         img: "159.png",
+        sound: "suspens.mp3",
         clickZones: [{
             'toStep': "terreur-QQR",
             'type': 'arrow',
