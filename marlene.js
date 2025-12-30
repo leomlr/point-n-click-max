@@ -1774,7 +1774,7 @@ const MARLENE_STEPS = [
         id: "m-chargement",
         img: "178.png",
         ambiance: "Attente.mp3",
-        video: "chargement.webm",
+        video: "chargement.mp4",
         playbackRate: 0.3,
         atEndStep: "m-179",
         clickZones: []

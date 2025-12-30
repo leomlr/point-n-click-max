@@ -1555,7 +1555,7 @@ const MarlenBrando = {
                 id: "game-over",
                 img: "Game over.png",
                 sound: "Game_over.mp3",
-                video: "chargement.webm",
+                video: "chargement.mp4",
                 playbackRate: 0.1,
                 atEndStep: "start-1",
                 atEndPath: "starter",
