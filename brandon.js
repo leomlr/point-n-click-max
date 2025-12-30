@@ -1049,6 +1049,7 @@ const BRANDON_STEPS = [
         id: "b-74",
         img: "74.png",
         ambiance: "Montagnes_hallucinees.mp3",
+        isSaveStep: true,
         clickZones: [{
             'toStep': null,
             'toStepCondition': (currentGame) => currentGame.playerWin ? "SLPPE-victoire" : "SLPPE",

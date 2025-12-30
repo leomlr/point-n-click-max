@@ -11,7 +11,7 @@ const MarlenBrando = {
     nextShortEl: 'short-sound-B',
     CONSTRUCT_DELAYS: {
         'adminMode': 10,
-        'players': 30
+        'players': 52
     },
     LOADING_TEXTS: [
         'Chargement du moteur 3D ...',
