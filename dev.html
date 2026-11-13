@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="favicon.ico">
+    <meta property="og:title" content="Gaufre sacrée de Noël">
+    <meta property="og:description"
+        content="Dans ce jeu hyper immersif, choisis ton enquêteureuse favorite et tente de retrouver la gauffre sacrée de Noël.">
+    <meta property="og:image" content="https://leomlr.github.io/point-n-click-max/main-image.png">
+    <meta property="og:type" content="website">
+    <title>Jeu de Noël Hypeeeer immersif</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="img-wrapper">
+            <div class="input-group">
+                <input id="mdp-input" type="text" placeholder="Écris le mot magique ici ...">
+            </div>
+            <img id="current-img" class="current-img">
+            <video id="video-step" class="overlay-video" playsinline></video>
+            <div class="chrono-wrapper">
+                <div id="countdown">00:00</div>
+            </div>
+            <p class="text-label" id="loading-text"></p>
+            <p class="text-label" id="stepId-text"></p>
+            <p class="text-label" id="stats-BG"></p>
+            <p class="text-label text-number" id="SLPPE-stats-game-over"></p>
+            <p class="text-label text-number" id="SLPPE-stats-percent"></p>
+            <div id="catapultes-container"></div>
+            <audio id="bg-sound-A" loop></audio>
+            <audio id="bg-sound-B" loop></audio>
+            <audio id="short-sound-A"></audio>
+            <audio id="short-sound-B"></audio>
+        </div>
+    </div>
+
+    <script src="marlene.js"></script>
+    <script src="brandon.js"></script>
+    <script src="main-dev.js"></script>
+
+</body>
+
+</html>
