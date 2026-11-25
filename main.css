@@ -86,6 +86,13 @@ body {
     width: 47%;
 }
 
+.gif-QQR-3 {
+    left: 30%;
+    top: 75%;
+    width: 30%;
+    z-index: 1;
+}
+
 .overlay-video {
     position: absolute;
     inset: 0;
@@ -267,6 +274,72 @@ body {
     height: auto;
     width: 13%;
     pointer-events: none;
+}
+
+#miroir-container {
+    position: absolute;
+    left: 70%;
+    top: 40%;
+    /* OK si ta bande jaune commence à 20% */
+    height: 18%;
+    /* OK si ta bande jaune fait 45% de l’image */
+    pointer-events: none;
+    z-index: 10;
+}
+
+.miroir {
+    height: 78%;
+    width: auto;
+}
+
+#slppe-btn-container {
+    position: absolute;
+    left: 10%;
+    right: 0;
+    top: 80%;
+    /* OK si ta bande jaune commence à 20% */
+    height: 100%;
+    /* OK si ta bande jaune fait 45% de l’image */
+    pointer-events: none;
+    z-index: 10;
+}
+
+.slppe-btn {
+    height: auto;
+    width: 25%;
+}
+
+#draggable-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.draggable {
+    position: absolute;
+    pointer-events: auto;
+    touch-action: none;
+    user-select: none;
+    cursor: grab;
+    -webkit-user-drag: none;
+}
+
+.draggable.dragging {
+    cursor: grabbing;
+    z-index: 100;
+}
+
+.paille {
+    position: absolute;
+    height: auto;
+    width: 20%;
+    background: transparent !important;
+    border: none;
+    pointer-events: auto;
 }
 
 #loading-text {

@@ -24,9 +24,13 @@ const MarlenBrando = {
     _fadeOutRaf: {},
     sleep_ms: (ms) => new Promise(resolve => setTimeout(resolve, ms)),
     init: async function () {
+        this.adminMode = localStorage.adminMode === "1" || localStorage.adminMode === 1;
         this.totalSteps = this.getTotalSteps();
         this.isArrivingToGame = true;
         this.getGameFromLS();
+        await this.initAdventure();
+    },
+    initAdventure: async function () {
         if (!this.currentGame.stepId) {
             this.currentGame.history = [];
             this.currentGame.stepId = 'start-1';
@@ -52,10 +56,13 @@ const MarlenBrando = {
             await this.showImage(reStep.img);
             if (reStep.clickZones) {
                 for (const newClickZone of reStep.clickZones) {
-                    newClickZone.toStep = this.currentGame.stepId;
+                    if (newClickZone.toStep == null) {
+                        newClickZone.toStep = this.currentGame.stepId;
+                    }
                     this.addClickableZone(newClickZone, followingSteps);
                 }
             }
+            this.showSprite('slppe-btn');
         } else {
             return await this.applyStep(this.currentGame.stepId, false, followingSteps);
         }
@@ -162,15 +169,18 @@ const MarlenBrando = {
             if (toStepId == 'time-machine-construct' && !clickZone.addTime && !clickZone.isRe) {
                 delete this.currentGame.endTime;
             }
+            console.log(toStepId)
             if (clickZone.randomSteps) {
                 toStepId = clickZone.randomSteps[Math.floor(Math.random() * clickZone.randomSteps.length)];
             }
+            console.log(toStepId)
             if (clickZone.toSavedStep) {
                 toStepId = this.currentGame.saveStepId;
                 this.currentGame.path = this.currentGame.player;
                 delete this.currentGame.endTime;
                 delete this.currentGame.remainingTime;
             }
+            console.log(toStepId)
             if (!clickZone.isBack) {
                 let throws;
                 if (Array.isArray(clickZone.throwSteps)) {
@@ -396,6 +406,12 @@ const MarlenBrando = {
             if (step.id == "piscine-1") {
                 this.currentGame.tickets -= 1;
             }
+            if (step.id == "SLPPE-corridor") {
+                this.showSprite('miroir');
+            }
+        }
+        if (step.id == "champ-1") {
+            await this.manageStrawField();
         }
     },
     createZone: function (id, clickZone) {
@@ -453,6 +469,9 @@ const MarlenBrando = {
         });
     },
     removeElementsFromPreviousStep: function () {
+        this.removeSprites('miroir')
+        this.removeSprites('slppe-btn')
+        this.removeSprites('draggable')
         if (this.readingVideoId && this.onEndsVideo[this.readingVideoId]) {
             this.videoEl.removeEventListener('ended', this.onEndsVideo[this.readingVideoId]);
             delete this.onEndsVideo[this.readingVideoId];
@@ -602,14 +621,14 @@ const MarlenBrando = {
         this.currentGame.catapultes = Math.max(0, Math.min(this.MAX_CATA, incrementor(this.currentGame.catapultes)));
         const diff = this.currentGame.catapultes - (isNaN(n) ? 0 : n);
         if (diff > 0) {
-            this.showCatapulte();
+            this.showCatapulte(this.currentGame.catapultes);
         } else if (diff < 0) {
             const index = n;
             const el = document.querySelector('.catapulte.cata-' + index);
             if (el) el.remove();
         }
     },
-    showCatapulte: function () {
+    showCatapulte: function (n) {
         return new Promise((resolve) => {
             const img = new Image();
             const onLoad = () => {
@@ -619,13 +638,158 @@ const MarlenBrando = {
             img.addEventListener('load', onLoad);
             img.src = 'image/catapulte.png';
             img.classList.add("catapulte");
-            img.classList.add("cata-" + this.currentGame.catapultes);
-            const col = (this.currentGame.catapultes - 1) % 8;              // 0 → 8
-            const row = Math.floor((this.currentGame.catapultes - 1) / 8);  // 0 → 7
+            img.classList.add("cata-" + n);
+            const col = (n - 1) % 8;              // 0 → 8
+            const row = Math.floor((n - 1) / 8);  // 0 → 7
             img.style.left = (col * 12.5) + "%";
             img.style.top = (row * 12) + "%";
             this.cataEl.appendChild(img);
         });
+    },
+    showSprite: function (sprite) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            const onLoad = () => {
+                img.removeEventListener('load', onLoad);
+                resolve(img);
+            };
+            img.addEventListener('load', onLoad);
+            img.src = 'image/' + sprite + '.png';
+            img.classList.add(sprite);
+            img.style.left = "70%";
+            const container = document.getElementById(sprite + "-container");
+            container.appendChild(img);
+        });
+    },
+    removeSprites: function (sprite) {
+        const container = document.getElementById(sprite + "-container").replaceChildren();
+    },
+    manageStrawField: async function (count = 10) {
+        const orientations = [-15, 0, 15];
+
+        const source = new Image();
+        source.src = "image/histoire2/paille.png";
+
+        await source.decode();
+
+        // Suppression du fond une seule fois
+        const transparentSrc = this.removeBackground(source);
+
+        const container = document.getElementById("draggable-container");
+
+        const images = [];
+
+        for (let i = 0; i < count; i++) {
+            const img = new Image();
+
+            img.classList.add("paille", "draggable");
+            img.draggable = false;
+
+            img.style.top = `${60 + Math.random() * 20}%`;
+            img.style.left = `${20 + Math.random() * 20}%`;
+
+            const rotation = orientations[i % orientations.length];
+            img.style.transform = `rotate(${rotation}deg)`;
+
+            img.src = transparentSrc;
+
+            this.enableDrag(img);
+            container.appendChild(img);
+
+            images.push(img);
+        }
+
+        await Promise.all(images.map(img => img.decode()));
+
+        return images;
+    },
+    removeBackground: function (img) {
+        const canvas = document.createElement("canvas");
+
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+
+        const ctx = canvas.getContext("2d", {
+            willReadFrequently: true
+        });
+
+        ctx.drawImage(img, 0, 0);
+
+        const imageData = ctx.getImageData(
+            0, 0, canvas.width, canvas.height
+        );
+
+        const data = imageData.data;
+        let removedPixels = 0;
+
+        for (let i = 0; i < data.length; i += 4) {
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+
+            // Détection des nuances de gris et de blanc
+            if (max - min < 40 && min > 100) {
+                data[i + 3] = 0;
+                removedPixels++;
+            }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+
+        console.log("Pixels supprimés :", removedPixels);
+
+        return canvas.toDataURL("image/png");
+    },
+    enableDrag: function (element) {
+        let offsetX = 0;
+        let offsetY = 0;
+        let activePointer = null;
+
+        element.addEventListener("pointerdown", (e) => {
+            if (activePointer !== null) return;
+
+            e.preventDefault();
+
+            activePointer = e.pointerId;
+
+            const container = element.parentElement;
+            const rect = container.getBoundingClientRect();
+
+            offsetX = e.clientX - rect.left
+                - element.offsetLeft * rect.width / container.clientWidth;
+
+            offsetY = e.clientY - rect.top
+                - element.offsetTop * rect.height / container.clientHeight;
+
+            element.setPointerCapture(e.pointerId);
+            element.classList.add("dragging");
+        });
+
+        element.addEventListener("pointermove", (e) => {
+            if (e.pointerId !== activePointer) return;
+
+            const rect = element.parentElement.getBoundingClientRect();
+
+            const x = (e.clientX - rect.left - offsetX) / rect.width;
+            const y = (e.clientY - rect.top - offsetY) / rect.height;
+
+            element.style.left = `${x * 100}%`;
+            element.style.top = `${y * 100}%`;
+        });
+
+        const stopDrag = (e) => {
+            if (e.pointerId !== activePointer) return;
+
+            activePointer = null;
+            element.classList.remove("dragging");
+        };
+
+        element.addEventListener("pointerup", stopDrag);
+        element.addEventListener("pointercancel", stopDrag);
+        element.addEventListener("lostpointercapture", stopDrag);
     },
     fadeOutAndStop: function (id, ms = 1200) {
         if (!this.audioEl(id)) return;
@@ -896,6 +1060,16 @@ const MarlenBrando = {
                         'top': 9,
                         'width': 22,
                         'height': 23
+                    }
+                }, {
+                    'toStep': "village-1",
+                    'path': 'village',
+                    'type': 'oval',
+                    'pos': {
+                        'left': 72.5,
+                        'top': 41,
+                        'width': 20,
+                        'height': 12
                     }
                 }]
             }, {
@@ -1840,6 +2014,105 @@ const MarlenBrando = {
         ],
         brandon: BRANDON_STEPS,
         marlene: MARLENE_STEPS,
+        village: [{
+            id: "village-1",
+            img: "histoire2/1.png",
+            sound: "village_de_noel.mp3",
+            clickZones: [{
+                'toStep': "village-2",
+                'type': 'arrow',
+                'pos': {
+                    'left': 71.5,
+                    'top': 90,
+                    'width': 25,
+                    'height': 9
+                }
+            }]
+        }, {
+            id: "village-2",
+            img: "histoire2/2.png",
+            sound: "village_de_noel.mp3",
+            clickZones: [{
+                'toStep': "village-3",
+                'type': 'arrow',
+                'pos': {
+                    'left': 73,
+                    'top': 89,
+                    'width': 25,
+                    'height': 9
+                }
+            }]
+        }, {
+            id: "village-3",
+            img: "histoire2/3.png",
+            clickZones: [{
+                'toStep': "village-4",
+                'type': 'arrow',
+                'pos': {
+                    'left': 73.5,
+                    'top': 89,
+                    'width': 24,
+                    'height': 9
+                }
+            }]
+        }, {
+            id: "village-4",
+            img: "histoire2/4.png",
+            clickZones: [{
+                'toStep': "village-5",
+                'type': 'arrow',
+                'pos': {
+                    'left': 71.5,
+                    'top': 89,
+                    'width': 25,
+                    'height': 9
+                }
+            }]
+        }, {
+            id: "village-5",
+            img: "histoire2/5.png",
+            clickZones: [{
+                'toStep': "village-6",
+                'type': 'arrow',
+                'pos': {
+                    'left': 64.5,
+                    'top': 88,
+                    'width': 23.5,
+                    'height': 9
+                }
+            }]
+        }, {
+            id: "village-6",
+            img: "histoire2/6.png",
+            sound: "hyper_suspens.mp3",
+            clickZones: [{
+                'toStep': "champ-1",
+                'type': 'arrow',
+                'pos': {
+                    'left': 71.5,
+                    'top': 89,
+                    'width': 24,
+                    'height': 9
+                }
+            }]
+        }, {
+            id: "champ-1",
+            img: "histoire2/champ.png",
+            gif: [{
+                src: "QQR_leo.gif",
+                class: "QQR-3"
+            }],
+            clickZones: [{
+                'toStep': "champ-2",
+                'type': 'arrow',
+                'pos': {
+                    'left': 71.5,
+                    'top': 89,
+                    'width': 24,
+                    'height': 9
+                }
+            }]
+        }]
     },
 }
 

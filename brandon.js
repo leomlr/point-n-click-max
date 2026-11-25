@@ -12,6 +12,17 @@ const BRANDON_STEPS = [
                 'width': 29,
                 'height': 10
             }
+        }, {
+            'toStep': "SLPPE",
+            'path': 'SLPPE',
+            'isRe': true,
+            'type': 'oval',
+            'pos': {
+                'left': 11.5,
+                'top': 80,
+                'width': 19,
+                'height': 9.5
+            }
         }]
     },
     {
