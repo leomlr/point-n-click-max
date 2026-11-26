@@ -129,6 +129,9 @@ const MarlenBrando = {
         this.gameContainer.appendChild(zone);
 
         zone.onclick = async () => {
+            if (this.currentGame.stepId == "village-6" && clickZone.toStep == "champ-1" && !this.adminMode) {
+                return;
+            }
             if (clickZone.reset) {
                 delete this.currentGame.playerWin;
                 delete this.currentGame.remainingTime;
@@ -169,18 +172,15 @@ const MarlenBrando = {
             if (toStepId == 'time-machine-construct' && !clickZone.addTime && !clickZone.isRe) {
                 delete this.currentGame.endTime;
             }
-            console.log(toStepId)
             if (clickZone.randomSteps) {
                 toStepId = clickZone.randomSteps[Math.floor(Math.random() * clickZone.randomSteps.length)];
             }
-            console.log(toStepId)
             if (clickZone.toSavedStep) {
                 toStepId = this.currentGame.saveStepId;
                 this.currentGame.path = this.currentGame.player;
                 delete this.currentGame.endTime;
                 delete this.currentGame.remainingTime;
             }
-            console.log(toStepId)
             if (!clickZone.isBack) {
                 let throws;
                 if (Array.isArray(clickZone.throwSteps)) {
@@ -738,8 +738,6 @@ const MarlenBrando = {
         }
 
         ctx.putImageData(imageData, 0, 0);
-
-        console.log("Pixels supprimés :", removedPixels);
 
         return canvas.toDataURL("image/png");
     },
